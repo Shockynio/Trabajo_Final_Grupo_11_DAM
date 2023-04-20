@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace 'com.example.trabajo_final_grupo_11_dam'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.trabajo_final_grupo_11_dam"
