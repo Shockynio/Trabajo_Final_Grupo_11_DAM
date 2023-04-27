@@ -59,7 +59,7 @@ public class SplashActivity extends AppCompatActivity {
 
                 super.onPostExecute(aVoid);
                 //Crear intent para la activity a la que llamaremos
-                Intent intent = new Intent(com.example.trabajo_final_grupo_11_dam.SplashActivity.this, MainActivity.class);
+                Intent intent = new Intent(com.example.trabajo_final_grupo_11_dam.SplashActivity.this, MainLoginActivity.class);
                 startActivity(intent);
                 finish();
             }

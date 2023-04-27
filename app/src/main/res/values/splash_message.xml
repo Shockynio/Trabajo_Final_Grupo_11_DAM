@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="splash_texto">
-        <b>EMPLEADOS</b><n> Base de Datos</n>
+        <b>Cazadores</b><n> de Comida</n>
     </string>
     <string name="splash_descripcion">Texto del SplashScreen</string>
 </resources>
