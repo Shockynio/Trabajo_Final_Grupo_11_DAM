@@ -37,27 +37,28 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
         switch (view.getId()){
 
             case R.id.btRepartidor:
-                if (txtNombre.getVisibility() == View. INVISIBLE);
-                {
+                if (txtNombre.getVisibility() == View. INVISIBLE);{
                 txtNombre.setVisibility(View.VISIBLE);
-
                 txtNombreRestaurante.setVisibility(View.INVISIBLE);
                 }
+
                 if (txtEmail.getVisibility() == View. INVISIBLE);{
                 txtEmail.setVisibility(View.VISIBLE);
                 }
+
                 if (texttelefono.getVisibility() == View. INVISIBLE);{
                 texttelefono.setVisibility(View.VISIBLE);
                 }
+
                 if (txtDireccion.getVisibility() == View. INVISIBLE);{
                 txtDireccion.setVisibility(View.VISIBLE);
                 }
+
                 if (txtExperienciaRepartidor.getVisibility() == View. INVISIBLE);{
                 txtExperienciaRepartidor.setVisibility(View.VISIBLE);
-
-
                 txtTipoDeComida.setVisibility(View.INVISIBLE);
                 }
+
                 if (txtmasinfo.getVisibility() == View. INVISIBLE);{
                 txtmasinfo.setVisibility(View.VISIBLE);
                 }
@@ -65,27 +66,28 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
             case R.id.btRestaurante:
                 if (txtNombreRestaurante.getVisibility() == View. INVISIBLE);{
                 txtNombreRestaurante.setVisibility(View.VISIBLE);
-
-
                 txtNombre.setVisibility(View.INVISIBLE);
                 }
+
                 if (txtEmail.getVisibility() == View. INVISIBLE);{
                 txtEmail.setVisibility(View.VISIBLE);
                 }
+
                 if (texttelefono.getVisibility() == View. INVISIBLE);{
                 texttelefono.setVisibility(View.VISIBLE);
                 }
+
                 if (txtDireccion.getVisibility() == View. INVISIBLE);{
                 txtDireccion.setVisibility(View.VISIBLE);
                 }
+
                 if (txtmasinfo.getVisibility() == View. INVISIBLE);{
                 txtmasinfo.setVisibility(View.VISIBLE);
                 }
+
                 if (txtTipoDeComida.getVisibility() == View. INVISIBLE);{
                 txtTipoDeComida.setVisibility(View.VISIBLE);
-
                 txtExperienciaRepartidor.setVisibility(View.INVISIBLE);
-
                 }
 
                 break;
