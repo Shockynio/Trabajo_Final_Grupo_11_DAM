@@ -18,6 +18,7 @@ public class SplashActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_splash);
 
+
             tv_bienvenida = findViewById(R.id.tv_bienvenida);
 
             //Quito el ActionBar

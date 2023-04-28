@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Trabajo_Final_Grupo_11_DAM</string>
+    <string name="texSolicitudTrabajo">Solicitud para trabajar con nosotros.</string>
+    <string name="texNombreyApellidos">Nombre y apellidos.</string>
+    <string name="texEmail">Email.</string>
+    <string name="texTelefono">Telefono.</string>
+    <string name="texDirección">Dirección.</string>
+    <string name="texExperiencia">Experiencia.</string>
+    <string name="texMasInfo">Más información .....</string>
+    <string name="texNombreRestaurante">Nombre del Restaurante.</string>
+    <string name="texTipoComida">Tipo de comida.</string>
 </resources>
