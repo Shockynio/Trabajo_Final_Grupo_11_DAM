@@ -14,33 +14,32 @@
         android:ems="10"
         android:hint="@string/texNombreRestaurante"
         android:inputType="textPersonName"
-        android:visibility="invisible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btRestaurante"
-        tools:visibility="invisible" />
+        tools:visibility="visible" />
 
-    <EditText
-        android:id="@+id/txtTipoDeComida"
+    <Spinner
+        android:id="@+id/spinnerTipoDeComida"
         android:layout_width="312dp"
         android:layout_height="48dp"
         android:layout_marginTop="12dp"
-        android:ems="10"
-        android:hint="@string/texTipoComida"
-        android:inputType="textPersonName"
+        android:contentDescription="@string/tex_tipo_de_comida"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDireccion"
-        tools:visibility="invisible" />
+        tools:visibility="visible" />
+
 
     <EditText
         android:id="@+id/txtmasinfo"
         android:layout_width="312dp"
         android:layout_height="48dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="4dp"
         android:ems="10"
         android:hint="@string/texMasInfo"
         android:inputType="textPersonName"
@@ -48,30 +47,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTipoDeComida"
-        tools:visibility="invisible" />
+        app:layout_constraintTop_toBottomOf="@+id/txtExperienciaRepartidor"
+        tools:visibility="visible" />
 
     <EditText
         android:id="@+id/txtExperienciaRepartidor"
         android:layout_width="312dp"
         android:layout_height="48dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="@string/texExperiencia"
         android:inputType="textPersonName"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/txtTipoDeComida"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDireccion"
-        app:layout_constraintVertical_bias="1.0"
-        tools:visibility="invisible" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerTipoDeComida"
+        app:layout_constraintVertical_bias="0.0"
+        tools:visibility="visible" />
 
     <EditText
         android:id="@+id/txtDireccion"
         android:layout_width="312dp"
         android:layout_height="48dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="4dp"
         android:ems="10"
         android:hint="@string/texDirección"
         android:inputType="textPersonName"
@@ -80,7 +80,7 @@
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/texttelefono"
-        tools:visibility="invisible" />
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/texSolicitudTrabajo"
@@ -101,25 +101,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Repartidor"
-
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btRestaurante"
-        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintHorizontal_bias="0.345"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/texSolicitudTrabajo"
-        app:layout_constraintVertical_bias="0.053" />
+        app:layout_constraintVertical_bias="0.05" />
 
     <Button
         android:id="@+id/btRestaurante"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="60dp"
+        android:layout_marginEnd="28dp"
         android:text="Restaurante"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/texSolicitudTrabajo"
-        app:layout_constraintVertical_bias="0.051" />
+        app:layout_constraintVertical_bias="0.05" />
 
     <EditText
         android:id="@+id/txtNombre"
@@ -129,12 +127,12 @@
         android:ems="10"
         android:hint="@string/texNombreyApellidos"
         android:inputType="textPersonName"
-        android:visibility="invisible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btRestaurante"
-        tools:visibility="invisible" />
+        tools:visibility="visible" />
 
     <EditText
         android:id="@+id/txtEmail"
@@ -149,7 +147,7 @@
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtNombreRestaurante"
-        tools:visibility="invisible" />
+        tools:visibility="visible" />
 
     <EditText
         android:id="@+id/texttelefono"
@@ -159,12 +157,12 @@
         android:ems="10"
         android:hint="@string/texTelefono"
         android:inputType="phone"
-        android:visibility="invisible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtEmail"
-        tools:visibility="invisible" />
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/btEnviar"
@@ -186,5 +184,50 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/texSolicitudTrabajo"
         app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/icono_repartidor"
+        android:layout_width="194dp"
+        android:layout_height="378dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="146dp"
+        android:layout_marginEnd="216dp"
+        android:layout_marginBottom="305dp"
+        android:src="@drawable/icono_repartidor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/icono_restaurante"
+        android:layout_width="206dp"
+        android:layout_height="377dp"
+        android:layout_marginStart="154dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginBottom="213dp"
+        android:src="@drawable/icono_restaurante"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.854"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.382"
+        app:srcCompat="@drawable/icono_restaurante" />
+
+    <ImageView
+        android:id="@+id/gif_business"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginBottom="25dp"
+        android:contentDescription="@string/gifbusiness"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

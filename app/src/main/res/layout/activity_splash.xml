@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainLoginActivity">
+    android:background="#3F51B5">
 
     <ImageView
         android:id="@+id/iv_bienvenida"
@@ -12,21 +12,38 @@
         android:layout_height="167dp"
         android:contentDescription="@string/splash_descripcion"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tv_bienvenida"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/splashbackground" />
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/icono" />
 
-    <TextView
-        android:id="@+id/tv_bienvenida"
-        android:layout_width="157dp"
-        android:layout_height="154dp"
-        android:layout_marginEnd="72dp"
-        android:gravity="center|start"
-        android:textSize="24sp"
+    <ImageView
+        android:id="@+id/gif_loading"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginBottom="75dp"
+        android:contentDescription="@string/gifloading"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/gif_titulo"
+        android:layout_width="405dp"
+        android:layout_height="288dp"
+        android:contentDescription="@string/giftitulo"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/gif_loading"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.368" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

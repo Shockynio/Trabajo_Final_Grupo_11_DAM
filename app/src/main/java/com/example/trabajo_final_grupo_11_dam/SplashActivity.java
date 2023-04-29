@@ -5,64 +5,51 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.content.Intent;
-import android.widget.TextView;
+import android.widget.ImageView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import android.os.Bundle;
+import android.os.Handler;
 
 import java.util.Objects;
 
 
 public class SplashActivity extends AppCompatActivity {
 
-        private TextView tv_bienvenida;
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_splash);
+    private static int SPLASH_TIME_OUT = 3000;
+    private Handler handler;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
 
-            tv_bienvenida = findViewById(R.id.tv_bienvenida);
+        ImageView loadingGif = findViewById(R.id.gif_loading);
+        ImageView tituloGif = findViewById(R.id.gif_titulo);
 
-            //Quito el ActionBar
-            Objects.requireNonNull(getSupportActionBar()).hide(
-            );
+        Glide.with(this)
+                .asGif()
+                .load(R.drawable.foodline)
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                .into(loadingGif);
 
-            new TypewriterTask().execute(getString(R.string.splash_texto));
-        }
+        Glide.with(this)
+                .asGif()
+                .load(R.drawable.text)
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                .into(tituloGif);
 
+        //Quito el ActionBar
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
-        private class TypewriterTask extends AsyncTask<String, Void, Void> {
+        handler = new Handler();
+        handler.postDelayed(new Runnable() {
             @Override
-            protected Void doInBackground(String... strings) {
-                String message = strings[0];
-                for (int i = 0; i < message.length(); i++) {
-                    final int index = i;
-                    try {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                tv_bienvenida.setText(message.substring(0, index+1));
-                            }
-                        });
-                        Thread.sleep(100); // Poner tiempo de espera entre la subida de cada caracter
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                super.onPostExecute(aVoid);
-                //Crear intent para la activity a la que llamaremos
-                Intent intent = new Intent(com.example.trabajo_final_grupo_11_dam.SplashActivity.this, MainLoginActivity.class);
-                startActivity(intent);
+            public void run() {
+                Intent i = new Intent(SplashActivity.this, MainLoginActivity.class);
+                startActivity(i);
                 finish();
             }
-        }
+        }, SPLASH_TIME_OUT);
+    }
 }
