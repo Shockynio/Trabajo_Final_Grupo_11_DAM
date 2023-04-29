@@ -27,19 +27,19 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_singin"
         android:layout_margin="10dp"
+        android:autofillHints="false"
         android:background="#30ffffff"
+        android:drawableStart="@drawable/ic_baseline_alternate_email_24"
         android:drawablePadding="20dp"
         android:hint="@string/hintEmail"
+        android:inputType="textEmailAddress"
         android:padding="20dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_singin"
-        android:drawableStart="@drawable/ic_baseline_alternate_email_24"
-        android:autofillHints="false"
-        android:inputType="textEmailAddress"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv_singin" />
 
     <EditText
         android:id="@+id/et_contraseña"
@@ -50,19 +50,19 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
+        android:autofillHints="false"
         android:background="#30ffffff"
+        android:drawableStart="@drawable/ic_baseline_disabled_visible_24"
         android:drawablePadding="20dp"
         android:hint="@string/hintContraseña"
+        android:inputType="textPassword"
         android:padding="20dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.842"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_email"
-        android:drawableStart="@drawable/ic_baseline_disabled_visible_24"
-        android:inputType="textPassword"
-        android:autofillHints="false"/>
+        app:layout_constraintTop_toBottomOf="@+id/et_email" />
 
     <Button
         android:id="@+id/btn_iniciar"
@@ -77,14 +77,14 @@
         android:text="@string/texInicioSesion" />
 
     <TextView
+        android:id="@+id/tv_contraseñaOlvidada"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_contraseñaOlvidada"
         android:layout_below="@id/btn_iniciar"
-        android:text="@string/texPreguntaContraseña"
-        android:textColor="@color/white"
         android:layout_centerHorizontal="true"
-        android:layout_margin="20dp"/>
+        android:layout_margin="20dp"
+        android:text="@string/texPreguntaContraseña"
+        android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/tv_linea"
@@ -103,20 +103,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_linea"
-        android:layout_marginTop="6dp"
-        android:gravity="center"
-        android:text="@string/textCrearCuenta"
         android:layout_centerHorizontal="true"
-        android:backgroundTint="@color/cardview_shadow_end_color"/>
+        android:layout_marginTop="6dp"
+        android:backgroundTint="@color/cardview_shadow_end_color"
+        android:gravity="center"
+        android:text="@string/textCrearCuenta" />
+
     <Button
         android:id="@+id/btn_solicitud"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btn_crearCuenta"
-        android:layout_marginTop="6dp"
-        android:gravity="center"
-        android:text="@string/texSolicitud"
         android:layout_centerHorizontal="true"
-        android:backgroundTint="@color/design_default_color_secondary"/>
+        android:layout_marginTop="6dp"
+        android:backgroundTint="@color/design_default_color_secondary"
+        android:gravity="center"
+        android:text="@string/texSolicitud" />
+
 
 </RelativeLayout>
