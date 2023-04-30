@@ -6,22 +6,21 @@
     <string name="texTelefono">Telefono.</string>
     <string name="texDirección">Dirección.</string>
     <string name="texExperiencia">Experiencia.</string>
-    <string name="texMasInfo">Más información…</string>
+    <string name="texMasInfo">Más información...</string>
     <string name="texNombreRestaurante">Nombre del Restaurante.</string>
     <string name="texTipoComida">Tipo de comida.</string>
     <string name="tex_tipo_de_comida">Tipo de comida</string>
     <string name="giftitulo">GifTitulo</string>
     <string name="gifloading">GifLoading</string>
     <string name="gifbusiness">GifLoading</string>
-    <string name="texBienvenida">Iniciar sesión</string>
-    <string name="hintEmail">Email</string>
-    <string name="hintContraseña">Contraseña</string>
-    <string name="texInicioSesion">Inicar Sesión</string>
-    <string name="texPreguntaContraseña">Has olbidado de la contraseña?</string>
-    <string name="lineaSeparacion">_____________________</string>
-    <string name="textCrearCuenta">Crear Cuenta</string>
-    <string name="texSolicitud">Quiere trabajar con nosotros?</string>
-
+    <string name="texBienvenida" />
+    <string name="hintEmail" />
+    <string name="hintContraseña" />
+    <string name="texPreguntaContraseña" />
+    <string name="texInicioSesion" />
+    <string name="lineaSeparacion" />
+    <string name="textCrearCuenta" />
+    <string name="texSolicitud" />
     <string-array name="tipos_de_comida">
         <item>Tipo de Comida</item>
         <item>China</item>

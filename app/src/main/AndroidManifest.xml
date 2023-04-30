@@ -13,16 +13,6 @@
         android:theme="@style/Theme.Trabajo_Final_Grupo_11_DAM"
         tools:targetApi="31">
         <activity
-            android:name=".LoginSolicitudActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainLoginActivity"
-            android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -31,6 +21,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
+        <activity
+            android:name=".MainLoginActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".LoginSolicitudActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginCreacionActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+       </application>
 
 </manifest>
