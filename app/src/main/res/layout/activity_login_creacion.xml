@@ -12,7 +12,7 @@
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/create_account_button"
+        app:layout_constraintBottom_toTopOf="@+id/btn_create_account"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.4">
 
@@ -26,19 +26,19 @@
             android:paddingRight="16dp">
 
             <EditText
-                android:id="@+id/full_name"
+                android:id="@+id/tv_full_name"
                 style="@style/EditTextStyle"
                 android:hint="Nombre completo"
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/username"
+                android:id="@+id/tv_username"
                 style="@style/EditTextStyle"
                 android:hint="Nombre de usuario"
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/tv_password"
                 style="@style/EditTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,13 +46,13 @@
                 android:inputType="textPassword" />
 
             <EditText
-                android:id="@+id/repeat_password"
+                android:id="@+id/tv_repeat_password"
                 style="@style/EditTextStyle"
                 android:hint="Repite la Contraseña"
                 android:inputType="textPassword" />
 
             <EditText
-                android:id="@+id/birthday"
+                android:id="@+id/tv_birthday"
                 style="@style/EditTextStyle"
                 android:focusable="false"
                 android:hint="Nacimiento (MM/DD/YYYY)"
@@ -60,19 +60,19 @@
 
 
             <EditText
-                android:id="@+id/phone"
+                android:id="@+id/tv_phone"
                 style="@style/EditTextStyle"
                 android:hint="Movil"
                 android:inputType="phone" />
 
             <EditText
-                android:id="@+id/email"
+                android:id="@+id/tv_email"
                 style="@style/EditTextStyle"
                 android:hint="Email"
                 android:inputType="textEmailAddress" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/tv_question"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:baselineAligned="false"
@@ -84,7 +84,7 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/create_account_button"
+                android:id="@+id/btn_create_account"
                 style="@style/ButtonMain"
                 android:text="Crear Cuenta"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -98,13 +98,13 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:id="@+id/iconodelivery2"
+                    android:id="@+id/ic_delivery2"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     app:srcCompat="@drawable/delivery2" />
 
                 <ImageView
-                    android:id="@+id/iconodelivery3"
+                    android:id="@+id/ic_delivery3"
                     android:layout_width="213dp"
                     android:layout_height="match_parent"
                     app:srcCompat="@drawable/delivery3" />

@@ -31,14 +31,14 @@ public class LoginCreacionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_creacion);
 
-        etUsername = findViewById(R.id.username);
-        etPassword = findViewById(R.id.password);
-        etBirthday = findViewById(R.id.birthday);
-        btnCreateAccount = findViewById(R.id.create_account_button);
-        etFullName = findViewById(R.id.full_name);
-        etRepeatPassword = findViewById(R.id.repeat_password);
-        etPhone = findViewById(R.id.phone);
-        etEmail = findViewById(R.id.email);
+        etUsername = findViewById(R.id.tv_username);
+        etPassword = findViewById(R.id.tv_password);
+        etBirthday = findViewById(R.id.tv_birthday);
+        btnCreateAccount = findViewById(R.id.btn_create_account);
+        etFullName = findViewById(R.id.tv_full_name);
+        etRepeatPassword = findViewById(R.id.tv_repeat_password);
+        etPhone = findViewById(R.id.tv_phone);
+        etEmail = findViewById(R.id.tv_email);
 
 
         btnCreateAccount.setOnClickListener(new View.OnClickListener() {

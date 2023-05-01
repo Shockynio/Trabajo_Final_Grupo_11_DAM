@@ -8,7 +8,7 @@
     tools:context=".LoginSolicitudActivity">
 
     <EditText
-        android:id="@+id/txtNombreRestaurante"
+        android:id="@+id/tv_nombre_restaurante"
         android:layout_width="312dp"
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
@@ -20,11 +20,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btRestaurante"
+        app:layout_constraintTop_toBottomOf="@+id/btn_restaurante"
         tools:visibility="visible" />
 
     <Spinner
-        android:id="@+id/spinnerTipoDeComida"
+        android:id="@+id/sp_tipo_comida"
         android:layout_width="312dp"
         android:layout_height="48dp"
         android:layout_marginTop="12dp"
@@ -34,12 +34,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDireccion"
+        app:layout_constraintTop_toBottomOf="@+id/tv_direccion"
         tools:visibility="visible" />
 
 
     <EditText
-        android:id="@+id/txtmasinfo"
+        android:id="@+id/tv_mas_info"
         android:layout_width="312dp"
         android:layout_height="48dp"
         android:layout_marginTop="4dp"
@@ -51,11 +51,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtExperienciaRepartidor"
+        app:layout_constraintTop_toBottomOf="@+id/tv_experiencia_repartidor"
         tools:visibility="visible" />
 
     <EditText
-        android:id="@+id/txtExperienciaRepartidor"
+        android:id="@+id/tv_experiencia_repartidor"
         android:layout_width="312dp"
         android:layout_height="48dp"
         android:layout_marginTop="12dp"
@@ -68,12 +68,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerTipoDeComida"
+        app:layout_constraintTop_toBottomOf="@+id/sp_tipo_comida"
         app:layout_constraintVertical_bias="0.0"
         tools:visibility="visible" />
 
     <EditText
-        android:id="@+id/txtDireccion"
+        android:id="@+id/tv_direccion"
         android:layout_width="312dp"
         android:layout_height="48dp"
         android:layout_marginTop="4dp"
@@ -85,11 +85,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/texttelefono"
+        app:layout_constraintTop_toBottomOf="@+id/tv_telefono"
         tools:visibility="visible" />
 
     <TextView
-        android:id="@+id/texSolicitudTrabajo"
+        android:id="@+id/tv_solicitud_trabajo"
         android:layout_width="385dp"
         android:layout_height="37dp"
         android:text="@string/texSolicitudTrabajo"
@@ -103,30 +103,30 @@
         app:layout_constraintVertical_bias="0.041" />
 
     <Button
-        android:id="@+id/btRepartidor"
+        android:id="@+id/btn_repartidor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Repartidor"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btRestaurante"
+        app:layout_constraintEnd_toStartOf="@+id/btn_restaurante"
         app:layout_constraintHorizontal_bias="0.345"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/texSolicitudTrabajo"
+        app:layout_constraintTop_toBottomOf="@+id/tv_solicitud_trabajo"
         app:layout_constraintVertical_bias="0.05" />
 
     <Button
-        android:id="@+id/btRestaurante"
+        android:id="@+id/btn_restaurante"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
         android:text="Restaurante"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/texSolicitudTrabajo"
+        app:layout_constraintTop_toBottomOf="@+id/tv_solicitud_trabajo"
         app:layout_constraintVertical_bias="0.05" />
 
     <EditText
-        android:id="@+id/txtNombre"
+        android:id="@+id/tv_nombre"
         android:layout_width="312dp"
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
@@ -138,11 +138,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btRestaurante"
+        app:layout_constraintTop_toBottomOf="@+id/btn_restaurante"
         tools:visibility="visible" />
 
     <EditText
-        android:id="@+id/txtEmail"
+        android:id="@+id/tv_email_solicitud"
         android:layout_width="312dp"
         android:layout_height="48dp"
         android:layout_marginTop="12dp"
@@ -154,11 +154,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtNombreRestaurante"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nombre_restaurante"
         tools:visibility="visible" />
 
     <EditText
-        android:id="@+id/texttelefono"
+        android:id="@+id/tv_telefono"
         android:layout_width="312dp"
         android:layout_height="48dp"
         android:layout_marginTop="12dp"
@@ -170,11 +170,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEmail"
+        app:layout_constraintTop_toBottomOf="@+id/tv_email_solicitud"
         tools:visibility="visible" />
 
     <Button
-        android:id="@+id/btEnviar"
+        android:id="@+id/btn_enviar"
         style="@style/ButtonMain"
         android:layout_width="174dp"
         android:layout_height="54dp"
@@ -182,21 +182,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtmasinfo" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_mas_info" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_pregunta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="¿Eres Repartidor o Restaurante ?"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/texSolicitudTrabajo"
+        app:layout_constraintTop_toBottomOf="@+id/tv_solicitud_trabajo"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/icono_repartidor"
+        android:id="@+id/ic_repartidor"
         android:layout_width="194dp"
         android:layout_height="378dp"
         android:layout_marginStart="7dp"
@@ -211,7 +211,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/icono_restaurante"
+        android:id="@+id/ic_restaurante"
         android:layout_width="206dp"
         android:layout_height="377dp"
         android:layout_marginStart="154dp"

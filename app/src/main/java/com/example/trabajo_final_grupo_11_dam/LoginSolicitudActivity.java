@@ -40,23 +40,23 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
         setContentView(R.layout.activity_login_solicitud);
 
 
-        etNombre = (EditText) findViewById(R.id.txtNombre);
-        etNombreRestaurante = (EditText) findViewById(R.id.txtNombreRestaurante);
-        etEmail = (EditText) findViewById(R.id.txtEmail);
-        etTelefono = (EditText) findViewById(R.id.texttelefono);
-        etDireccion = (EditText) findViewById(R.id.txtDireccion);
-        etExperienciaRepartidor = (EditText) findViewById(R.id.txtExperienciaRepartidor);
-        etMasInfo = (EditText) findViewById(R.id.txtmasinfo);
-        spTipoDeComida = findViewById(R.id.spinnerTipoDeComida);
-        ImageView iconoRepartidor = findViewById(R.id.icono_repartidor);
-        ImageView iconoRestaurante = findViewById(R.id.icono_restaurante);
+        etNombre = (EditText) findViewById(R.id.tv_nombre);
+        etNombreRestaurante = (EditText) findViewById(R.id.tv_nombre_restaurante);
+        etEmail = (EditText) findViewById(R.id.tv_email_solicitud);
+        etTelefono = (EditText) findViewById(R.id.tv_telefono);
+        etDireccion = (EditText) findViewById(R.id.tv_direccion);
+        etExperienciaRepartidor = (EditText) findViewById(R.id.tv_experiencia_repartidor);
+        etMasInfo = (EditText) findViewById(R.id.tv_mas_info);
+        spTipoDeComida = findViewById(R.id.sp_tipo_comida);
+        ImageView iconoRepartidor = findViewById(R.id.ic_repartidor);
+        ImageView iconoRestaurante = findViewById(R.id.ic_restaurante);
 
         iconoRepartidor.setOnClickListener(this);
         iconoRestaurante.setOnClickListener(this);
-        findViewById(R.id.btRepartidor).setOnClickListener(this);
-        findViewById(R.id.btRestaurante).setOnClickListener(this);
-        findViewById(R.id.btEnviar).setOnClickListener(this);
-        findViewById(R.id.btEnviar).setVisibility(View.GONE);
+        findViewById(R.id.btn_repartidor).setOnClickListener(this);
+        findViewById(R.id.btn_restaurante).setOnClickListener(this);
+        findViewById(R.id.btn_enviar).setOnClickListener(this);
+        findViewById(R.id.btn_enviar).setVisibility(View.GONE);
 
         ImageView gif_business = findViewById(R.id.gif_business);
 
@@ -162,31 +162,31 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
 
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.icono_repartidor:
-            case R.id.btRepartidor:
+            case R.id.ic_repartidor:
+            case R.id.btn_repartidor:
                 mostrarFormulario(true);
-                findViewById(R.id.btEnviar).setVisibility(View.VISIBLE);
+                findViewById(R.id.btn_enviar).setVisibility(View.VISIBLE);
                 break;
-            case R.id.icono_restaurante:
-            case R.id.btRestaurante:
+            case R.id.ic_restaurante:
+            case R.id.btn_restaurante:
                 mostrarFormulario(false);
-                findViewById(R.id.btEnviar).setVisibility(View.VISIBLE);
+                findViewById(R.id.btn_enviar).setVisibility(View.VISIBLE);
                 break;
-            case R.id.btEnviar:
+            case R.id.btn_enviar:
                 break;
         }
     }
         private void mostrarFormulario(boolean esRepartidor) {
             // Ocultar los iconos de repartidor y restaurante
-            findViewById(R.id.icono_repartidor).setVisibility(View.GONE);
-            findViewById(R.id.icono_restaurante).setVisibility(View.GONE);
+            findViewById(R.id.ic_repartidor).setVisibility(View.GONE);
+            findViewById(R.id.ic_restaurante).setVisibility(View.GONE);
 
             // Mostrar elementos comunes
             etEmail.setVisibility(View.VISIBLE);
             etTelefono.setVisibility(View.VISIBLE);
             etDireccion.setVisibility(View.VISIBLE);
             etMasInfo.setVisibility(View.VISIBLE);
-            findViewById(R.id.btEnviar).setVisibility(View.VISIBLE);
+            findViewById(R.id.btn_enviar).setVisibility(View.VISIBLE);
             findViewById(R.id.gif_business).setVisibility(View.GONE);
 
 

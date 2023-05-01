@@ -8,7 +8,7 @@
     tools:context=".MainLoginActivity">
 
     <TextView
-        android:id="@+id/tv_singin"
+        android:id="@+id/tv_sing_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -25,7 +25,7 @@
         android:id="@+id/et_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_singin"
+        android:layout_below="@+id/tv_sing_in"
         android:layout_margin="10dp"
         android:background="#30ffffff"
         android:drawablePadding="20dp"
@@ -36,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_singin"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sing_in"
         android:drawableStart="@drawable/ic_baseline_alternate_email_24"
         android:autofillHints="false"
         android:inputType="textEmailAddress"/>
