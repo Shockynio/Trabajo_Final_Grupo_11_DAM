@@ -23,8 +23,14 @@ import java.util.Objects;
 
 
 public class LoginSolicitudActivity extends AppCompatActivity implements  View.OnClickListener {
-    EditText txtNombre, txtEmail, texttelefono, txtDireccion, txtExperienciaRepartidor, txtmasinfo, txtNombreRestaurante;
-    Spinner spinnerTipoDeComida;
+    EditText etNombre;
+    EditText etEmail;
+    EditText etTelefono;
+    EditText etDireccion;
+    EditText etExperienciaRepartidor;
+    EditText etMasInfo;
+    EditText etNombreRestaurante;
+    Spinner  spTipoDeComida;
 
 
     @SuppressLint("MissingInflatedId")
@@ -34,14 +40,14 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
         setContentView(R.layout.activity_login_solicitud);
 
 
-        txtNombre = (EditText) findViewById(R.id.txtNombre);
-        txtNombreRestaurante = (EditText) findViewById(R.id.txtNombreRestaurante);
-        txtEmail = (EditText) findViewById(R.id.txtEmail);
-        texttelefono = (EditText) findViewById(R.id.texttelefono);
-        txtDireccion = (EditText) findViewById(R.id.txtDireccion);
-        txtExperienciaRepartidor = (EditText) findViewById(R.id.txtExperienciaRepartidor);
-        txtmasinfo = (EditText) findViewById(R.id.txtmasinfo);
-        spinnerTipoDeComida = findViewById(R.id.spinnerTipoDeComida);
+        etNombre = (EditText) findViewById(R.id.txtNombre);
+        etNombreRestaurante = (EditText) findViewById(R.id.txtNombreRestaurante);
+        etEmail = (EditText) findViewById(R.id.txtEmail);
+        etTelefono = (EditText) findViewById(R.id.texttelefono);
+        etDireccion = (EditText) findViewById(R.id.txtDireccion);
+        etExperienciaRepartidor = (EditText) findViewById(R.id.txtExperienciaRepartidor);
+        etMasInfo = (EditText) findViewById(R.id.txtmasinfo);
+        spTipoDeComida = findViewById(R.id.spinnerTipoDeComida);
         ImageView iconoRepartidor = findViewById(R.id.icono_repartidor);
         ImageView iconoRestaurante = findViewById(R.id.icono_restaurante);
 
@@ -90,9 +96,9 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // Establece el adaptador y configura el comportamiento del Spinner
-        spinnerTipoDeComida.setAdapter(adapter);
-        spinnerTipoDeComida.setSelection(0, false);
-        spinnerTipoDeComida.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spTipoDeComida.setAdapter(adapter);
+        spTipoDeComida.setSelection(0, false);
+        spTipoDeComida.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
@@ -106,46 +112,46 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
         });
 
 
-        txtNombre.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        etNombre.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    String nombre = txtNombre.getText().toString().trim();
+                    String nombre = etNombre.getText().toString().trim();
                     if (!isValidName(nombre)) {
-                        txtNombre.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
+                        etNombre.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
                         Toast.makeText(LoginSolicitudActivity.this, "Nombre o apellidos inválidos", Toast.LENGTH_SHORT).show();
                     } else {
-                        txtNombre.getBackground().setColorFilter(null);
+                        etNombre.getBackground().setColorFilter(null);
                     }
                 }
             }
         });
 
-        txtEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        etEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    String email = txtEmail.getText().toString().trim();
+                    String email = etEmail.getText().toString().trim();
                     if (!isValidEmail(email)) {
-                        txtEmail.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
+                        etEmail.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
                         Toast.makeText(LoginSolicitudActivity.this, "Email inválido", Toast.LENGTH_SHORT).show();
                     } else {
-                        txtEmail.getBackground().setColorFilter(null);
+                        etEmail.getBackground().setColorFilter(null);
                     }
                 }
             }
         });
 
-        texttelefono.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        etTelefono.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    String telefono = texttelefono.getText().toString().trim();
+                    String telefono = etTelefono.getText().toString().trim();
                     if (!isValidSpanishMobileNumber(telefono)) {
-                        texttelefono.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
+                        etTelefono.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
                         Toast.makeText(LoginSolicitudActivity.this, "Número de teléfono inválido", Toast.LENGTH_SHORT).show();
                     } else {
-                        texttelefono.getBackground().setColorFilter(null);
+                        etTelefono.getBackground().setColorFilter(null);
                     }
                 }
             }
@@ -176,26 +182,26 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
             findViewById(R.id.icono_restaurante).setVisibility(View.GONE);
 
             // Mostrar elementos comunes
-            txtEmail.setVisibility(View.VISIBLE);
-            texttelefono.setVisibility(View.VISIBLE);
-            txtDireccion.setVisibility(View.VISIBLE);
-            txtmasinfo.setVisibility(View.VISIBLE);
+            etEmail.setVisibility(View.VISIBLE);
+            etTelefono.setVisibility(View.VISIBLE);
+            etDireccion.setVisibility(View.VISIBLE);
+            etMasInfo.setVisibility(View.VISIBLE);
             findViewById(R.id.btEnviar).setVisibility(View.VISIBLE);
             findViewById(R.id.gif_business).setVisibility(View.GONE);
 
 
             if (esRepartidor) {
-                txtNombre.setVisibility(View.VISIBLE);
-                txtExperienciaRepartidor.setVisibility(View.VISIBLE);
+                etNombre.setVisibility(View.VISIBLE);
+                etExperienciaRepartidor.setVisibility(View.VISIBLE);
 
-                txtNombreRestaurante.setVisibility(View.GONE);
-                spinnerTipoDeComida.setVisibility(View.GONE);
+                etNombreRestaurante.setVisibility(View.GONE);
+                spTipoDeComida.setVisibility(View.GONE);
             } else {
-                txtNombreRestaurante.setVisibility(View.VISIBLE);
-                spinnerTipoDeComida.setVisibility(View.VISIBLE);
+                etNombreRestaurante.setVisibility(View.VISIBLE);
+                spTipoDeComida.setVisibility(View.VISIBLE);
 
-                txtNombre.setVisibility(View.GONE);
-                txtExperienciaRepartidor.setVisibility(View.GONE);
+                etNombre.setVisibility(View.GONE);
+                etExperienciaRepartidor.setVisibility(View.GONE);
             }
         }
 
@@ -222,13 +228,13 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
             // Puede que lo necesitemos luego, por si hay que limpiar el array de información
 
             private void limpiar() {
-                txtNombre.setText("");
-                txtEmail.setText("");
-                texttelefono.setText("");
-                txtDireccion.setText("");
-                txtExperienciaRepartidor.setText("");
-                txtmasinfo.setText("");
-                spinnerTipoDeComida.setSelection(0);
-                txtNombreRestaurante.setText("");
+                etNombre.setText("");
+                etEmail.setText("");
+                etTelefono.setText("");
+                etDireccion.setText("");
+                etExperienciaRepartidor.setText("");
+                etMasInfo.setText("");
+                spTipoDeComida.setSelection(0);
+                etNombreRestaurante.setText("");
             }
 }

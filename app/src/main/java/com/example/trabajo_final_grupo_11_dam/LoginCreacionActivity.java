@@ -16,14 +16,14 @@ import java.util.Calendar;
 
 public class LoginCreacionActivity extends AppCompatActivity {
 
-    private EditText usernameEditText;
-    private EditText passwordEditText;
-    private EditText birthdayEditText;
-    private Button createAccountButton;
-    private EditText fullNameEditText;
-    private EditText repeatPasswordEditText;
-    private EditText phoneEditText;
-    private EditText emailEditText;
+    private EditText etUsername;
+    private EditText etPassword;
+    private EditText etBirthday;
+    private Button   btnCreateAccount;
+    private EditText etFullName;
+    private EditText etRepeatPassword;
+    private EditText etPhone;
+    private EditText etEmail;
 
 
     @Override
@@ -31,110 +31,110 @@ public class LoginCreacionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_creacion);
 
-        usernameEditText = findViewById(R.id.username);
-        passwordEditText = findViewById(R.id.password);
-        birthdayEditText = findViewById(R.id.birthday);
-        createAccountButton = findViewById(R.id.create_account_button);
-        fullNameEditText = findViewById(R.id.full_name);
-        repeatPasswordEditText = findViewById(R.id.repeat_password);
-        phoneEditText = findViewById(R.id.phone);
-        emailEditText = findViewById(R.id.email);
+        etUsername = findViewById(R.id.username);
+        etPassword = findViewById(R.id.password);
+        etBirthday = findViewById(R.id.birthday);
+        btnCreateAccount = findViewById(R.id.create_account_button);
+        etFullName = findViewById(R.id.full_name);
+        etRepeatPassword = findViewById(R.id.repeat_password);
+        etPhone = findViewById(R.id.phone);
+        etEmail = findViewById(R.id.email);
 
 
-        createAccountButton.setOnClickListener(new View.OnClickListener() {
+        btnCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 createAccount();
             }
         });
 
-        birthdayEditText.setOnClickListener(new View.OnClickListener() {
+        etBirthday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDatePickerDialog();
             }
         });
 
-        fullNameEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        etFullName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    boolean isValid = isValidName(fullNameEditText.getText().toString().trim());
-                    setBackgroundColorBasedOnValidation(fullNameEditText, isValid);
+                    boolean isValid = isValidName(etFullName.getText().toString().trim());
+                    setBackgroundColorBasedOnValidation(etFullName, isValid);
                     if (!isValid) {
-                        fullNameEditText.setError("Ingrese su nombre completo (nombre y dos apellidos)");
+                        etFullName.setError("Ingrese su nombre completo (nombre y dos apellidos)");
                     } else {
-                        fullNameEditText.setError(null);
+                        etFullName.setError(null);
                     }
                 }
             }
         });
-        usernameEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        etUsername.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    setBackgroundColorBasedOnValidation(usernameEditText, !usernameEditText.getText().toString().trim().isEmpty());
+                    setBackgroundColorBasedOnValidation(etUsername, !etUsername.getText().toString().trim().isEmpty());
                 }
             }
         });
 
-        passwordEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        etPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    boolean isValid = isValidPassword(passwordEditText.getText().toString().trim());
-                    setBackgroundColorBasedOnValidation(passwordEditText, isValid);
+                    boolean isValid = isValidPassword(etPassword.getText().toString().trim());
+                    setBackgroundColorBasedOnValidation(etPassword, isValid);
                     if (!isValid) {
-                        passwordEditText.setError("La contraseña debe tener al menos 6 caracteres y 3 números");
+                        etPassword.setError("La contraseña debe tener al menos 6 caracteres y 3 números");
                     } else {
-                        passwordEditText.setError(null);
+                        etPassword.setError(null);
                     }
-                    if (!repeatPasswordEditText.getText().toString().trim().isEmpty()) {
-                        boolean passwordsMatch = checkPasswordsMatch(passwordEditText, repeatPasswordEditText);
-                        setBackgroundColorBasedOnValidation(repeatPasswordEditText, passwordsMatch);
-                    }
-                }
-            }
-        });
-
-
-        repeatPasswordEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    boolean isValid = checkPasswordsMatch(passwordEditText, repeatPasswordEditText);
-                    setBackgroundColorBasedOnValidation(passwordEditText, isValid);
-                    setBackgroundColorBasedOnValidation(repeatPasswordEditText, isValid);
-                }
-            }
-        });
-
-
-        phoneEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    boolean isValid = isValidSpanishMobileNumber(phoneEditText.getText().toString().trim());
-                    setBackgroundColorBasedOnValidation(phoneEditText, isValid);
-                    if (!isValid) {
-                        phoneEditText.setError("Ingrese un número de teléfono válido");
-                    } else {
-                        phoneEditText.setError(null);
+                    if (!etRepeatPassword.getText().toString().trim().isEmpty()) {
+                        boolean passwordsMatch = checkPasswordsMatch(etPassword, etRepeatPassword);
+                        setBackgroundColorBasedOnValidation(etRepeatPassword, passwordsMatch);
                     }
                 }
             }
         });
 
-        emailEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+        etRepeatPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    boolean isValid = isValidEmail(emailEditText.getText().toString().trim());
-                    setBackgroundColorBasedOnValidation(emailEditText, isValid);
+                    boolean isValid = checkPasswordsMatch(etPassword, etRepeatPassword);
+                    setBackgroundColorBasedOnValidation(etPassword, isValid);
+                    setBackgroundColorBasedOnValidation(etRepeatPassword, isValid);
+                }
+            }
+        });
+
+
+        etPhone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    boolean isValid = isValidSpanishMobileNumber(etPhone.getText().toString().trim());
+                    setBackgroundColorBasedOnValidation(etPhone, isValid);
                     if (!isValid) {
-                        emailEditText.setError("Ingrese un correo electrónico válido");
+                        etPhone.setError("Ingrese un número de teléfono válido");
                     } else {
-                        emailEditText.setError(null);
+                        etPhone.setError(null);
+                    }
+                }
+            }
+        });
+
+        etEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    boolean isValid = isValidEmail(etEmail.getText().toString().trim());
+                    setBackgroundColorBasedOnValidation(etEmail, isValid);
+                    if (!isValid) {
+                        etEmail.setError("Ingrese un correo electrónico válido");
+                    } else {
+                        etEmail.setError(null);
                     }
                 }
             }
@@ -165,7 +165,7 @@ public class LoginCreacionActivity extends AppCompatActivity {
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                             // Updatea la fecha en el TextDialog
-                            birthdayEditText.setText(String.format("%d/%02d/%02d", year, month+1, dayOfMonth));
+                            etBirthday.setText(String.format("%d/%02d/%02d", year, month+1, dayOfMonth));
                         }
                     },
                     year, month, day
@@ -218,12 +218,12 @@ public class LoginCreacionActivity extends AppCompatActivity {
         }
 
         private boolean areAllFieldsValid() {
-            boolean usernameValid = !usernameEditText.getText().toString().trim().isEmpty();
-            boolean passwordValid = passwordEditText.getText().toString().trim().length() >= 8; // Mínimo 8 carácteres de password
-            boolean passwordsMatch = checkPasswordsMatch(passwordEditText, repeatPasswordEditText);
-            boolean fullNameValid = isValidName(fullNameEditText.getText().toString().trim());
-            boolean phoneValid = isValidSpanishMobileNumber(phoneEditText.getText().toString().trim());
-            boolean emailValid = isValidEmail(emailEditText.getText().toString().trim());
+            boolean usernameValid = !etUsername.getText().toString().trim().isEmpty();
+            boolean passwordValid = etPassword.getText().toString().trim().length() >= 8; // Mínimo 8 carácteres de password
+            boolean passwordsMatch = checkPasswordsMatch(etPassword, etRepeatPassword);
+            boolean fullNameValid = isValidName(etFullName.getText().toString().trim());
+            boolean phoneValid = isValidSpanishMobileNumber(etPhone.getText().toString().trim());
+            boolean emailValid = isValidEmail(etEmail.getText().toString().trim());
 
             return usernameValid && passwordValid && passwordsMatch && fullNameValid && phoneValid && emailValid;
         }
