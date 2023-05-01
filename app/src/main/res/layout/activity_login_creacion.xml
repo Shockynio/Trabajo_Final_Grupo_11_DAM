@@ -28,13 +28,13 @@
             <EditText
                 android:id="@+id/tv_full_name"
                 style="@style/EditTextStyle"
-                android:hint="Nombre completo"
+                android:hint="@string/hintNombreCompleto"
                 android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/tv_username"
                 style="@style/EditTextStyle"
-                android:hint="Nombre de usuario"
+                android:hint="@string/hintNombreDeUsuario"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -42,33 +42,33 @@
                 style="@style/EditTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Contraseña (mín. 8 caracteres, 3 numericos)"
+                android:hint="@string/hintContraseñaParametros"
                 android:inputType="textPassword" />
 
             <EditText
                 android:id="@+id/tv_repeat_password"
                 style="@style/EditTextStyle"
-                android:hint="Repite la Contraseña"
+                android:hint="@string/hintContraseñaRepetir"
                 android:inputType="textPassword" />
 
             <EditText
                 android:id="@+id/tv_birthday"
                 style="@style/EditTextStyle"
                 android:focusable="false"
-                android:hint="Nacimiento (MM/DD/YYYY)"
+                android:hint="@string/hintNacimientoParametros"
                 android:inputType="date" />
 
 
             <EditText
                 android:id="@+id/tv_phone"
                 style="@style/EditTextStyle"
-                android:hint="Movil"
+                android:hint="@string/hintMovil"
                 android:inputType="phone" />
 
             <EditText
                 android:id="@+id/tv_email"
                 style="@style/EditTextStyle"
-                android:hint="Email"
+                android:hint="@string/hintEmail"
                 android:inputType="textEmailAddress" />
 
             <TextView
@@ -78,7 +78,7 @@
                 android:baselineAligned="false"
                 android:drawablePadding="8dp"
                 android:padding="8dp"
-                android:text="¿Lejos de la ciudad? ¡No hay problema! "
+                android:text="@string/textPregunta"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -86,7 +86,7 @@
             <Button
                 android:id="@+id/btn_create_account"
                 style="@style/ButtonMain"
-                android:text="Crear Cuenta"
+                android:text="@string/textCrearCuenta"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

@@ -1,5 +1,6 @@
 package com.example.trabajo_final_grupo_11_dam;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainLoginActivity extends AppCompatActivity {
@@ -15,9 +17,10 @@ public class MainLoginActivity extends AppCompatActivity {
     private Button   btnCreateAccount;
     private Button   btnSolicitud;
     private Button   btnIniciarSesion;
-    private TextView tvContraseñaOlvidade;
+    private TextView tvContrasenaOlvidade;
     private EditText etEmail;
-    private EditText etContraseña;
+    private EditText etContrasena;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,28 +28,29 @@ public class MainLoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         EditText etEmail = (EditText) findViewById(R.id.et_email);
-        EditText etContraseña = (EditText) findViewById(R.id.et_contraseña);
+        EditText etContrasena = (EditText) findViewById(R.id.et_contraseña);
 
-        btnCreateAccount = findViewById(R.id.btn_crearCuenta);
+        btnCreateAccount = findViewById(R.id.btn_crear_cuenta);
         btnSolicitud = findViewById(R.id.btn_solicitud);
         btnIniciarSesion = findViewById(R.id.btn_iniciar);
+        tvContrasenaOlvidade =  findViewById(R.id.tv_contraseña_olvidada);
 
         //admin and admin
 
         btnIniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(etEmail.getText().toString().equals("cliente") && etContraseña.getText().toString().equals("cliente")){
+                if(etEmail.getText().toString().equals("cliente") && etContrasena.getText().toString().equals("cliente")){
                     //correct
                     Toast.makeText(MainLoginActivity.this,"BIENVENIDO CREADOR A CLIENTES",Toast.LENGTH_SHORT).show();
                     Intent iniciarSesionCliente = new Intent(MainLoginActivity.this, MenuClientesActivity.class);
                     startActivity(iniciarSesionCliente);
-                }else if(etEmail.getText().toString().equals("repartidor") && etContraseña.getText().toString().equals("repartidor")) {
+                }else if(etEmail.getText().toString().equals("repartidor") && etContrasena.getText().toString().equals("repartidor")) {
                     //correct
                     Toast.makeText(MainLoginActivity.this, "BIENVENIDO CREADOR A EMPLEADOS", Toast.LENGTH_SHORT).show();
                     Intent inciarSesionRepartidor = new Intent(MainLoginActivity.this, MenuRepartidoresActivity.class);
                     startActivity(inciarSesionRepartidor);
-                }else if(etEmail.getText().toString().equals("restaurante") && etContraseña.getText().toString().equals("restaurante")) {
+                }else if(etEmail.getText().toString().equals("restaurante") && etContrasena.getText().toString().equals("restaurante")) {
                     //correct
                     Toast.makeText(MainLoginActivity.this, "BIENVENIDO CREADOR A RESTAURANTES", Toast.LENGTH_SHORT).show();
                     Intent inciarSesionRestaurante = new Intent(MainLoginActivity.this, MenuRestaurantesActivity.class);
@@ -55,6 +59,13 @@ public class MainLoginActivity extends AppCompatActivity {
                     //incorrect
                     Toast.makeText(MainLoginActivity.this,"LOGIN FAILED !!!",Toast.LENGTH_SHORT).show();
                 }
+        });
+
+        tvContrasenaOlvidade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog(v);
+            }
         });
 
 
@@ -73,6 +84,25 @@ public class MainLoginActivity extends AppCompatActivity {
                 startActivity(solicitudIntent);
             }
         });
+
+    }
+
+    public void showDialog(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Quiere que le enviemos la contraseña a su email?");
+        builder.setPositiveButton("Enviar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // Enviar email
+                Toast.makeText(MainLoginActivity.this, "EMAIL ENVIADO", Toast.LENGTH_SHORT).show();
+            }
+        });
+       /* builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                //nothing
+            }
+        });*/
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
 
