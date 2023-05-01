@@ -12,9 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainLoginActivity extends AppCompatActivity {
 
-    private Button btnCreateAccount;
-    private Button btnSolicitud;
-    private Button btnIniciarSesion;
+    private Button   btnCreateAccount;
+    private Button   btnSolicitud;
+    private Button   btnIniciarSesion;
     private TextView tvContraseñaOlvidade;
     private EditText etEmail;
     private EditText etContraseña;
