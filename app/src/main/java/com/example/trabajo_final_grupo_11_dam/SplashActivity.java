@@ -29,7 +29,7 @@ public class SplashActivity extends AppCompatActivity {
 
         Glide.with(this)
                 .asGif()
-                .load(R.drawable.foodline)
+                .load(R.drawable.logonaranjito)
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                 .into(loadingGif);
 

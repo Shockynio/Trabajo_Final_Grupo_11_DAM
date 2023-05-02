@@ -13,8 +13,14 @@
         <color name="grey_60">#999999</color>
         <color name="yellow_600">#FFD600</color>
         <color name="green">#00C853</color>
+        <color name="orangeCLEAR">#FDA52E</color>
+        <color name="orangeINTENSE">#fc9000</color>
+        <color name="brown">#B8730E</color>
         <color name="backgroundColor">#F5F5F5</color>
         <color name="button_green">#2F5504</color>
+        <color name="border_color1">#FFC69E </color>
+        <color name="border_color2">#3AAE3B </color>
+
 
 
 </resources>
