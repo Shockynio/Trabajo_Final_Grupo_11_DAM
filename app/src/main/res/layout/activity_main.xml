@@ -104,21 +104,23 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_linea"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="13dp"
         android:background="#F44D18"
         android:backgroundTint="@color/cardview_shadow_end_color"
+        android:backgroundTintMode="src_over"
         android:gravity="center"
         android:text="@string/textCrearCuentaNueva"
         tools:visibility="visible" />
+
     <Button
         android:id="@+id/btn_solicitud"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btn_crear_cuenta"
-        android:layout_marginTop="6dp"
-        android:gravity="center"
-        android:text="@string/textSolicitud"
         android:layout_centerHorizontal="true"
-        android:backgroundTint="@color/design_default_color_secondary"/>
+        android:layout_marginTop="27dp"
+        android:backgroundTint="@color/design_default_color_secondary"
+        android:gravity="center"
+        android:text="@string/textSolicitud" />
 
 </RelativeLayout>

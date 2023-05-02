@@ -176,34 +176,37 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
                 break;
         }
     }
-        private void mostrarFormulario(boolean esRepartidor) {
-            // Ocultar los iconos de repartidor y restaurante
-            findViewById(R.id.ic_repartidor).setVisibility(View.GONE);
-            findViewById(R.id.ic_restaurante).setVisibility(View.GONE);
+    private void mostrarFormulario(boolean esRepartidor) {
+        // Ocultar los iconos de repartidor y restaurante
+        findViewById(R.id.ic_repartidor).setVisibility(View.GONE);
+        findViewById(R.id.ic_restaurante).setVisibility(View.GONE);
 
-            // Mostrar elementos comunes
-            etEmail.setVisibility(View.VISIBLE);
-            etTelefono.setVisibility(View.VISIBLE);
-            etDireccion.setVisibility(View.VISIBLE);
-            etMasInfo.setVisibility(View.VISIBLE);
-            findViewById(R.id.btn_enviar).setVisibility(View.VISIBLE);
-            findViewById(R.id.gif_business).setVisibility(View.GONE);
+        // Mostrar elementos comunes
+        etEmail.setVisibility(View.VISIBLE);
+        etTelefono.setVisibility(View.VISIBLE);
+        etDireccion.setVisibility(View.VISIBLE);
+        etMasInfo.setVisibility(View.VISIBLE);
+        findViewById(R.id.btn_enviar).setVisibility(View.VISIBLE);
+        findViewById(R.id.gif_business).setVisibility(View.GONE);
 
+        if (esRepartidor) {
+            etNombre.setHint(getString(R.string.textNombreyApellidos));
+            etNombre.setVisibility(View.VISIBLE);
+            etExperienciaRepartidor.setVisibility(View.VISIBLE);
 
-            if (esRepartidor) {
-                etNombre.setVisibility(View.VISIBLE);
-                etExperienciaRepartidor.setVisibility(View.VISIBLE);
+            etNombreRestaurante.setVisibility(View.GONE);
+            spTipoDeComida.setVisibility(View.GONE);
+        } else {
+            etNombre.setHint(getString(R.string.textNombreyApellidosManager));
+            etNombre.setVisibility(View.VISIBLE);
+            etNombreRestaurante.setVisibility(View.VISIBLE);
+            spTipoDeComida.setVisibility(View.VISIBLE);
 
-                etNombreRestaurante.setVisibility(View.GONE);
-                spTipoDeComida.setVisibility(View.GONE);
-            } else {
-                etNombreRestaurante.setVisibility(View.VISIBLE);
-                spTipoDeComida.setVisibility(View.VISIBLE);
-
-                etNombre.setVisibility(View.GONE);
-                etExperienciaRepartidor.setVisibility(View.GONE);
-            }
+            etExperienciaRepartidor.setVisibility(View.GONE);
         }
+    }
+
+
 
 
          //Comprobación de errores en el formulario a través de métodos

@@ -9,14 +9,14 @@
 
     <EditText
         android:id="@+id/tv_nombre_restaurante"
+        style="@style/EditTextStyle"
         android:layout_width="312dp"
         android:layout_height="48dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="@string/textNombreRestaurante"
         android:inputType="textPersonName"
         android:visibility="gone"
-        style="@style/EditTextStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,14 +40,14 @@
 
     <EditText
         android:id="@+id/tv_mas_info"
+        style="@style/EditTextStyle"
         android:layout_width="312dp"
         android:layout_height="48dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/textMasInfo"
         android:inputType="textPersonName"
         android:visibility="invisible"
-        style="@style/EditTextStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,14 +74,14 @@
 
     <EditText
         android:id="@+id/tv_direccion"
+        style="@style/EditTextStyle"
         android:layout_width="312dp"
         android:layout_height="48dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/textDirección"
         android:inputType="textPersonName"
         android:visibility="invisible"
-        style="@style/EditTextStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
@@ -127,62 +127,66 @@
 
     <EditText
         android:id="@+id/tv_nombre"
+        style="@style/EditTextStyle"
         android:layout_width="312dp"
         android:layout_height="48dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="56dp"
         android:ems="10"
         android:hint="@string/textNombreyApellidos"
         android:inputType="textPersonName"
         android:visibility="gone"
-        style="@style/EditTextStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_restaurante"
+        app:layout_constraintTop_toTopOf="@+id/tv_nombre_restaurante"
         tools:visibility="visible" />
 
     <EditText
         android:id="@+id/tv_email_solicitud"
+        style="@style/EditTextStyle"
         android:layout_width="312dp"
         android:layout_height="48dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="56dp"
         android:ems="10"
         android:hint="@string/textEmail"
-        style="@style/EditTextStyle"
         android:inputType="textEmailAddress"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_nombre_restaurante"
+        app:layout_constraintTop_toTopOf="@+id/tv_nombre"
         tools:visibility="visible" />
 
     <EditText
         android:id="@+id/tv_telefono"
+        style="@style/EditTextStyle"
         android:layout_width="312dp"
         android:layout_height="48dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="56dp"
         android:ems="10"
         android:hint="@string/textTelefono"
         android:inputType="phone"
         android:visibility="gone"
-        style="@style/EditTextStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_email_solicitud"
+        app:layout_constraintTop_toTopOf="@+id/tv_email_solicitud"
         tools:visibility="visible" />
 
     <Button
         android:id="@+id/btn_enviar"
-        style="@style/ButtonMain"
         android:layout_width="174dp"
         android:layout_height="54dp"
+        android:background="@color/green"
         android:text="Enviar"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_mas_info" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_mas_info"
+        app:rippleColor="@color/green" />
+
 
     <TextView
         android:id="@+id/tv_pregunta"
@@ -208,7 +212,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.489" />
 
     <ImageView
         android:id="@+id/ic_restaurante"

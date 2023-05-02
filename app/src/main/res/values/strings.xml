@@ -2,6 +2,7 @@
     <string name="app_name">Trabajo_Final_Grupo_11_DAM</string>
     <string name="textSolicitudTrabajo">Solicitud para trabajar con nosotros.</string>
     <string name="textNombreyApellidos">Nombre y apellidos.</string>
+    <string name="textNombreyApellidosManager">Nombre y apellidos. (Encargado)</string>
     <string name="textEmail">Email.</string>
     <string name="textTelefono">Telefono.</string>
     <string name="textDirección">Dirección.</string>
@@ -13,14 +14,14 @@
     <string name="gifTitulo">GifTitulo</string>
     <string name="gifLoading">GifLoading</string>
     <string name="gifBusiness">GifLoading</string>
-    <string name="textBienvenida">Inicar Sesión</string>
+    <string name="textBienvenida">Iniciar Sesión</string>
     <string name="hintEmail">Email</string>
     <string name="hintContraseña">Contraseña</string>
-    <string name="textPreguntaContraseña">Has olbidado la contraseña?</string>
+    <string name="textPreguntaContraseña">¿Has olvidado la contraseña?</string>
     <string name="textInicio">Inicio</string>
     <string name="lineaSeparacion">___________________</string>
-    <string name="textCrearCuentaNueva">Crear Cuenta Nueva</string>
-    <string name="textSolicitud">Te gustaria trabajar com nosotros?</string>
+    <string name="textCrearCuentaNueva">Crear Nueva Cuenta</string>
+    <string name="textSolicitud">Te gustaria trabajar con nosotros?</string>
     <string name="hintNombreCompleto">Nombre completo</string>
     <string name="hintNombreDeUsuario">Nombre de usuario</string>
     <string name="hintContraseñaParametros">Contraseña (mín. 8 caracteres, 3 numericos)</string>
@@ -29,6 +30,7 @@
     <string name="hintMovil">Movil</string>
     <string name="textPregunta">¿Lejos de la ciudad? ¡No hay problema! </string>
     <string name="textCrearCuenta">Crear Cuenta</string>
+
     <string-array name="tipos_de_comida">
         <item>Tipo de Comida</item>
         <item>China</item>
