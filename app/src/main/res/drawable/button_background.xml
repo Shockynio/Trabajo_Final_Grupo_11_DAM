@@ -1,21 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
-        <animation-list
-            android:id="@+id/border_animation_list"
-            android:oneshot="false">
-            <item
-                android:drawable="@drawable/border_frame1"
-                android:duration="600" />
-            <item
-                android:drawable="@drawable/border_frame2"
-                android:duration="600" />
-            <!-- se pueden añadir mas bordes -->
-        </animation-list>
-    </item>
-    <item android:top="3dp" android:right="3dp" android:bottom="3dp" android:left="3dp">
-        <shape>
-            <solid android:color="@color/green" />
-        </shape>
-    </item>
-</layer-list>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/green" />
+</shape>

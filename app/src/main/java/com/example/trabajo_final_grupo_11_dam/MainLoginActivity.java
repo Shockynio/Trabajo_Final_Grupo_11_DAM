@@ -1,7 +1,11 @@
 package com.example.trabajo_final_grupo_11_dam;
 
+import Gradients.BorderGradientDrawable;
+
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +19,9 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
+import Gradients.BorderGradientDrawable;
 
 public class MainLoginActivity extends AppCompatActivity {
 
@@ -40,9 +47,16 @@ public class MainLoginActivity extends AppCompatActivity {
         tvContrasenaOlvidade =  findViewById(R.id.tv_contraseña_olvidada);
 
 
-        LayerDrawable buttonBackground = (LayerDrawable) btnIniciarSesion.getBackground();
-        AnimationDrawable borderAnimation = (AnimationDrawable) buttonBackground.getDrawable(0);
-        borderAnimation.start();
+        int borderColor1 = ContextCompat.getColor(this, R.color.border_color1);
+        int borderColor2 = ContextCompat.getColor(this, R.color.border_color2);
+        Resources resources = getResources();
+        int strokeWidth = resources.getDimensionPixelSize(R.dimen.border_stroke_width);
+
+        BorderGradientDrawable borderGradientDrawable = new BorderGradientDrawable(this, borderColor1, borderColor2, strokeWidth);
+        Drawable[] layers = {borderGradientDrawable, btnIniciarSesion.getBackground()};
+        LayerDrawable layerDrawable = new LayerDrawable(layers);
+        layerDrawable.setLayerInset(1, strokeWidth, strokeWidth, strokeWidth, strokeWidth);
+        btnIniciarSesion.setBackground(layerDrawable);
 
 
         //admin and admin
