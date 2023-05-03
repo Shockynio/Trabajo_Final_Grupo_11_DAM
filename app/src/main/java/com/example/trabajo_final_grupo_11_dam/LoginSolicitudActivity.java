@@ -69,11 +69,11 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
         //Quito el ActionBar
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        // Carga el array de tipos de comida desde el archivo de recursos
+// Carga el array de tipos de comida desde el archivo de recursos
         String[] tiposDeComida = getResources().getStringArray(R.array.tipos_de_comida);
 
-        // Crea el ArrayAdapter personalizado
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, tiposDeComida) {
+// Crea el ArrayAdapter personalizado
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, R.drawable.spinner_item_layout, tiposDeComida) {
             @Override
             public View getDropDownView(int position, View convertView, ViewGroup parent) {
                 View view = super.getDropDownView(position, convertView, parent);
@@ -81,7 +81,7 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
                 if (position == 0) {
                     textView.setTextColor(Color.GRAY);
                 } else {
-                    textView.setTextColor(Color.BLACK);
+                    textView.setTextColor(Color.WHITE);
                 }
                 return view;
             }
@@ -92,24 +92,25 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
             }
         };
 
-        // Especificar el diseño a utilizar cuando aparezca la lista de opciones
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    // Especificar el diseño a utilizar cuando aparezca la lista de opciones
+            adapter.setDropDownViewResource(R.drawable.spinner_item_layout);
 
-        // Establece el adaptador y configura el comportamiento del Spinner
-        spTipoDeComida.setAdapter(adapter);
-        spTipoDeComida.setSelection(0, false);
-        spTipoDeComida.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-                    ((TextView) view).setTextColor(Color.GRAY);
+    // Establece el adaptador y configura el comportamiento del Spinner
+            spTipoDeComida.setAdapter(adapter);
+            spTipoDeComida.setSelection(0, false);
+            spTipoDeComida.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if (position == 0) {
+                        ((TextView) view).setTextColor(Color.GRAY);
+                    }
                 }
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+
 
 
         etNombre.setOnFocusChangeListener(new View.OnFocusChangeListener() {

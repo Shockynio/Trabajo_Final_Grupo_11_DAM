@@ -9,8 +9,8 @@
     <string name="textExperiencia">Experiencia.</string>
     <string name="textMasInfo">Más información...</string>
     <string name="textNombreRestaurante">Nombre del Restaurante.</string>
-    <string name="textTipoComida">Tipo de comida.</string>
-    <string name="text_tipo_de_comida">Tipo de comida</string>
+    <string name="textEstiloComida">Estilo de comida.</string>
+    <string name="text_tipo_de_comida">Estilo de comida</string>
     <string name="gifTitulo">GifTitulo</string>
     <string name="gifLoading">GifLoading</string>
     <string name="gifBusiness">GifLoading</string>
@@ -32,12 +32,12 @@
     <string name="textCrearCuenta">Crear Cuenta</string>
 
     <string-array name="tipos_de_comida">
-        <item>Tipo de Comida</item>
-        <item>China</item>
+        <item>Estilo de Comida</item>
         <item>Española</item>
         <item>Americana</item>
         <item>Italiana</item>
-        <item>Japonesa</item>
+        <item>Asiatica</item>
+        <item>Turca</item>
         <item>India</item>
         <item>Mexicana</item>
     </string-array>
