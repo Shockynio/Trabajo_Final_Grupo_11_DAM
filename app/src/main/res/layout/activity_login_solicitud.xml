@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundColor"
+    android:background="@color/orangeINTENSE"
     tools:context=".LoginSolicitudActivity">
 
     <EditText
@@ -17,6 +17,7 @@
         android:hint="@string/textNombreRestaurante"
         android:inputType="textPersonName"
         android:visibility="gone"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,6 +31,8 @@
         android:layout_marginTop="12dp"
         android:contentDescription="@string/text_tipo_de_comida"
         android:visibility="invisible"
+        android:textColorHint="#FFFFFF"
+        android:textColor="#FFFFFF"
         style="@style/EditTextStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
@@ -48,6 +51,7 @@
         android:hint="@string/textMasInfo"
         android:inputType="textPersonName"
         android:visibility="invisible"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,6 +65,7 @@
         android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="@string/textExperiencia"
+        android:textColorHint="#FFFFFF"
         android:inputType="textPersonName"
         android:visibility="invisible"
         style="@style/EditTextStyle"
@@ -80,6 +85,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/textDirección"
+        android:textColorHint="#FFFFFF"
         android:inputType="textPersonName"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,6 +99,7 @@
         android:layout_width="385dp"
         android:layout_height="37dp"
         android:text="@string/textSolicitudTrabajo"
+        android:textColor="#FFFFFF"
         android:textAlignment="center"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -133,6 +140,7 @@
         android:layout_marginTop="56dp"
         android:ems="10"
         android:hint="@string/textNombreyApellidos"
+        android:textColorHint="#FFFFFF"
         android:inputType="textPersonName"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
@@ -149,6 +157,7 @@
         android:layout_marginTop="56dp"
         android:ems="10"
         android:hint="@string/textEmail"
+        android:textColorHint="#FFFFFF"
         android:inputType="textEmailAddress"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -165,6 +174,7 @@
         android:layout_marginTop="56dp"
         android:ems="10"
         android:hint="@string/textTelefono"
+        android:textColorHint="#FFFFFF"
         android:inputType="phone"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
@@ -184,8 +194,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_mas_info"
-        app:rippleColor="@color/green" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_mas_info" />
 
 
     <TextView
@@ -193,6 +202,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="¿Eres Repartidor o Restaurante ?"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
