@@ -34,7 +34,12 @@
     <string name="textmenuRestaurantePedidos">Pedidos</string>
     <string name="textmenuRestauranteAñadirCarta">Añadir Carta</string>
     <string name="textmenuRestauranteCerrarSesion">Cerrar Sesión</string>
-
+    <string name="textmenuRestauranteTitulo">Menu Restaurantes</string>
+    <string name="textAñadirCarta">Añadir Carta</string>
+    <string name="textRestauranteEntrantes">Entrantes</string>
+    <string name="textRestauranteTapas">Tapas</string>
+    <string name="textRestauranteProducto">Producto</string>
+    <string name="textRestaurantePrecio">Precio </string>
     <string-array name="tipos_de_comida">
         <item>Estilo de Comida</item>
         <item>Española</item>
