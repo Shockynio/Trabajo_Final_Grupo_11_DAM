@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/btn_menurestaurante_carta"
+        android:title="@string/textmenuRestauranteCarta" />
+    <item
+        android:id="@+id/btn_menurestaurante_añadirCarta"
+        android:title="@string/textmenuRestauranteAñadirCarta" />
+    <item
+        android:id="@+id/btn_menurestaurante_pedidos"
+        android:title="@string/textmenuRestaurantePedidos" />
+    <item
+        android:id="@+id/btn_menurestaurante_cerrarsesion"
+        android:title="@string/textmenuRestauranteCerrarSesion" />
+</menu>

@@ -30,6 +30,10 @@
     <string name="hintMovil">Movil</string>
     <string name="textPregunta">¿Lejos de la ciudad? ¡No hay problema! </string>
     <string name="textCrearCuenta">Crear Cuenta</string>
+    <string name="textmenuRestauranteCarta">Carta</string>
+    <string name="textmenuRestaurantePedidos">Pedidos</string>
+    <string name="textmenuRestauranteAñadirCarta">Añadir Carta</string>
+    <string name="textmenuRestauranteCerrarSesion">Cerrar Sesión</string>
 
     <string-array name="tipos_de_comida">
         <item>Estilo de Comida</item>
