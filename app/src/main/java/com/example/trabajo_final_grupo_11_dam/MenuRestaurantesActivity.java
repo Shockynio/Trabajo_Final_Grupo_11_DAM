@@ -1,19 +1,20 @@
 package com.example.trabajo_final_grupo_11_dam;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 public class MenuRestaurantesActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_restaurantes);
     }
-/*
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.overflow, menu);
         return true;
@@ -34,6 +35,6 @@ public class MenuRestaurantesActivity extends AppCompatActivity {
             Toast.makeText(this, "boton4", Toast.LENGTH_LONG).show();
         }
 
-    return  super.onOptionsItemSelected(item);
-    }*/
+        return  super.onOptionsItemSelected(item);
+    }
 }
