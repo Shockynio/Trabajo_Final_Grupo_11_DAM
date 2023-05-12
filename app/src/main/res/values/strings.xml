@@ -40,6 +40,7 @@
     <string name="textRestauranteTapas">Tapas</string>
     <string name="textRestauranteProducto">Producto</string>
     <string name="textRestaurantePrecio">Precio </string>
+    <string name="textRestauranteBebidas">Bebidas </string>
     <string-array name="tipos_de_comida">
         <item>Estilo de Comida</item>
         <item>Española</item>
