@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,6 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Trabajo_Final_Grupo_11_DAM"
         tools:targetApi="31">
+        <activity
+            android:name=".MenuActivity"
+            android:exported="false"
+            android:label="@string/title_activity_menu"
+            android:theme="@style/Theme.Trabajo_Final_Grupo_11_DAM.NoActionBar" />
         <activity
             android:name=".AnyadirCartaActivity"
             android:exported="false" />
@@ -37,39 +42,33 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
-                android:value=""/>
+                android:value="" />
         </activity>
-
         <activity
             android:name=".LoginSolicitudActivity"
-            android:screenOrientation="portrait"
-            android:exported="false"/>
-
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".LoginCreacionActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".LoginContraseñaResetActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:scheme="https"
                     android:host="com.example.trabajo_final_grupo_11_dam"
-                    android:pathPrefix="/reset-password" />
+                    android:pathPrefix="/reset-password"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
-
-
-
-
     </application>
 
 </manifest>
