@@ -17,8 +17,33 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_slideshow" />
         <item
-            android:id="@+id/nav_nuevo"
+            android:id="@+id/perfilFragment"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:title= "Perfil" />
+
+        <item
+            android:id="@+id/encargosDisponiblesFragment"
+            android:icon="@drawable/ic_menu_camera"
+            android:title= "Pedidos Disponibles" />
+        <item
+            android:id="@+id/encargosEscogidosragment"
+            android:icon="@drawable/ic_menu_camera"
+            android:title= "Pedidos Adjudicados" />
+        <item
+            android:id="@+id/restauranteFragment"
+            android:icon="@drawable/ic_menu_camera"
+            android:title= "Restaurantes" />
+        <item
+            android:id="@+id/cartaFragment"
+            android:icon="@drawable/ic_menu_camera"
+            android:title= "Carta" />
+        <item
+            android:id="@+id/anyadirCartaFragment"
+            android:icon="@drawable/ic_menu_camera"
+            android:title= "Añadir Carta" />
+        <item
+            android:id="@+id/pedidosFragment"
+            android:icon="@drawable/ic_menu_camera"
+            android:title= "Pedidos" />
     </group>
 </menu>
