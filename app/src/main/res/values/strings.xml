@@ -30,6 +30,10 @@
     <string name="hintMovil">Movil</string>
     <string name="textPregunta">¿Lejos de la ciudad? ¡No hay problema! </string>
     <string name="textCrearCuenta">Crear Cuenta</string>
+    <string name="textContraseñaOlvidada">Recupera acceso en un tan solo un instante.</string>
+    <string name="new_password" />
+    <string name="confirm_password" />
+    <string name="reset_password" />
 
     <string-array name="tipos_de_comida">
         <item>Estilo de Comida</item>

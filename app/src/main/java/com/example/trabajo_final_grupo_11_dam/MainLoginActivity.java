@@ -13,6 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+
+
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.widget.Button;
@@ -21,7 +24,20 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import Gradients.BorderGradientDrawable;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.Request.Method;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+
 
 public class MainLoginActivity extends AppCompatActivity {
 
@@ -38,8 +54,8 @@ public class MainLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EditText etEmail = (EditText) findViewById(R.id.et_email);
-        EditText etContrasena = (EditText) findViewById(R.id.et_contraseña);
+        etEmail = findViewById(R.id.et_email);
+        etContrasena = findViewById(R.id.et_contraseña);
 
         btnCreateAccount = findViewById(R.id.btn_crear_cuenta);
         btnSolicitud = findViewById(R.id.btn_solicitud);
@@ -113,21 +129,46 @@ public class MainLoginActivity extends AppCompatActivity {
 
     public void showDialog(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Quiere que le enviemos la contraseña a su email?");
+        builder.setMessage("¿Quiere recibir un correo electrónico para restablecer su contraseña?");
         builder.setPositiveButton("Enviar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // Enviar email
-                Toast.makeText(MainLoginActivity.this, "EMAIL ENVIADO", Toast.LENGTH_SHORT).show();
+                // Get the email
+                String email = etEmail.getText().toString();
+
+                RequestQueue queue = Volley.newRequestQueue(MainLoginActivity.this);
+                String url = "https://trabajo-final-grupo-11.azurewebsites.net/forgotPassword";  // Using HTTP instead of HTTPS
+
+                JSONObject jsonBody = new JSONObject();
+                try {
+                    jsonBody.put("email", email);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonBody,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                // Handle the successful response
+                                Toast.makeText(MainLoginActivity.this, "¡El correo electrónico de restablecimiento de contraseña se envió con éxito!", Toast.LENGTH_SHORT).show();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // Handle the unsuccessful response
+                                Toast.makeText(MainLoginActivity.this, "Error al enviar el correo electrónico de restablecimiento de contraseña", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                );
+
+                // Add the request to the RequestQueue
+                queue.add(jsonObjectRequest);
             }
         });
-       /* builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                //nothing
-            }
-        });*/
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        builder.create().show();
     }
+
 }
 
 

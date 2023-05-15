@@ -1,5 +1,7 @@
 package com.example.trabajo_final_grupo_11_dam;
 
+import static Util.Metodos.isEmailTaken;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -16,9 +18,19 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import Util.Metodos;
 import java.util.Objects;
 
 
@@ -69,10 +81,10 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
         //Quito el ActionBar
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-// Carga el array de tipos de comida desde el archivo de recursos
+    // Carga el array de tipos de comida desde el archivo de recursos
         String[] tiposDeComida = getResources().getStringArray(R.array.tipos_de_comida);
 
-// Crea el ArrayAdapter personalizado
+    // Crea el ArrayAdapter personalizado
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, R.drawable.spinner_item_layout, tiposDeComida) {
             @Override
             public View getDropDownView(int position, View convertView, ViewGroup parent) {
@@ -118,7 +130,7 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     String nombre = etNombre.getText().toString().trim();
-                    if (!isValidName(nombre)) {
+                    if (!Metodos.isValidName(nombre)) {
                         etNombre.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
                         Toast.makeText(LoginSolicitudActivity.this, "Nombre o apellidos inválidos", Toast.LENGTH_SHORT).show();
                     } else {
@@ -133,7 +145,7 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     String email = etEmail.getText().toString().trim();
-                    if (!isValidEmail(email)) {
+                    if (!Metodos.isValidEmail(email)) {
                         etEmail.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
                         Toast.makeText(LoginSolicitudActivity.this, "Email inválido", Toast.LENGTH_SHORT).show();
                     } else {
@@ -148,7 +160,7 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     String telefono = etTelefono.getText().toString().trim();
-                    if (!isValidSpanishMobileNumber(telefono)) {
+                    if (!Metodos.isValidSpanishMobileNumber(telefono)) {
                         etTelefono.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
                         Toast.makeText(LoginSolicitudActivity.this, "Número de teléfono inválido", Toast.LENGTH_SHORT).show();
                     } else {
@@ -174,9 +186,38 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
                 findViewById(R.id.btn_enviar).setVisibility(View.VISIBLE);
                 break;
             case R.id.btn_enviar:
+                String email = etEmail.getText().toString();
+                isEmailTaken(LoginSolicitudActivity.this, email, new LoginCreacionActivity.VolleyCallback() {
+                    @Override
+                    public void onSuccess(boolean isTaken) {
+                        if (isTaken) {
+                            Toast.makeText(LoginSolicitudActivity.this, "El correo electrónico ya está en uso.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            if (etExperienciaRepartidor.getVisibility() == View.VISIBLE) {
+                                String nombre = etNombre.getText().toString();
+                                int telefono = Integer.parseInt(etTelefono.getText().toString());
+                                String direccion = etDireccion.getText().toString();
+                                String experiencia = etExperienciaRepartidor.getText().toString();
+                                String masInfo = etMasInfo.getText().toString();
+
+                                EnviarSolicitudRepartidor(nombre, email, telefono, direccion, experiencia, masInfo);
+                            } else {
+                                String nombreRestaurante = etNombreRestaurante.getText().toString();
+                                String nombreEncargado = etNombre.getText().toString();
+                                int telefono = Integer.parseInt(etTelefono.getText().toString());
+                                String direccion = etDireccion.getText().toString();
+                                String estiloComida = spTipoDeComida.getSelectedItem().toString();
+                                String masInfo = etMasInfo.getText().toString();
+
+                                EnviarSolicitudRestaurante(nombreRestaurante, nombreEncargado, email, telefono, direccion, estiloComida, masInfo);
+                            }
+                        }
+                    }
+                });
                 break;
         }
-    }
+    } // Close the onClick method here
+
     private void mostrarFormulario(boolean esRepartidor) {
         // Ocultar los iconos de repartidor y restaurante
         findViewById(R.id.ic_repartidor).setVisibility(View.GONE);
@@ -210,24 +251,76 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
 
 
 
-         //Comprobación de errores en el formulario a través de métodos
 
-            private boolean isValidSpanishMobileNumber(String mobileNumber) {
-                String mobileRegex = "^[6|7|9]\\d{8}$";
-                return mobileNumber.matches(mobileRegex);
+    private void EnviarSolicitudRepartidor(String name, String email, int phoneNumber, String address, String experience, String additionalInfo) {
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "https://trabajo-final-grupo-11.azurewebsites.net/SubmitDriverForm";
+
+        JSONObject formData = new JSONObject();
+        try {
+            formData.put("NombreApellidos", name);
+            formData.put("Email", email);
+            formData.put("Telefono", phoneNumber);
+            formData.put("Direccion", address);
+            formData.put("Experiencia", experience);
+            formData.put("MasInformacion", additionalInfo);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, formData,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Repuesta de servidor
+                        Toast.makeText(LoginSolicitudActivity.this, "Solicitud enviada correctamente!", Toast.LENGTH_SHORT).show();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(LoginSolicitudActivity.this, "Error enviando la solicitud: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
+        });
 
-            private boolean isValidName(String name) {
-                String nameRegex = "^[A-Za-zÁ-Úá-úñÑ ]{2,}(\\s[A-Za-zÁ-Úá-úñÑ ]{2,}){2}$";
-                return name.matches(nameRegex);
+        // Añadir la request a la cola
+        queue.add(jsonObjectRequest);
+    }
+
+    private void EnviarSolicitudRestaurante(String nombreRestaurante, String nombreEncargado, String email, int phoneNumber, String address, String estiloComida, String additionalInfo) {
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "https://trabajo-final-grupo-11.azurewebsites.net/submitRestaurantForm";
+
+        JSONObject formData = new JSONObject();
+        try {
+            formData.put("nombreRestaurante", nombreRestaurante);
+            formData.put("nombreEncargado", nombreEncargado);
+            formData.put("email", email);
+            formData.put("telefono", phoneNumber);
+            formData.put("direccion", address);
+            formData.put("estiloComida", estiloComida);
+            formData.put("masInfo", additionalInfo);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, formData,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Server response
+                        Toast.makeText(LoginSolicitudActivity.this, "Solicitud enviada correctamente!", Toast.LENGTH_SHORT).show();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(LoginSolicitudActivity.this, "Error enviando la solicitud: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
+        });
 
-
-            private boolean isValidEmail(String email) {
-                String emailRegex = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
-                return email.matches(emailRegex);
-            }
-
+        // Add the request to the queue
+        queue.add(jsonObjectRequest);
+    }
 
             // Puede que lo necesitemos luego, por si hay que limpiar el array de información
 

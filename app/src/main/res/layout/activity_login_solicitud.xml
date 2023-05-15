@@ -26,14 +26,14 @@
 
     <Spinner
         android:id="@+id/sp_tipo_comida"
+        style="@style/EditTextStyle"
         android:layout_width="312dp"
         android:layout_height="48dp"
         android:layout_marginTop="12dp"
         android:contentDescription="@string/text_tipo_de_comida"
-        android:visibility="invisible"
-        android:textColorHint="#FFFFFF"
         android:textColor="#FFFFFF"
-        style="@style/EditTextStyle"
+        android:textColorHint="#FFFFFF"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"

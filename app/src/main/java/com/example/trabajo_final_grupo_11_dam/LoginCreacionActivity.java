@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -11,8 +12,23 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.graphics.Color;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+
+import Util.Metodos;
 
 public class LoginCreacionActivity extends AppCompatActivity {
 
@@ -144,12 +160,76 @@ public class LoginCreacionActivity extends AppCompatActivity {
 
     private void createAccount() {
         if (areAllFieldsValid()) {
-            // TODO: Logica de creación de cuentas irá aquí
+            final String username = etUsername.getText().toString().trim(); // Get the input from the username field
+            final String email = etEmail.getText().toString().trim(); // Get the input from the email field
+
+            Util.Metodos metodos = new Util.Metodos(); // Create an instance of the Metodos class
+
+            metodos.isUsernameTaken(LoginCreacionActivity.this, username, new VolleyCallback() {
+                @Override
+                public void onSuccess(boolean isTaken) {
+                    if (!isTaken) {
+                        metodos.isEmailTaken(LoginCreacionActivity.this, email, new VolleyCallback() {
+                            @Override
+                            public void onSuccess(boolean isTaken) {
+                                if (!isTaken) {
+                                    // Proceed with account creation
+                                    createAccountRequest(username, email);
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "El correo electrónico ya está en uso.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    } else {
+                        Toast.makeText(getApplicationContext(), "El nombre de usuario ya está en uso.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         } else {
             Toast.makeText(this, "Por favor, corrige los campos inválidos.", Toast.LENGTH_SHORT).show();
         }
-
     }
+
+    private void createAccountRequest(String username, String email) {
+        // Instantiate the RequestQueue
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "https://trabajo-final-grupo-11.azurewebsites.net/createAccount";
+
+        // Create a JSONObject to send as request body
+        JSONObject requestBody = new JSONObject();
+        try {
+            requestBody.put("Nombre_Completo", etFullName.getText().toString().trim());
+            requestBody.put("Username", username);
+            requestBody.put("Password", etPassword.getText().toString().trim());
+            requestBody.put("Nacimiento", etBirthday.getText().toString().trim());
+            requestBody.put("Telefono", etPhone.getText().toString().trim());
+            requestBody.put("Email", email);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        // Request a JSON response from the provided URL
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, requestBody,
+                response -> {
+                    // Handle response here
+                    Toast.makeText(getApplicationContext(), "La cuenta se ha creado correctamente!", Toast.LENGTH_SHORT).show();
+                },
+                error -> {
+                    // Handle error here
+                    Toast.makeText(getApplicationContext(), "Ha habido un error creando la cuenta.", Toast.LENGTH_SHORT).show();
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+
+        // Add the request to the RequestQueue
+        queue.add(jsonObjectRequest);
+    }
+
 
         private void showDatePickerDialog() {
             // Current date en el default
@@ -172,6 +252,10 @@ public class LoginCreacionActivity extends AppCompatActivity {
             );
             datePickerDialog.show();
         }
+
+
+
+
 
 
 
@@ -228,12 +312,10 @@ public class LoginCreacionActivity extends AppCompatActivity {
             return usernameValid && passwordValid && passwordsMatch && fullNameValid && phoneValid && emailValid;
         }
 
-    private boolean isUsernameTaken(String username) {
-        // TODO: Remplazar este placeholder con la pregunta que le haremos al SQL cuando tengamos la database para saber si el usuario ya está cogido
-        return false;
+    public interface VolleyCallback {
+        void onSuccess(boolean isTaken);
     }
 
+
 }
-
-
 
