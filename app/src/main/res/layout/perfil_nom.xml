@@ -10,6 +10,7 @@
     app:cardUseCompatPadding="true"
     card_view:cardCornerRAdius="5dp">
     <LinearLayout
+        android:background="@color/orangeINTENSE"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -18,33 +19,39 @@
             android:padding="3dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <ImageView
-                android:padding="2dp"
-                android:src="@drawable/ic_person"
-                android:layout_marginStart="5dp"
+                android:id="@+id/iv_pn_ic_person"
                 android:layout_width="30dp"
-                android:layout_height="30dp"/>
+                android:layout_height="30dp"
+                android:layout_marginStart="5dp"
+                android:padding="2dp"
+                android:src="@drawable/ic_person" />
+
             <TextView
-                android:text="Nombre"
-                android:layout_marginStart="10dp"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                android:textColor="#605E5E"
+                android:id="@+id/tv_pn_nom"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:text="Nombre"
+                android:textColor="#605E5E"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
 
         </LinearLayout>
+
         <TextView
-            android:text="Aleix Busquets Carpena"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="18sp"
+            android:id="@+id/tv_pn_nom_completo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:layout_marginBottom="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:text="Aleix Busquets Carpena"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
 
 

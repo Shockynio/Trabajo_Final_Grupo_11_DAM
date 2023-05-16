@@ -39,39 +39,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="Dirección"
+                    android:text="Dirección Restaurante"
                     android:textColor="#F8554A4A"
                     android:textSize="16sp"
                     android:textStyle="bold|normal" />
 
 
             </LinearLayout>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:padding="1dp"
-                android:gravity="center"
-                android:layout_alignParentEnd="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/iv_pd_ic_add"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:padding="5dp"
-                    android:src="@drawable/ic_add" />
-
-                <TextView
-                    android:id="@+id/tv_pd_anadir_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="Añadir Información"
-                    android:textColor="#286DC2"
-                    android:textSize="16sp"
-                    android:textStyle="bold|normal" />
-
-            </LinearLayout>
 
 
         </RelativeLayout>
@@ -86,7 +61,7 @@
                 android:layout_height="25dp"
                 android:layout_marginStart="10dp"
                 android:padding="2dp"
-                android:src="@drawable/ic_home"
+                android:src="@drawable/ic_restaurante"
                 app:tint="@color/black" />
             <LinearLayout
                 android:orientation="vertical"
@@ -122,6 +97,83 @@
         </LinearLayout>
 
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:padding="1dp"
+                android:gravity="center"
+                android:layout_alignParentStart="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_pd_ic_person2"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_direccion" />
+
+                <TextView
+                    android:id="@+id/tv_pd_direccion2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Dirección Cliente"
+                    android:textColor="#F8554A4A"
+                    android:textSize="16sp"
+                    android:textStyle="bold|normal" />
+
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_pd_ic_home2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="10dp"
+                android:padding="2dp"
+                android:src="@drawable/ic_home"
+                app:tint="@color/black" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_pd_calle2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Calle Mare Rafols 63 3º 1ª"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_pd_calle_info2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vilafranca del Penedès, \nBarcelona,\nEspaña \n08720"
+                    android:textAlignment="textStart"
+                    android:textColor="#ED5E5E5E"
+                    android:textSize="13sp"
+                    android:textStyle="normal"
+                    card_view:ignore="RtlCompat" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
