@@ -4,21 +4,29 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import android.content.Intent;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import com.google.gson.Gson;
 
 public class LoginContraseñaResetActivity extends AppCompatActivity {
 
@@ -26,7 +34,7 @@ public class LoginContraseñaResetActivity extends AppCompatActivity {
     private Button resetPasswordButton;
     private String token;
 
- // TODO: FIXEAR EL ERROR DEL TOKEN DE CLIENTE Y REVISAR EL ENDPOINT DEL RESETEO + INTENTAR HACER MAS BONITO EL EMAIL QUIZÁS
+ // TODO: INTENTAR HACER MAS BONITO EL EMAIL QUIZÁS
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +45,10 @@ public class LoginContraseñaResetActivity extends AppCompatActivity {
         confirmPasswordEditText = findViewById(R.id.confirm_password);
         resetPasswordButton = findViewById(R.id.reset_password_button);
 
-        token = getIntent().getStringExtra("token");
+        Uri data = getIntent().getData();
+
+
+        token = data.getQueryParameter("token");
 
         newPasswordEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -99,10 +110,16 @@ public class LoginContraseñaResetActivity extends AppCompatActivity {
                 } else {
                     OkHttpClient client = new OkHttpClient();
 
-                    RequestBody body = new FormBody.Builder()
-                            .add("token", token)
-                            .add("newPassword", newPassword)
-                            .build();
+                    MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
+
+                    // Use Gson to create JSON string
+                    Gson gson = new Gson();
+                    Map<String, String> params = new HashMap<>();
+                    params.put("token", token);
+                    params.put("newPassword", newPassword);
+                    String json = gson.toJson(params);
+
+                    RequestBody body = RequestBody.create(mediaType, json);
 
                     Request request = new Request.Builder()
                             .url("https://trabajo-final-grupo-11.azurewebsites.net/resetPassword")
@@ -122,6 +139,11 @@ public class LoginContraseñaResetActivity extends AppCompatActivity {
                                     @Override
                                     public void run() {
                                         Toast.makeText(LoginContraseñaResetActivity.this, "La contraseña se ha restablecido correctamente!", Toast.LENGTH_SHORT).show();
+
+                                        // Devolvemos al usuario al menu de login principal
+                                        Intent intent = new Intent(LoginContraseñaResetActivity.this, MainLoginActivity.class);
+                                        startActivity(intent);
+                                        finish();  // Cerramos la activity actual
                                     }
                                 });
                             } else {

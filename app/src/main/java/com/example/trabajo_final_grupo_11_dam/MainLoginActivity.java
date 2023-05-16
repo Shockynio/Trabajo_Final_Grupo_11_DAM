@@ -131,11 +131,25 @@ public class MainLoginActivity extends AppCompatActivity {
 
     public void showDialog(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("¿Quiere recibir un correo electrónico para restablecer su contraseña?");
+
+        // Pasamos el email
+        String email = etEmail.getText().toString();
+
+        // Check si el campo de email está vacio
+        if (email.isEmpty()) {
+            // Si lo está, se le envía un mensaje al usuario para recordarle que debe rellenar el campo.
+            builder.setMessage("Por favor, introduzca su correo electrónico");
+        } else {
+            // Si está correcto, se le pregunta si quiere recibir el correo de restablecimiento
+            builder.setMessage("¿Quiere recibir un correo electrónico para restablecer su contraseña?");
+        }
+
         builder.setPositiveButton("Enviar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // Get the email
-                String email = etEmail.getText().toString();
+                // Si el email está vacío, no hacer nada
+                if (email.isEmpty()) {
+                    return;
+                }
 
                 RequestQueue queue = Volley.newRequestQueue(MainLoginActivity.this);
                 String url = "https://trabajo-final-grupo-11.azurewebsites.net/forgotPassword";  // Using HTTP instead of HTTPS
@@ -151,14 +165,14 @@ public class MainLoginActivity extends AppCompatActivity {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                // Handle the successful response
+                                // Manejar respuesta correcta del server
                                 Toast.makeText(MainLoginActivity.this, "¡El correo electrónico de restablecimiento de contraseña se envió con éxito!", Toast.LENGTH_SHORT).show();
                             }
                         },
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                // Handle the unsuccessful response
+                                // Manejar respuesta incorrecta
                                 Toast.makeText(MainLoginActivity.this, "Error al enviar el correo electrónico de restablecimiento de contraseña", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -170,6 +184,7 @@ public class MainLoginActivity extends AppCompatActivity {
         });
         builder.create().show();
     }
+
 
 }
 
