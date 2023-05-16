@@ -34,7 +34,6 @@ public class LoginContraseñaResetActivity extends AppCompatActivity {
     private Button resetPasswordButton;
     private String token;
 
- // TODO: INTENTAR HACER MAS BONITO EL EMAIL QUIZÁS
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
