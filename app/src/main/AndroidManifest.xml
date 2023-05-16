@@ -26,7 +26,7 @@
             android:name=".MenuRestaurantesActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".Login.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -36,7 +36,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainLoginActivity"
+            android:name=".Login.MainLoginActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -45,16 +45,16 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".LoginSolicitudActivity"
+            android:name=".Login.LoginSolicitudActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LoginCreacionActivity"
+            android:name=".Login.LoginCreacionActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".LoginContraseñaResetActivity"
+            android:name=".Login.LoginContraseñaResetActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>

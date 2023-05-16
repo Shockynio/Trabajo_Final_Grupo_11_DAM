@@ -1,14 +1,14 @@
-package com.example.trabajo_final_grupo_11_dam;
+package com.example.trabajo_final_grupo_11_dam.Login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.content.Intent;
 import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import android.os.Bundle;
+import com.example.trabajo_final_grupo_11_dam.R;
+
 import android.os.Handler;
 
 import java.util.Objects;

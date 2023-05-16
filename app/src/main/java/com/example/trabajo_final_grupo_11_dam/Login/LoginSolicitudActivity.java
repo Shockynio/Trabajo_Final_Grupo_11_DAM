@@ -1,4 +1,4 @@
-package com.example.trabajo_final_grupo_11_dam;
+package com.example.trabajo_final_grupo_11_dam.Login;
 
 import static Util.Metodos.isEmailTaken;
 
@@ -26,6 +26,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.trabajo_final_grupo_11_dam.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

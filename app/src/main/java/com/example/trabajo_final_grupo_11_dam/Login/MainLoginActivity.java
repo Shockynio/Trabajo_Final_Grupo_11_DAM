@@ -1,4 +1,4 @@
-package com.example.trabajo_final_grupo_11_dam;
+package com.example.trabajo_final_grupo_11_dam.Login;
 
 import Gradients.BorderGradientDrawable;
 
@@ -8,19 +8,12 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-
-import android.graphics.drawable.AnimationDrawable;
-import android.os.Bundle;
-import android.widget.Button;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,13 +25,13 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.android.volley.Request.Method;
+import com.example.trabajo_final_grupo_11_dam.MenuActivity;
+import com.example.trabajo_final_grupo_11_dam.MenuRepartidoresActivity;
+import com.example.trabajo_final_grupo_11_dam.MenuRestaurantesActivity;
+import com.example.trabajo_final_grupo_11_dam.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.IOException;
-
 
 
 public class MainLoginActivity extends AppCompatActivity {

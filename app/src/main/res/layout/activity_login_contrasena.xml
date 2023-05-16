@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/orangeINTENSE"
-    tools:context=".LoginContraseñaResetActivity">
+    tools:context=".Login.LoginContraseñaResetActivity">
 
     <TextView
         android:id="@+id/tv_question2"
