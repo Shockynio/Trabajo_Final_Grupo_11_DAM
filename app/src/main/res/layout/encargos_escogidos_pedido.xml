@@ -1,55 +1,271 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
-    android:layout_centerInParent="true"
-    android:gravity="center">
+    app:cardCornerRadius="15dp"
+    app:cardElevation="10dp"
+    app:cardUseCompatPadding="true"
+    card_view:cardCornerRAdius="5dp">
 
-    <RelativeLayout
+    <LinearLayout
+        android:background="@color/orangeINTENSE"
+        android:orientation="vertical"
+        android:padding="8dp"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_centerInParent="true">
-
-        <androidx.cardview.widget.CardView
+        android:layout_height="wrap_content">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="240dp"
-            android:layout_marginTop="140dp"
-            android:backgroundTint="@color/orangeINTENSE"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="10dp"
-            app:cardUseCompatPadding="true"
-            card_view:cardCornerRAdius="5dp">
-
+            android:layout_height="wrap_content">
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="23dp"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:padding="1dp"
+                android:gravity="center"
+                android:layout_alignParentStart="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_eep_ic_pedido"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_direccion" />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_eep_pedido"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:gravity="center"
-                    android:text="Bar de PEPE"
-                    android:textColor="@color/black"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
+                    android:layout_margin="5dp"
+                    android:text="Pedido"
+                    android:textColor="#F8554A4A"
+                    android:textSize="16sp"
+                    android:textStyle="bold|normal" />
+
 
             </LinearLayout>
 
 
-        </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_eep_ic_restaurante1"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="10dp"
+                android:padding="2dp"
+                android:src="@drawable/ic_restaurante"
+                app:tint="@color/black" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_eep_entrantes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="ENTRANTES"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_eep_pedido_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ensalada de queso, \nFideua"
+                    android:textAlignment="textStart"
+                    android:textColor="#ED5E5E5E"
+                    android:textSize="13sp"
+                    android:textStyle="normal"
+                    card_view:ignore="RtlCompat" />
 
 
-    </RelativeLayout>
-    <com.google.android.material.imageview.ShapeableImageView
-        android:src="@drawable/barPEPE"
-        android:elevation="40dp"
-        android:padding="5dp"
-        android:layout_centerHorizontal="true"
-        android:layout_width="250dp"
-        android:layout_height="230dp"/>
-</RelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_eep_ic_restaurante2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="10dp"
+                android:padding="2dp"
+                android:src="@drawable/ic_restaurante"
+                app:tint="@color/black" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_eep_segundos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="SEGUNDOS"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_eep_pedido_info2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Espaguetis a la carbonara, \nChurrasco"
+                    android:textAlignment="textStart"
+                    android:textColor="#ED5E5E5E"
+                    android:textSize="13sp"
+                    android:textStyle="normal"
+                    card_view:ignore="RtlCompat" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_eep_ic_restaurante3"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="10dp"
+                android:padding="2dp"
+                android:src="@drawable/ic_restaurante"
+                app:tint="@color/black" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_eep_postres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="POSTRES"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_eep_pedido_info3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Helado de nata, \nCafe"
+                    android:textAlignment="textStart"
+                    android:textColor="#ED5E5E5E"
+                    android:textSize="13sp"
+                    android:textStyle="normal"
+                    card_view:ignore="RtlCompat" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_eep_ic_restaurante4"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="10dp"
+                android:padding="2dp"
+                android:src="@drawable/ic_bebida"
+                app:tint="@color/black" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_eep_Bebidas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="BEBIDAS"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_eep_pedido_info4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Agua de litro, \nVino tinto"
+                    android:textAlignment="textStart"
+                    android:textColor="#ED5E5E5E"
+                    android:textSize="13sp"
+                    android:textStyle="normal"
+                    card_view:ignore="RtlCompat" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_eep_ic_restaurante5"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="10dp"
+                android:padding="2dp"
+                android:src="@drawable/ic_restaurante"
+                app:tint="@color/black" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_eep_tapas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="TAPAS"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_eep_pedido_info5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Patatas, \nAceitunas"
+                    android:textAlignment="textStart"
+                    android:textColor="#ED5E5E5E"
+                    android:textSize="13sp"
+                    android:textStyle="normal"
+                    card_view:ignore="RtlCompat" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

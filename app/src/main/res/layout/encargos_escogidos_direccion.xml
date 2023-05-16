@@ -160,7 +160,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tv_pd_calle_info2"
+                    android:id="@+id/tv_eep_pedido_info2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Vilafranca del Penedès, \nBarcelona,\nEspaña \n08720"
