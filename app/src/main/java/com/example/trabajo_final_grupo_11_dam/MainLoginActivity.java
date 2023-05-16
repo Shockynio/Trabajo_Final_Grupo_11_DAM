@@ -85,7 +85,7 @@ public class MainLoginActivity extends AppCompatActivity {
                 if(etEmail.getText().toString().equals("cliente") && etContrasena.getText().toString().equals("cliente")){
                     //correct
                     Toast.makeText(MainLoginActivity.this,"BIENVENIDO CREADOR A CLIENTES",Toast.LENGTH_SHORT).show();
-                    Intent iniciarSesionCliente = new Intent(MainLoginActivity.this, MenuClientesActivity.class);
+                    Intent iniciarSesionCliente = new Intent(MainLoginActivity.this, MenuActivity.class);
                     startActivity(iniciarSesionCliente);
                 }else if(etEmail.getText().toString().equals("repartidor") && etContrasena.getText().toString().equals("repartidor")) {
                     //correct
