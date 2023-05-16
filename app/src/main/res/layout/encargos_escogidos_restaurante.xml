@@ -46,7 +46,7 @@
 
     </RelativeLayout>
     <com.google.android.material.imageview.ShapeableImageView
-        android:src="@drawable/barPEPE"
+        android:src="@drawable/comida"
         android:elevation="40dp"
         android:padding="5dp"
         android:layout_centerHorizontal="true"
