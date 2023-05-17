@@ -325,6 +325,10 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
 
             // Puede que lo necesitemos luego, por si hay que limpiar el array de información
 
+
+      // COMENTARIO PRUEBA
+
+
             private void limpiar() {
                 etNombre.setText("");
                 etEmail.setText("");

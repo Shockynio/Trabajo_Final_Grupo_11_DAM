@@ -255,7 +255,7 @@
                     android:id="@+id/tv_eep_pedido_info5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Patatas, \nAceitunas"
+                    android:text="Patatas , \nAceitunas"
                     android:textAlignment="textStart"
                     android:textColor="#ED5E5E5E"
                     android:textSize="13sp"
