@@ -5,125 +5,258 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/orangeINTENSE"
+    android:background="@color/white"
     tools:context=".Login.LoginCreacionActivity">
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_create_account"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4">
+        app:layout_constraintVertical_bias="0.0">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clBackground"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:paddingLeft="16dp"
-            android:paddingTop="16dp"
-            android:paddingRight="16dp">
+            android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/tv_full_name"
-                style="@style/EditTextStyle"
-                android:hint="@string/hintNombreCompleto"
-                android:textColorHint="#FFFFFF"
-                android:inputType="textPersonName" />
+            <ImageView
+                android:id="@+id/ic_delivery2"
+                android:layout_width="164dp"
+                android:layout_height="57dp"
+                app:layout_constraintBottom_toTopOf="@+id/cl_whiteBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.133"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.3"
+                app:srcCompat="@drawable/delivery2" />
 
-            <EditText
-                android:id="@+id/tv_username"
-                style="@style/EditTextStyle"
-                android:hint="@string/hintNombreDeUsuario"
-                android:textColorHint="#FFFFFF"
-                android:inputType="textPersonName" />
+            <ImageView
+                android:id="@+id/ic_delivery3"
+                android:layout_width="178dp"
+                android:layout_height="57dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.845"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.009"
+                app:srcCompat="@drawable/delivery3" />
 
-            <EditText
-                android:id="@+id/tv_password"
-                style="@style/EditTextStyle"
-                android:textColorHint="#FFFFFF"
+            <Button
+                android:id="@+id/btn_create_account"
+                android:layout_width="403dp"
+                android:layout_height="31dp"
+                android:background="@drawable/border_button"
+                android:text="@string/textCrearCuenta"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.998"
+                tools:ignore="ExtraText"
+                tools:layout_editor_absoluteX="4dp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_whiteBackground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hintContraseñaParametros"
-                android:inputType="textPassword" />
+                android:layout_marginTop="20dp"
+                android:background="@drawable/contraint_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <EditText
-                android:id="@+id/tv_repeat_password"
-                style="@style/EditTextStyle"
-                android:textColorHint="#FFFFFF"
-                android:hint="@string/hintContraseñaRepetir"
-                android:inputType="textPassword" />
-
-            <EditText
-                android:id="@+id/tv_birthday"
-                style="@style/EditTextStyle"
-                android:textColorHint="#FFFFFF"
-                android:focusable="false"
-                android:hint="@string/hintNacimientoParametros"
-                android:inputType="date" />
-
-
-            <EditText
-                android:id="@+id/tv_phone"
-                style="@style/EditTextStyle"
-                android:hint="@string/hintMovil"
-                android:textColorHint="#FFFFFF"
-                android:inputType="phone" />
-
-            <EditText
-                android:id="@+id/tv_email"
-                style="@style/EditTextStyle"
-                android:hint="@string/hintEmail"
-                android:textColorHint="#FFFFFF"
-                android:inputType="textEmailAddress" />
-
-            <TextView
-                android:id="@+id/tv_question"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:drawablePadding="8dp"
-                android:padding="8dp"
-                android:text="@string/textPregunta"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/ic_delivery2"
+                <TextView
+                    android:id="@+id/textView5"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@drawable/delivery2" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/hintNombreDeUsuario"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/cl_whiteBackground" />
 
-                <ImageView
-                    android:id="@+id/ic_delivery3"
-                    android:layout_width="213dp"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@drawable/delivery3" />
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/textNombreyApellidos"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_username" />
 
-         </LinearLayout>
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="@string/hintContraseñaParametros"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_full_name" />
 
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/repitaContrasenia"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_password" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/hintNacimientoParametros"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_repeat_password" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/hintMovil"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_birthday" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/hintEmail"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_phone" />
+
+                <EditText
+                    android:id="@+id/tv_username"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="15dp"
+                    android:hint="Introduzca su usuario"
+                    android:inputType="text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+                <EditText
+                    android:id="@+id/tv_full_name"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="15dp"
+                    android:hint="Introduzca su nombre"
+                    android:inputType="text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+                <EditText
+                    android:id="@+id/tv_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="15dp"
+                    android:hint="Introduzca contraseña"
+                    android:inputType="textPassword"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+                <EditText
+                    android:id="@+id/tv_repeat_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="15dp"
+                    android:hint="Repita su contraseña"
+                    android:inputType="textPassword"
+                    android:textColor="@color/lightGrey"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+                <EditText
+                    android:id="@+id/tv_birthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="15dp"
+                    android:focusable="false"
+                    android:hint="Seleccione fecha de nacimiento"
+                    android:inputType="date"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+
+                <EditText
+                    android:id="@+id/tv_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="15dp"
+                    android:hint="Introduzca su telefono"
+                    android:inputType="phone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+                <EditText
+                    android:id="@+id/tv_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="15dp"
+                    android:hint="Introduzca su email"
+                    android:inputType="textEmailAddress"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 
-        <Button
-            android:id="@+id/btn_create_account"
-            style="@style/ButtonMain"
-            android:text="@string/textCrearCuenta"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
