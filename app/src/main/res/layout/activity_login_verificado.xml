@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/orangeINTENSE"
+    android:background="@color/white"
     tools:context=".Login.LoginAccountVerifiedActivity">
 
     <TextView
@@ -15,7 +15,7 @@
         android:drawablePadding="8dp"
         android:padding="8dp"
         android:text="¡Estamos listos para verificar tu cuenta!"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +42,7 @@
         android:drawablePadding="8dp"
         android:padding="8dp"
         android:text="Pulsa el botón a continuación para confirmar tu cuenta"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,13 +50,14 @@
 
     <Button
         android:id="@+id/verifyAccountButton"
-        android:layout_width="219dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="32dp"
-        android:background="#6A1C04"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/border_button"
         android:text="Verificar cuenta"
-        android:textColor="#FFFFFF"
-        app:iconTint="#FFFFFF"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_redirect" />
