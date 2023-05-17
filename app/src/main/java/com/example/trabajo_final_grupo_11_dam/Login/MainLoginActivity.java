@@ -36,7 +36,7 @@ import org.json.JSONObject;
 
 public class MainLoginActivity extends AppCompatActivity {
 
-    private Button   btnCreateAccount;
+    private TextView   tvCreateAccount;
     private Button   btnSolicitud;
     private Button   btnIniciarSesion;
     private TextView tvContrasenaOlvidade;
@@ -52,13 +52,13 @@ public class MainLoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.et_email);
         etContrasena = findViewById(R.id.et_contraseña);
 
-        btnCreateAccount = findViewById(R.id.btn_crear_cuenta);
-        btnSolicitud = findViewById(R.id.btn_solicitud);
+        //btnSolicitud = findViewById(R.id.btn_solicitud);
         btnIniciarSesion = findViewById(R.id.btn_iniciar);
         tvContrasenaOlvidade =  findViewById(R.id.tv_contraseña_olvidada);
+        tvCreateAccount = findViewById(R.id.tv_crear_cuenta);
 
 
-        int borderColor1 = ContextCompat.getColor(this, R.color.border_color1);
+        /*int borderColor1 = ContextCompat.getColor(this, R.color.border_color1);
         int borderColor2 = ContextCompat.getColor(this, R.color.border_color2);
         Resources resources = getResources();
         int strokeWidth = resources.getDimensionPixelSize(R.dimen.border_stroke_width);
@@ -67,7 +67,7 @@ public class MainLoginActivity extends AppCompatActivity {
         Drawable[] layers = {borderGradientDrawable, btnIniciarSesion.getBackground()};
         LayerDrawable layerDrawable = new LayerDrawable(layers);
         layerDrawable.setLayerInset(1, strokeWidth, strokeWidth, strokeWidth, strokeWidth);
-        btnIniciarSesion.setBackground(layerDrawable);
+        btnIniciarSesion.setBackground(layerDrawable);*/
 
 
         //admin and admin
@@ -93,7 +93,7 @@ public class MainLoginActivity extends AppCompatActivity {
                 }else
                     //incorrect
                     Toast.makeText(MainLoginActivity.this,"LOGIN FAILED !!!",Toast.LENGTH_SHORT).show();
-                }
+            }
         });
 
         tvContrasenaOlvidade.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +104,7 @@ public class MainLoginActivity extends AppCompatActivity {
         });
 
 
-        btnCreateAccount.setOnClickListener(new View.OnClickListener() {
+        tvCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent createAccountIntent = new Intent(MainLoginActivity.this, LoginCreacionActivity.class);
@@ -112,13 +112,13 @@ public class MainLoginActivity extends AppCompatActivity {
             }
         });
 
-        btnSolicitud.setOnClickListener(new View.OnClickListener() {
+        /*btnSolicitud.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent solicitudIntent = new Intent(MainLoginActivity.this, LoginSolicitudActivity.class);
                 startActivity(solicitudIntent);
             }
-        });
+        });*/
 
     }
 

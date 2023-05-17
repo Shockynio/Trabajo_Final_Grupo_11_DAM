@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/orangeINTENSE"
+    tools:context=".Login.LoginAccountVerifiedActivity">
+
+    <TextView
+        android:id="@+id/tv_confirmation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="144dp"
+        android:drawablePadding="8dp"
+        android:padding="8dp"
+        android:text="¡Estamos listos para verificar tu cuenta!"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_confirmation"
+        android:layout_width="181dp"
+        android:layout_height="167dp"
+        android:layout_marginTop="48dp"
+        android:contentDescription="@string/splash_descripcion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_confirmation"
+        app:srcCompat="@drawable/icono" />
+
+    <TextView
+        android:id="@+id/tv_redirect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:drawablePadding="8dp"
+        android:padding="8dp"
+        android:text="Pulsa el botón a continuación para confirmar tu cuenta"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_confirmation" />
+
+    <Button
+        android:id="@+id/verifyAccountButton"
+        android:layout_width="219dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="32dp"
+        android:background="#6A1C04"
+        android:text="Verificar cuenta"
+        android:textColor="#FFFFFF"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_redirect" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

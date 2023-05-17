@@ -204,11 +204,10 @@ public class LoginCreacionActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        // Request a JSON response from the provided URL
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, requestBody,
                 response -> {
                     // Handle response here
-                    Toast.makeText(getApplicationContext(), "La cuenta se ha creado correctamente!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "La cuenta se ha creado correctamente! Por favor, revisa tu correo electrónico para verificar tu cuenta.", Toast.LENGTH_SHORT).show();
                 },
                 error -> {
                     // Handle error here
