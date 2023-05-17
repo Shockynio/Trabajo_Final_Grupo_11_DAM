@@ -43,7 +43,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:drawableRight="@drawable/ic_okey"
-                        android:text="Entregado" />
+                        android:text="ENTREGADO" />
 
                     <Button
                         android:id="@+id/btn_fee_cancelar"
