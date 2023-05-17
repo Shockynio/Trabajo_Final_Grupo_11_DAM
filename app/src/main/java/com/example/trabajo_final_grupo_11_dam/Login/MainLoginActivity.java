@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -102,6 +103,24 @@ public class MainLoginActivity extends AppCompatActivity {
                 showDialog(v);
             }
         });
+
+             // FIX DEL BUG DEL ENTER DEL CAMPO DE CORREO
+        etEmail.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    if (event.getAction() == KeyEvent.ACTION_UP) {
+                        View nextField = v.focusSearch(View.FOCUS_DOWN);
+                        if (nextField != null) {
+                            nextField.requestFocus();
+                        }
+                    }
+                    return true; // Consume the space key event
+                }
+                return false; // Let other key events be handled normally
+            }
+        });
+
 
 
         tvCreateAccount.setOnClickListener(new View.OnClickListener() {

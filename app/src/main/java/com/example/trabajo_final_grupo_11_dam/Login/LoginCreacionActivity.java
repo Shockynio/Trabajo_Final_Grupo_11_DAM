@@ -1,8 +1,10 @@
 package com.example.trabajo_final_grupo_11_dam.Login;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.app.DatePickerDialog;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -52,7 +54,6 @@ public class LoginCreacionActivity extends AppCompatActivity {
         etPhone = findViewById(R.id.tv_phone);
         etEmail = findViewById(R.id.tv_email);
 
-
         btnCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,91 +68,75 @@ public class LoginCreacionActivity extends AppCompatActivity {
             }
         });
 
+        // Move the showFieldError method outside of onCreate
 
+        // Set the error for etFullName
         etFullName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     boolean isValid = isValidName(etFullName.getText().toString().trim());
-                    setBackgroundColorBasedOnValidation(etFullName, isValid);
                     if (!isValid) {
-                        etFullName.setError("Ingrese su nombre completo (nombre y dos apellidos)");
-                    } else {
-                        etFullName.setError(null);
+                        showFieldError(etFullName, "Ingrese su nombre completo (nombre y dos apellidos)");
                     }
                 }
             }
         });
-        etUsername.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    setBackgroundColorBasedOnValidation(etUsername, !etUsername.getText().toString().trim().isEmpty());
-                }
-            }
-        });
 
+        // Set the error for etPassword
         etPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     boolean isValid = isValidPassword(etPassword.getText().toString().trim());
-                    setBackgroundColorBasedOnValidation(etPassword, isValid);
                     if (!isValid) {
-                        etPassword.setError("La contraseña debe tener al menos 6 caracteres y 3 números");
-                    } else {
-                        etPassword.setError(null);
-                    }
-                    if (!etRepeatPassword.getText().toString().trim().isEmpty()) {
-                        boolean passwordsMatch = checkPasswordsMatch(etPassword, etRepeatPassword);
-                        setBackgroundColorBasedOnValidation(etRepeatPassword, passwordsMatch);
+                        showFieldError(etPassword, "La contraseña debe tener al menos 6 caracteres y 3 números");
                     }
                 }
             }
         });
 
-
+     // Set the error for etRepeatPassword
         etRepeatPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    boolean isValid = checkPasswordsMatch(etPassword, etRepeatPassword);
-                    setBackgroundColorBasedOnValidation(etPassword, isValid);
-                    setBackgroundColorBasedOnValidation(etRepeatPassword, isValid);
+                    checkPasswordMatch(); // Call method to check if passwords match
                 }
             }
         });
 
 
+
+        // Set the error for etPhone
         etPhone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     boolean isValid = isValidSpanishMobileNumber(etPhone.getText().toString().trim());
-                    setBackgroundColorBasedOnValidation(etPhone, isValid);
                     if (!isValid) {
-                        etPhone.setError("Ingrese un número de teléfono válido");
-                    } else {
-                        etPhone.setError(null);
+                        showFieldError(etPhone, "Ingrese un número de teléfono válido");
                     }
                 }
             }
         });
 
+        // Set the error for etEmail
         etEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     boolean isValid = isValidEmail(etEmail.getText().toString().trim());
-                    setBackgroundColorBasedOnValidation(etEmail, isValid);
                     if (!isValid) {
-                        etEmail.setError("Ingrese un correo electrónico válido");
-                    } else {
-                        etEmail.setError(null);
+                        showFieldError(etEmail, "Ingrese un correo electrónico válido");
                     }
                 }
             }
         });
+    }
+
+    private void showFieldError(EditText editText, String errorMessage) {
+        editText.setError(errorMessage);
     }
 
 
@@ -307,6 +292,19 @@ public class LoginCreacionActivity extends AppCompatActivity {
 
             return usernameValid && passwordValid && passwordsMatch && fullNameValid && phoneValid && emailValid;
         }
+
+
+    private void checkPasswordMatch() {
+        String password = etPassword.getText().toString().trim();
+        String repeatPassword = etRepeatPassword.getText().toString().trim();
+
+        if (!password.equals(repeatPassword)) {
+            showFieldError(etRepeatPassword, "Las contraseñas no coinciden");
+        } else {
+            // Passwords match, clear the error
+            etRepeatPassword.setError(null);
+        }
+    }
 
     public interface VolleyCallback {
         void onSuccess(boolean isTaken);

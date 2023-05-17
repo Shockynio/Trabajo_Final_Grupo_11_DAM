@@ -106,6 +106,10 @@ public class LoginContraseñaResetActivity extends AppCompatActivity {
                     Toast.makeText(LoginContraseñaResetActivity.this, "Ambos campos deben rellenarse.", Toast.LENGTH_SHORT).show();
                 } else if(token == null || token.isEmpty()) {
                     Toast.makeText(LoginContraseñaResetActivity.this, "Token is missing.", Toast.LENGTH_SHORT).show();
+                } else if (!isValidPassword(newPassword)) {
+                    Toast.makeText(LoginContraseñaResetActivity.this, "La contraseña debe tener al menos 8 caracteres, 1 letra y 3 números.", Toast.LENGTH_SHORT).show();
+                } else if (!newPassword.equals(confirmPassword)) {
+                    Toast.makeText(LoginContraseñaResetActivity.this, "Las contraseñas no coinciden.", Toast.LENGTH_SHORT).show();
                 } else {
                     OkHttpClient client = new OkHttpClient();
 
