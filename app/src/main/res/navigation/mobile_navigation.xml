@@ -24,37 +24,37 @@
         tools:layout="@layout/fragment_slideshow" />
     <fragment
         android:id="@+id/perfilFragment"
-        android:name="com.example.trabajo_final_grupo_11_dam.PerfilFragment"
+        android:name="com.example.trabajo_final_grupo_11_dam.Fragment.PerfilFragment"
         android:label="fragment_perfil"
         tools:layout="@layout/fragment_perfil" />
     <fragment
         android:id="@+id/restauranteFragment"
-        android:name="com.example.trabajo_final_grupo_11_dam.RestauranteFragment"
+        android:name="com.example.trabajo_final_grupo_11_dam.Fragment.RestauranteFragment"
         android:label="fragment_restaurante"
         tools:layout="@layout/fragment_restaurante" />
     <fragment
         android:id="@+id/encargosDisponiblesFragment"
-        android:name="com.example.trabajo_final_grupo_11_dam.EncargosDisponiblesFragment"
+        android:name="com.example.trabajo_final_grupo_11_dam.Fragment.EncargosDisponiblesFragment"
         android:label="fragment_encargos_disponibles"
         tools:layout="@layout/fragment_encargos_disponibles" />
     <fragment
         android:id="@+id/cartaFragment"
-        android:name="com.example.trabajo_final_grupo_11_dam.CartaFragment"
+        android:name="com.example.trabajo_final_grupo_11_dam.Fragment.CartaFragment"
         android:label="fragment_carta"
         tools:layout="@layout/fragment_carta" />
     <fragment
         android:id="@+id/anyadirCartaFragment"
-        android:name="com.example.trabajo_final_grupo_11_dam.anyadirCartaFragment"
+        android:name="com.example.trabajo_final_grupo_11_dam.Fragment.anyadirCartaFragment"
         android:label="fragment_anyadir_carta"
         tools:layout="@layout/fragment_anyadir_carta" />
     <fragment
         android:id="@+id/pedidosFragment"
-        android:name="com.example.trabajo_final_grupo_11_dam.PedidosFragment"
+        android:name="com.example.trabajo_final_grupo_11_dam.Fragment.PedidosFragment"
         android:label="fragment_pedidos"
         tools:layout="@layout/fragment_pedidos" />
     <fragment
         android:id="@+id/encargosEscogidosragment"
-        android:name="com.example.trabajo_final_grupo_11_dam.EncargosEscogidosragment"
+        android:name="com.example.trabajo_final_grupo_11_dam.Fragment.EncargosEscogidosragment"
         android:label="fragment_encargos_escogidosragment"
         tools:layout="@layout/fragment_encargos_escogidosragment" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.trabajo_final_grupo_11_dam;
+package com.example.trabajo_final_grupo_11_dam.Fragment;
 
 import android.os.Bundle;
 
@@ -7,13 +7,17 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
+
+import com.example.trabajo_final_grupo_11_dam.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link PerfilFragment#newInstance} factory method to
+ * Use the {@link CartaFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PerfilFragment extends Fragment {
+public class CartaFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,8 +27,9 @@ public class PerfilFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Button btnañadiralcarrito;
 
-    public PerfilFragment() {
+    public CartaFragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +39,11 @@ public class PerfilFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment PerfilFragment.
+     * @return A new instance of fragment CartaFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static PerfilFragment newInstance(String param1, String param2) {
-        PerfilFragment fragment = new PerfilFragment();
+    public static CartaFragment newInstance(String param1, String param2) {
+        CartaFragment fragment = new CartaFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +64,22 @@ public class PerfilFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_perfil, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_carta, container, false);
+
+        // Obtener referencia a los elementos del perfil
+        btnañadiralcarrito = view.findViewById(R.id.btn_añadir_al_carrito);
+
+        // Agregar función al botón de edición
+        btnañadiralcarrito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Realizar acciones al pulsar el botón de edición del perfil
+                // TODO; Añadir funcion para añadir al carrito
+                Toast.makeText(getActivity(), "¡Producto Añadido!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return view;
     }
 }

@@ -40,6 +40,7 @@
     <string name="textmenuRestauranteCarta">Carta</string>
     <string name="textmenuRestaurantePedidos">Pedidos</string>
     <string name="textmenuRestauranteAñadirCarta">Añadir Carta</string>
+    <string name="textmenuRestauranteAñadiraCarta">AÑADIR A LA CARTA</string>
     <string name="textmenuRestauranteCerrarSesion">Cerrar Sesión</string>
     <string name="textmenuRestauranteTitulo">Menu Restaurantes</string>
     <string name="textAñadirCarta">Añadir Carta</string>
