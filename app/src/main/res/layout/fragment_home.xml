@@ -30,10 +30,6 @@
 
             <include layout="@layout/perfil_restaurante" />
 
-            <include
-                android:id="@+id/txtHome"
-                layout="@layout/perfil_restaurante" />
-
             <include layout="@layout/perfil_restaurante" />
 
             <include layout="@layout/perfil_restaurante" />
