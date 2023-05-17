@@ -219,6 +219,10 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
         }
     } // Close the onClick method here
 
+
+     // HOLA
+
+
     private void mostrarFormulario(boolean esRepartidor) {
         // Ocultar los iconos de repartidor y restaurante
         findViewById(R.id.ic_repartidor).setVisibility(View.GONE);
