@@ -42,7 +42,6 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="38dp"
         android:autofillHints="false"
-
         android:drawableStart="@drawable/ic_baseline_person_outline_24"
         android:drawablePadding="20dp"
         android:hint="Introduzca su email"

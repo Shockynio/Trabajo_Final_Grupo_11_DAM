@@ -3,10 +3,12 @@ package com.example.trabajo_final_grupo_11_dam.Login;
 import static Util.Metodos.isEmailTaken;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,7 +96,7 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
                 if (position == 0) {
                     textView.setTextColor(Color.GRAY);
                 } else {
-                    textView.setTextColor(Color.WHITE);
+                    textView.setTextColor(Color.BLACK);
                 }
                 return view;
             }
@@ -134,10 +136,9 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
                 if (!hasFocus) {
                     String nombre = etNombre.getText().toString().trim();
                     if (!Metodos.isValidName(nombre)) {
-                        etNombre.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
-                        Toast.makeText(LoginSolicitudActivity.this, "Nombre o apellidos inválidos", Toast.LENGTH_SHORT).show();
+                        setFieldError(etNombre, "Nombre o apellidos inválidos");
                     } else {
-                        etNombre.getBackground().setColorFilter(null);
+                        clearFieldError(etNombre);
                     }
                 }
             }
@@ -149,10 +150,9 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
                 if (!hasFocus) {
                     String email = etEmail.getText().toString().trim();
                     if (!Metodos.isValidEmail(email)) {
-                        etEmail.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
-                        Toast.makeText(LoginSolicitudActivity.this, "Email inválido", Toast.LENGTH_SHORT).show();
+                        setFieldError(etEmail, "Email inválido");
                     } else {
-                        etEmail.getBackground().setColorFilter(null);
+                        clearFieldError(etEmail);
                     }
                 }
             }
@@ -164,15 +164,18 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
                 if (!hasFocus) {
                     String telefono = etTelefono.getText().toString().trim();
                     if (!Metodos.isValidSpanishMobileNumber(telefono)) {
-                        etTelefono.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
-                        Toast.makeText(LoginSolicitudActivity.this, "Número de teléfono inválido", Toast.LENGTH_SHORT).show();
+                        setFieldError(etTelefono, "Número de teléfono inválido");
                     } else {
-                        etTelefono.getBackground().setColorFilter(null);
+                        clearFieldError(etTelefono);
                     }
                 }
             }
         });
     }
+
+
+
+
 
     // He refactorizado el sistema para que aparezcan los elementos si es repartidor/restaurante en vez de usar tantos ifs :)
 
@@ -367,6 +370,21 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
             return false;
         }
         return true;
+    }
+
+
+    // Method to set the error on the field
+// Method to set the error on the field
+    private void setFieldError(EditText editText, String errorMessage) {
+        editText.setError(errorMessage);
+        editText.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
+    }
+
+
+    // Method to clear the error on the field
+    private void clearFieldError(EditText editText) {
+        editText.setError(null);
+        editText.getBackground().setColorFilter(null);
     }
 
 
