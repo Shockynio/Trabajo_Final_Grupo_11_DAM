@@ -1,13 +1,17 @@
 package com.example.trabajo_final_grupo_11_dam.Login;
 
 import Gradients.BorderGradientDrawable;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
+
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -18,21 +22,32 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.RequestQueue;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.example.trabajo_final_grupo_11_dam.MenuActivity;
-import com.example.trabajo_final_grupo_11_dam.MenuRepartidoresActivity;
-import com.example.trabajo_final_grupo_11_dam.MenuRestaurantesActivity;
+
 import com.example.trabajo_final_grupo_11_dam.R;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.Objects;
 
 
 public class MainLoginActivity extends AppCompatActivity {
@@ -59,16 +74,6 @@ public class MainLoginActivity extends AppCompatActivity {
         tvCreateAccount = findViewById(R.id.tv_crear_cuenta);
 
 
-       /* int borderColor1 = ContextCompat.getColor(this, R.color.border_color1);
-        int borderColor2 = ContextCompat.getColor(this, R.color.border_color2);
-        Resources resources = getResources();
-        int strokeWidth = resources.getDimensionPixelSize(R.dimen.border_stroke_width);
-
-        BorderGradientDrawable borderGradientDrawable = new BorderGradientDrawable(this, borderColor1, borderColor2, strokeWidth);
-        Drawable[] layers = {borderGradientDrawable, btnIniciarSesion.getBackground()};
-        LayerDrawable layerDrawable = new LayerDrawable(layers);
-        layerDrawable.setLayerInset(1, strokeWidth, strokeWidth, strokeWidth, strokeWidth);
-        btnIniciarSesion.setBackground(layerDrawable);*/
 
 
         //admin and admin
@@ -76,26 +81,84 @@ public class MainLoginActivity extends AppCompatActivity {
         btnIniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(etEmail.getText().toString().equals("cliente") && etContrasena.getText().toString().equals("cliente")){
-                    //correct
-                    Toast.makeText(MainLoginActivity.this,"BIENVENIDO CREADOR A CLIENTES",Toast.LENGTH_SHORT).show();
-                    Intent iniciarSesionCliente = new Intent(MainLoginActivity.this, MenuActivity.class);
-                    startActivity(iniciarSesionCliente);
-                }else if(etEmail.getText().toString().equals("repartidor") && etContrasena.getText().toString().equals("repartidor")) {
-                    //correct
-                    Toast.makeText(MainLoginActivity.this, "BIENVENIDO CREADOR A EMPLEADOS", Toast.LENGTH_SHORT).show();
-                    Intent inciarSesionRepartidor = new Intent(MainLoginActivity.this, MenuRepartidoresActivity.class);
-                    startActivity(inciarSesionRepartidor);
-                }else if(etEmail.getText().toString().equals("restaurante") && etContrasena.getText().toString().equals("restaurante")) {
-                    //correct
-                    Toast.makeText(MainLoginActivity.this, "BIENVENIDO CREADOR A RESTAURANTES", Toast.LENGTH_SHORT).show();
-                    Intent inciarSesionRestaurante = new Intent(MainLoginActivity.this, MenuRestaurantesActivity.class);
-                    startActivity(inciarSesionRestaurante);
-                }else
-                    //incorrect
-                    Toast.makeText(MainLoginActivity.this,"LOGIN FAILED !!!",Toast.LENGTH_SHORT).show();
+                String email = etEmail.getText().toString();
+                String password = etContrasena.getText().toString();
+
+                Log.d("Login", "Email: " + email);
+                Log.d("Login", "Password: " + password);
+
+                RequestQueue queue = Volley.newRequestQueue(MainLoginActivity.this);
+
+                String url = "https://trabajo-final-grupo-11.azurewebsites.net/login";
+
+                JSONObject jsonBody = new JSONObject();
+                try {
+                    jsonBody.put("Email", email);
+                    jsonBody.put("Password", password);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                        (Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
+
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                Log.d("Login", "Response: " + response.toString());
+                                try {
+                                    boolean success = response.getBoolean("success");
+                                    if (success) {
+                                        Log.d("Login", "Login successful");
+                                        // Login was successful. Start the next activity.
+                                        Intent iniciarSesionCliente = new Intent(MainLoginActivity.this, MenuActivity.class);
+                                        startActivity(iniciarSesionCliente);
+                                    } else {
+                                        Log.d("Login", "Login failed");
+                                        // Login failed. Show an error message.
+                                        String message = response.getString("error");
+                                        Toast.makeText(MainLoginActivity.this, message, Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.e("Login", "Error: " + error.getMessage(), error);
+
+                                String errorMessage = "An error occurred during login";
+
+                                if (error.networkResponse != null && error.networkResponse.data != null) {
+                                    try {
+                                        String errorResponse = new String(error.networkResponse.data, HttpHeaderParser.parseCharset(error.networkResponse.headers));
+                                        JSONObject errorObject = new JSONObject(errorResponse);
+
+                                        if (errorObject.has("error")) {
+                                            errorMessage = errorObject.getString("error");
+                                        }
+                                    } catch (UnsupportedEncodingException | JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                Toast.makeText(MainLoginActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                // Add the request to the RequestQueue.
+                queue.add(jsonObjectRequest);
             }
         });
+
+
+
+
+
+
+
+
 
         tvContrasenaOlvidade.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -195,9 +258,7 @@ public class MainLoginActivity extends AppCompatActivity {
             }
         });
         builder.create().show();
+            }
     }
-
-
-}
 
 
