@@ -18,6 +18,7 @@
     <string name="hintEmail">Email</string>
     <string name="hintContraseña">Contraseña</string>
     <string name="textPreguntaContraseña">¿Has olvidado la contraseña?</string>
+    <string name="textPreguntaCrearCuentaNueva">¿No tiene cuenta?</string>
     <string name="textInicio">Inicio</string>
     <string name="lineaSeparacion">___________________</string>
     <string name="textCrearCuentaNueva">Crear Nueva Cuenta</string>
@@ -25,6 +26,7 @@
     <string name="hintNombreCompleto">Nombre completo</string>
     <string name="hintNombreDeUsuario">Nombre de usuario</string>
     <string name="hintContraseñaParametros">Contraseña (mín. 8 caracteres, 3 numericos)</string>
+    <string name="repitaContrasenia">Repita su contraseña</string>
     <string name="hintContraseñaRepetir">Repite la Contraseña</string>
     <string name="hintNacimientoParametros">Nacimiento (MM/DD/YYYY)</string>
     <string name="hintMovil">Movil</string>

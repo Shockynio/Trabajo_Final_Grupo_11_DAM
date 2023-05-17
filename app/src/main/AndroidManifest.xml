@@ -69,6 +69,23 @@
                     android:scheme="https" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Login.LoginAccountVerifiedActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter android:label="filter_verify_account">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="https"
+                    android:host="com.example.trabajo_final_grupo_11_dam"
+                    android:pathPrefix="/verify-account" />
+            </intent-filter>
+        </activity>
+
+
     </application>
 
 </manifest>
