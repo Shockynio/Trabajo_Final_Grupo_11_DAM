@@ -220,7 +220,6 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
     } // Close the onClick method here
 
 
-     // HOLA
 
 
     private void mostrarFormulario(boolean esRepartidor) {
