@@ -111,18 +111,20 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
     // Establece el adaptador y configura el comportamiento del Spinner
             spTipoDeComida.setAdapter(adapter);
             spTipoDeComida.setSelection(0, false);
-            spTipoDeComida.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    if (position == 0) {
-                        ((TextView) view).setTextColor(Color.GRAY);
-                    }
+        spTipoDeComida.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                    ((TextView) view).setTextColor(Color.GRAY);
+                } else {
+                    ((TextView) view).setTextColor(Color.BLACK);
                 }
+            }
 
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                }
-            });
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
 
 
@@ -187,6 +189,9 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
                 findViewById(R.id.btn_enviar).setVisibility(View.VISIBLE);
                 break;
             case R.id.btn_enviar:
+                if (!validarCampos()) {
+                    return;
+                }
                 String email = etEmail.getText().toString();
                 isEmailTaken(LoginSolicitudActivity.this, email, new LoginCreacionActivity.VolleyCallback() {
                     @Override
@@ -217,7 +222,7 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
                 });
                 break;
         }
-    } // Close the onClick method here
+    }
 
 
 
@@ -326,20 +331,43 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
         queue.add(jsonObjectRequest);
     }
 
-            // Puede que lo necesitemos luego, por si hay que limpiar el array de información
+    private boolean validarCampos() {
+        if (etEmail.getText().toString().isEmpty()) {
+            Toast.makeText(LoginSolicitudActivity.this, "El campo de correo electrónico no puede estar vacío.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (etNombre.getText().toString().isEmpty()) {
+            Toast.makeText(LoginSolicitudActivity.this, "El campo de nombre no puede estar vacío.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (etTelefono.getText().toString().isEmpty()) {
+            Toast.makeText(LoginSolicitudActivity.this, "El campo de teléfono no puede estar vacío.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (etDireccion.getText().toString().isEmpty()) {
+            Toast.makeText(LoginSolicitudActivity.this, "El campo de dirección no puede estar vacío.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (etExperienciaRepartidor.getVisibility() == View.VISIBLE && etExperienciaRepartidor.getText().toString().isEmpty()) {
+            Toast.makeText(LoginSolicitudActivity.this, "El campo de experiencia no puede estar vacío.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (etNombreRestaurante.getVisibility() == View.VISIBLE && etNombreRestaurante.getText().toString().isEmpty()) {
+            Toast.makeText(LoginSolicitudActivity.this, "El campo de nombre de restaurante no puede estar vacío.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (etMasInfo.getText().toString().isEmpty()) {
+            Toast.makeText(LoginSolicitudActivity.this, "El campo de información adicional no puede estar vacío.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
 
 
-      // COMENTARIO PRUEBA
-
-
-            private void limpiar() {
-                etNombre.setText("");
-                etEmail.setText("");
-                etTelefono.setText("");
-                etDireccion.setText("");
-                etExperienciaRepartidor.setText("");
-                etMasInfo.setText("");
-                spTipoDeComida.setSelection(0);
-                etNombreRestaurante.setText("");
-            }
 }
