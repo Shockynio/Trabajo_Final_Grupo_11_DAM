@@ -36,8 +36,8 @@ import org.json.JSONObject;
 
 public class MainLoginActivity extends AppCompatActivity {
 
-    private TextView   tvCreateAccount;
-    private Button   btnSolicitud;
+    private TextView tvCreateAccount;
+    private TextView tvSolicitud;
     private Button   btnIniciarSesion;
     private TextView tvContrasenaOlvidade;
     private EditText etEmail;
@@ -52,13 +52,13 @@ public class MainLoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.et_email);
         etContrasena = findViewById(R.id.et_contraseña);
 
-        //btnSolicitud = findViewById(R.id.btn_solicitud);
+        tvSolicitud = findViewById(R.id.tv_Solicitud);
         btnIniciarSesion = findViewById(R.id.btn_iniciar);
         tvContrasenaOlvidade =  findViewById(R.id.tv_contraseña_olvidada);
         tvCreateAccount = findViewById(R.id.tv_crear_cuenta);
 
 
-        /*int borderColor1 = ContextCompat.getColor(this, R.color.border_color1);
+       /* int borderColor1 = ContextCompat.getColor(this, R.color.border_color1);
         int borderColor2 = ContextCompat.getColor(this, R.color.border_color2);
         Resources resources = getResources();
         int strokeWidth = resources.getDimensionPixelSize(R.dimen.border_stroke_width);
@@ -112,13 +112,13 @@ public class MainLoginActivity extends AppCompatActivity {
             }
         });
 
-        /*btnSolicitud.setOnClickListener(new View.OnClickListener() {
+        tvSolicitud.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent solicitudIntent = new Intent(MainLoginActivity.this, LoginSolicitudActivity.class);
                 startActivity(solicitudIntent);
             }
-        });*/
+        });
 
     }
 

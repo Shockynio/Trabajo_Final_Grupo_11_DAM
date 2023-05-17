@@ -113,6 +113,22 @@
         android:layout_marginEnd="38dp"
         android:text="@string/textPreguntaContraseña"
         android:textColor="@color/orangeINTENSE"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_contraseña" />
+
+
+    <TextView
+        android:id="@+id/tv_Solicitud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_iniciar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="100dp"
+        android:text="@string/textSolicitud"
+        android:textColor="@color/orangeINTENSE"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_contraseña" />
 
@@ -140,7 +156,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:text="@string/textCrearCuentaNueva"
-            android:textColor="@color/chefchaouenBlue"
+            android:textColor="@color/orangeINTENSE"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_info_contrasenia"
             app:layout_constraintTop_toTopOf="parent" />

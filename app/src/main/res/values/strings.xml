@@ -18,7 +18,7 @@
     <string name="hintEmail">Email</string>
     <string name="hintContraseña">Contraseña</string>
     <string name="textPreguntaContraseña">¿Has olvidado la contraseña?</string>
-    <string name="textPreguntaCrearCuentaNueva">¿No tiene cuenta?</string>
+    <string name="textPreguntaCrearCuentaNueva">¿No tienes cuenta todavía?</string>
     <string name="textInicio">Inicio</string>
     <string name="lineaSeparacion">___________________</string>
     <string name="textCrearCuentaNueva">Crear Nueva Cuenta</string>
