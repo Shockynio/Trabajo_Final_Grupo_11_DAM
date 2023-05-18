@@ -32,8 +32,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class HomeFragment extends Fragment {
 
@@ -92,9 +98,14 @@ public class HomeFragment extends Fragment {
                                 restaurant.setTelefonoContacto(restaurantObject.getInt("Telefono_Contacto"));
                                 restaurant.setDireccionLocal(restaurantObject.getString("Dirección_Local"));
                                 restaurant.setEstiloComida(restaurantObject.getString("Estilo_Comida"));
-                                restaurant.setHorarioApertura(restaurantObject.getString("Horario_Apertura"));
-                                restaurant.setHorarioCierre(restaurantObject.getString("Horario_Cierre"));
-                                restaurant.setCerrado(restaurantObject.getInt("Cerrado") == 1);
+
+                                // Retrieve the opening and closing hours as strings
+                                String openingTimeString = restaurantObject.getString("Horario_Apertura");
+                                String closingTimeString = restaurantObject.getString("Horario_Cierre");
+
+                                // Set the opening and closing hours in the Restaurantes object
+                                restaurant.setHorarioApertura(openingTimeString);
+                                restaurant.setHorarioCierre(closingTimeString);
 
                                 // Add the restaurant to the list
                                 restaurantesList.add(restaurant);
@@ -107,6 +118,8 @@ public class HomeFragment extends Fragment {
                             Log.e("HomeFragment", "Error in onResponse(): " + e.getMessage());
                         }
                     }
+
+
                 },
                 new Response.ErrorListener() {
                     @Override
@@ -118,6 +131,34 @@ public class HomeFragment extends Fragment {
         );
 
         queue.add(jsonObjectRequest);
+    }
+
+
+
+    private int extractHour(String timestamp) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
+            Date date = sdf.parse(timestamp);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            return calendar.get(Calendar.HOUR_OF_DAY);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    private int extractMinute(String timestamp) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
+            Date date = sdf.parse(timestamp);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            return calendar.get(Calendar.MINUTE);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
 
