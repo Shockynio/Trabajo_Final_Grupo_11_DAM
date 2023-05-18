@@ -62,6 +62,8 @@ public class HomeFragment extends Fragment {
     }
 
     private void fetchRestaurantData() {
+        // Clear the restaurant data before fetching new data
+        clearRestaurantData();
         String url = "https://trabajo-final-grupo-11.azurewebsites.net/RetrieveRestaurants";
         RequestQueue queue = Volley.newRequestQueue(getActivity());
 
@@ -116,6 +118,12 @@ public class HomeFragment extends Fragment {
         );
 
         queue.add(jsonObjectRequest);
+    }
+
+
+    private void clearRestaurantData() {
+        restaurantesList.clear();
+        mRestaurantAdapter.notifyDataSetChanged();
     }
 }
 
