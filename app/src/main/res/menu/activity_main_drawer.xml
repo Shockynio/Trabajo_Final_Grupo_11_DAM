@@ -30,10 +30,6 @@
             android:icon="@drawable/ic_menu_camera"
             android:title= "Pedidos Adjudicados" />
         <item
-            android:id="@+id/restauranteFragment"
-            android:icon="@drawable/ic_menu_camera"
-            android:title= "Restaurantes" />
-        <item
             android:id="@+id/cartaFragment"
             android:icon="@drawable/ic_menu_camera"
             android:title= "Carta" />
