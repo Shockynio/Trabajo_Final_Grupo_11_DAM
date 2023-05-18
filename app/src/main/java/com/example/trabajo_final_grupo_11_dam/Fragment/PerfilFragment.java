@@ -2,6 +2,7 @@ package com.example.trabajo_final_grupo_11_dam.Fragment;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -55,6 +56,7 @@ public class PerfilFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -69,6 +71,7 @@ public class PerfilFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_perfil, container, false);
+
 
         tvPDCalle = root.findViewById(R.id.tv_pd_calle);
         tvPDCalleInfo = root.findViewById(R.id.tv_pd_calle_info);

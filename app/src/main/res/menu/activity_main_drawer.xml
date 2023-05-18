@@ -6,7 +6,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_home_basic"
             android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_gallery"
@@ -18,24 +18,24 @@
             android:title="@string/menu_slideshow" />
         <item
             android:id="@+id/perfilFragment"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_person"
             android:title= "Perfil" />
 
         <item
             android:id="@+id/encargosDisponiblesFragment"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_restaurante"
             android:title= "Pedidos Disponibles" />
         <item
             android:id="@+id/encargosEscogidosragment"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_send"
             android:title= "Pedidos Adjudicados" />
         <item
             android:id="@+id/cartaFragment"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_restaurant_menu"
             android:title= "Carta" />
         <item
             android:id="@+id/anyadirCartaFragment"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_shop"
             android:title= "Añadir Carta" />
         <item
             android:id="@+id/pedidosFragment"
