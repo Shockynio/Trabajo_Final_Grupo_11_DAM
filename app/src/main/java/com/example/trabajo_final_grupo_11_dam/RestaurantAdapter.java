@@ -65,6 +65,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
             holder.restaurantImage.setImageResource(R.drawable.american_image);
         } else if (restaurantType.equals("Italiana")) {
             holder.restaurantImage.setImageResource(R.drawable.italian_image);
+        } else if (restaurantType.equals("Turca")) {
+            holder.restaurantImage.setImageResource(R.drawable.turkish_image);
+        } else if (restaurantType.equals("India")) {
+            holder.restaurantImage.setImageResource(R.drawable.indian_image);
         } else {
             // Default image if the type doesn't match any specific image
             holder.restaurantImage.setImageResource(R.drawable.icono_restaurante);
@@ -153,10 +157,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
 
 
 
-    private int extractHour(String timestamp) {
+    private int extractHour(String time) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
-            Date date = sdf.parse(timestamp);
+            Date date = sdf.parse(time);
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
             return calendar.get(Calendar.HOUR_OF_DAY);
@@ -166,10 +170,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         return 0;
     }
 
-    private int extractMinute(String timestamp) {
+    private int extractMinute(String time) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
-            Date date = sdf.parse(timestamp);
+            Date date = sdf.parse(time);
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
             return calendar.get(Calendar.MINUTE);
@@ -181,15 +185,40 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
 
 
 
-        private boolean isRestaurantClosed(int currentHour, int currentMinute, int openingHour, int openingMinute, int closingHour, int closingMinute) {
-        if (currentHour < openingHour || currentHour > closingHour) {
-            return true; // Restaurant is closed if the current hour is before opening or after closing
-        } else if (currentHour == openingHour && currentMinute < openingMinute) {
-            return true; // Restaurant is closed if the current hour is the opening hour but the current minute is before opening minute
-        } else if (currentHour == closingHour && currentMinute > closingMinute) {
-            return true; // Restaurant is closed if the current hour is the closing hour but the current minute is after closing minute
-        } else {
-            return false; // Restaurant is open
+
+
+
+    private boolean isRestaurantClosed(int currentHour, int currentMinute, int openingHour, int openingMinute, int closingHour, int closingMinute) {
+        if (openingHour < closingHour) {
+            if (currentHour < openingHour || currentHour > closingHour) {
+                return true; // Restaurant is closed if the current hour is before opening or after closing
+            } else if (currentHour == openingHour && currentMinute < openingMinute) {
+                return true; // Restaurant is closed if the current hour is the opening hour but the current minute is before opening minute
+            } else if (currentHour == closingHour && currentMinute > closingMinute) {
+                return true; // Restaurant is closed if the current hour is the closing hour but the current minute is after closing minute
+            } else {
+                return false; // Restaurant is open
+            }
+        } else if (openingHour == closingHour) {
+            if (currentHour == openingHour) {
+                if (currentMinute < openingMinute || currentMinute > closingMinute) {
+                    return true; // Restaurant is closed if the current hour is the opening/closing hour but current minute is outside the open interval
+                } else {
+                    return false; // Restaurant is open
+                }
+            } else {
+                return (currentHour < openingHour || currentHour > closingHour); // Restaurant is closed if current hour is outside the open interval
+            }
+        } else { // openingHour > closingHour
+            if (currentHour > closingHour && currentHour < openingHour) {
+                return true; // Restaurant is closed if the current hour is after closing and before opening
+            } else if ((currentHour == closingHour && currentMinute > closingMinute) ||
+                    (currentHour == openingHour && currentMinute < openingMinute)) {
+                return true; // Restaurant is closed if it's the closing/opening hour but the minute is outside the open interval
+            } else {
+                return false; // Restaurant is open
+            }
         }
     }
 }
+

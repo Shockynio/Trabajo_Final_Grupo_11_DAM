@@ -135,10 +135,10 @@ public class HomeFragment extends Fragment {
 
 
 
-    private int extractHour(String timestamp) {
+    private int extractHour(String time) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
-            Date date = sdf.parse(timestamp);
+            Date date = sdf.parse(time);
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
             return calendar.get(Calendar.HOUR_OF_DAY);
@@ -148,10 +148,10 @@ public class HomeFragment extends Fragment {
         return 0;
     }
 
-    private int extractMinute(String timestamp) {
+    private int extractMinute(String time) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
-            Date date = sdf.parse(timestamp);
+            Date date = sdf.parse(time);
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
             return calendar.get(Calendar.MINUTE);
@@ -160,6 +160,7 @@ public class HomeFragment extends Fragment {
         }
         return 0;
     }
+
 
 
     private void clearRestaurantData() {
