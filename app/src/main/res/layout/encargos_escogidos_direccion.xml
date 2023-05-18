@@ -28,14 +28,14 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/iv_pd_ic_person"
+                    android:id="@+id/iv_edd_ic_person"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:padding="5dp"
                     android:src="@drawable/ic_direccion" />
 
                 <TextView
-                    android:id="@+id/tv_pd_direccion"
+                    android:id="@+id/tv_eed_direccion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/iv_pd_ic_home"
+                android:id="@+id/iv_eed_ic_home"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="10dp"
@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/tv_pd_calle"
+                    android:id="@+id/tv_eed_calle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -79,7 +79,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tv_pd_calle_info"
+                    android:id="@+id/tv_eed_calle_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Vilafranca del Penedès, \nBarcelona,\nEspaña \n08720"
@@ -109,14 +109,14 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/iv_pd_ic_person2"
+                    android:id="@+id/iv_eed_ic_person2"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:padding="5dp"
                     android:src="@drawable/ic_direccion" />
 
                 <TextView
-                    android:id="@+id/tv_pd_direccion2"
+                    android:id="@+id/tv_eed_direccion2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -137,7 +137,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/iv_pd_ic_home2"
+                android:id="@+id/iv_eed_ic_home2"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="10dp"
@@ -150,7 +150,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/tv_pd_calle2"
+                    android:id="@+id/tv_eed_calle2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -160,7 +160,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tv_eep_pedido_info2"
+                    android:id="@+id/tv_eed_calle_info2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Vilafranca del Penedès, \nBarcelona,\nEspaña \n08720"

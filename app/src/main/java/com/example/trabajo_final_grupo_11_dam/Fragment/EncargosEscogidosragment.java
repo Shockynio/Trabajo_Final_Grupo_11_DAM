@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.trabajo_final_grupo_11_dam.R;
 
@@ -57,10 +59,65 @@ public class EncargosEscogidosragment extends Fragment {
         }
     }
 
+    private TextView tvEERNomRestaurante;
+
+    private TextView tvEEPPedidoInfo;
+    private TextView tvEEPPedidoInfo2;
+    private TextView tvEEPPedidoInfo3;
+    private TextView tvEEPPedidoInfo4;
+    private TextView tvEEPPedidoInfo5;
+
+    private TextView tvEEDCalle;
+    private TextView tvEEDCalleInfo; //"Vilafranca del Penedès, \nBarcelona,\nEspaña \n08720"
+    private TextView tvEEDCalle2;
+    private TextView tvEEDCalleInfo2;
+
+    private Button btnFEECompleto;
+    private Button btnFEECancelar;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_encargos_escogidosragment, container, false);
+        View root = inflater.inflate(R.layout.fragment_encargos_escogidosragment, container, false);
+
+        //TODO: SELECT TO NOMBRE RESTAURANTE donde se hace el pedido
+        tvEERNomRestaurante = root.findViewById(R.id.tv_eer_nom_restaurante);
+        //TODO: SELECT TO PEDIDOS(DIVIDIDOS ENTRE 1.ENTRANTES 2.SEGUNDOS 3.POSTRES 4.BEBEDIAS 5.TAPAS)
+        tvEEPPedidoInfo  = root.findViewById(R.id.tv_eep_pedido_info);
+        tvEEPPedidoInfo2 = root.findViewById(R.id.tv_eep_pedido_info2);
+        tvEEPPedidoInfo3 = root.findViewById(R.id.tv_eep_pedido_info3);
+        tvEEPPedidoInfo4 = root.findViewById(R.id.tv_eep_pedido_info4);
+        tvEEPPedidoInfo5 = root.findViewById(R.id.tv_eep_pedido_info5);
+        //TODO: SELECT TO DIRECCION 1.RESTAURANTE 2.CLIENTE
+        tvEEDCalle = root.findViewById(R.id.tv_eed_calle);
+        tvEEDCalleInfo = root.findViewById(R.id.tv_eed_calle_info);
+        tvEEDCalle2 = root.findViewById(R.id.tv_eed_calle2);
+        tvEEDCalleInfo2 = root.findViewById(R.id.tv_eed_calle_info2);
+
+        btnFEECompleto = root.findViewById(R.id.btn_fee_completo);
+        btnFEECancelar = root.findViewById(R.id.btn_fee_cancelar);
+
+        //TODO: Al apretar PEDIDO cambia estado a COMPLETO
+        // (Repartidor a completado la entrega)
+        btnFEECompleto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        //TODO: Al apretar PEDIDO cambia estado a DISPONIBLE
+        // (Repartidor a cancelado continuar con la enctrega)
+        btnFEECancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+
+        return root;
     }
 }
