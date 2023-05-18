@@ -54,22 +54,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/iv_pd_ic_add"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:padding="5dp"
-                    android:src="@drawable/ic_add" />
 
-                <TextView
-                    android:id="@+id/tv_pd_anadir_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="Añadir Información"
-                    android:textColor="#286DC2"
-                    android:textSize="16sp"
-                    android:textStyle="bold|normal" />
+
+
 
             </LinearLayout>
 
