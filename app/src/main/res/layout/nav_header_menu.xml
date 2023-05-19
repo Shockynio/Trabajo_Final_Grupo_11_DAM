@@ -14,11 +14,12 @@
     <ImageView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
-        android:layout_height="99dp"
+        android:layout_height="140dp"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         app:srcCompat="@drawable/icono" />
 
+    <!-- Please ignore the following TextView element
     <TextView
         android:id="@+id/tv_full_name"
         android:layout_width="match_parent"
@@ -26,12 +27,14 @@
         android:textStyle="bold"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="@string/nav_header_title"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" /> -->
 
+    <!--
     <TextView
         android:id="@+id/tv_email"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/nav_header_subtitle" />
+        android:text="@string/nav_header_subtitle" /> -->
+
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.example.trabajo_final_grupo_11_dam;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.util.Log;
@@ -102,7 +103,9 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
                     Restaurantes clickedRestaurant = mRestaurantList.get(position);
                     Log.d("RestaurantAdapter", "Restaurant: " + clickedRestaurant.getNombre() +
                             ", Opening Hour: " + clickedRestaurant.getHorarioApertura() +
-                            ", Closing Hour: " + clickedRestaurant.getHorarioCierre());
+                            ", Closing Hour: " + clickedRestaurant.getHorarioCierre() +
+                            ", Restaurant ID: " + clickedRestaurant.getRestaurantId());
+
 
                     int openingHour = extractHour(clickedRestaurant.getHorarioApertura());
                     int openingMinute = extractMinute(clickedRestaurant.getHorarioApertura());
@@ -118,23 +121,18 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
                         // Restaurant is closed, show error message
                         Toast.makeText(mContext, "El restaurante se encuentra cerrado ahora mismo.", Toast.LENGTH_SHORT).show();
                     } else {
-                        // Restaurant is open, perform the desired action (e.g., navigate to restaurant details)
-                        // Add your code here to handle the click event when the restaurant is open
+                        // Restaurant is open, start CartaMenuActivity and pass the restaurant's id
+                        Intent intent = new Intent(mContext, CartaMenuActivity.class);
+                        int restaurantId = clickedRestaurant.getRestaurantId();
+                        Log.d("RestaurantAdapter", "Putting restaurantId into Intent: " + restaurantId);
+                        intent.putExtra("restaurantId", restaurantId);
+                        mContext.startActivity(intent);
                     }
                 }
             }
         });
 
     }
-
-
-
-
-
-
-
-
-
 
 
     @Override
@@ -154,7 +152,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
             restaurantImage = itemView.findViewById(R.id.imageViewRestaurant);
         }
     }
-
 
 
     private int extractHour(String time) {
@@ -182,10 +179,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         }
         return 0;
     }
-
-
-
-
 
 
     private boolean isRestaurantClosed(int currentHour, int currentMinute, int openingHour, int openingMinute, int closingHour, int closingMinute) {

@@ -26,7 +26,7 @@ public class MenuRestaurantesActivity extends AppCompatActivity {
         btnverCarta = (Button)findViewById(R.id.btn_ver_carta);
         btnpedidos = (Button)findViewById(R.id.btn_pedidos);
 
-        btnañadirCarta.setOnClickListener(new View.OnClickListener() {
+       /* btnañadirCarta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 switch (view.getId()) {
@@ -47,7 +47,7 @@ public class MenuRestaurantesActivity extends AppCompatActivity {
                 }
             }
 
-        });
+        });*/
 /*
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.overflow, menu);

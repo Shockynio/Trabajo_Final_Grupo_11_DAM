@@ -3,6 +3,7 @@ package com.example.trabajo_final_grupo_11_dam.ui.home;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -107,6 +108,9 @@ public class HomeFragment extends Fragment {
                                 restaurant.setHorarioApertura(openingTimeString);
                                 restaurant.setHorarioCierre(closingTimeString);
 
+                                restaurant.setCerrado(restaurantObject.optInt("Cerrado", 0) != 0);
+                                restaurant.setRestaurantId(restaurantObject.getInt("Restaurant_ID"));
+
                                 // Add the restaurant to the list
                                 restaurantesList.add(restaurant);
                             }
@@ -131,34 +135,6 @@ public class HomeFragment extends Fragment {
         );
 
         queue.add(jsonObjectRequest);
-    }
-
-
-
-    private int extractHour(String time) {
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
-            Date date = sdf.parse(time);
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date);
-            return calendar.get(Calendar.HOUR_OF_DAY);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
-
-    private int extractMinute(String time) {
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
-            Date date = sdf.parse(time);
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date);
-            return calendar.get(Calendar.MINUTE);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return 0;
     }
 
 

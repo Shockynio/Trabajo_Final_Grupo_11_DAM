@@ -1,6 +1,7 @@
 package com.example.trabajo_final_grupo_11_dam;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -58,7 +59,7 @@ public class MenuActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         // Fetch user data and update the header view
-        fetchUserData();
+        //fetchUserData();
     }
 
     @Override
@@ -87,7 +88,7 @@ public class MenuActivity extends AppCompatActivity {
         }
     }
 
-    private void fetchUserData() {
+   /* private void fetchUserData() {
         String url = "https://trabajo-final-grupo-11.azurewebsites.net/selectuserdata";
 
         // Create a StringRequest with the GET method
@@ -97,9 +98,14 @@ public class MenuActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         // Parse the response and extract the user's information
                         try {
+                            Log.d("MenuActivity", "Response: " + response);
+
                             JSONObject jsonResponse = new JSONObject(response);
                             String fullName = jsonResponse.getString("fullName");
                             String email = jsonResponse.getString("email");
+
+                            Log.d("MenuActivity", "Full Name: " + fullName);
+                            Log.d("MenuActivity", "Email: " + email);
 
                             // Update the header view with the retrieved user's information
                             updateHeaderView(fullName, email);
@@ -112,12 +118,14 @@ public class MenuActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Handle error response
+                        Log.e("MenuActivity", "Error fetching user data: " + error.getMessage());
                     }
                 });
 
         // Add the request to the request queue
         Volley.newRequestQueue(this).add(stringRequest);
     }
+*/
 
     private void updateHeaderView(String fullName, String email) {
         headerView = navigationView.getHeaderView(0);

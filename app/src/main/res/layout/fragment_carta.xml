@@ -10,25 +10,8 @@
     android:layout_gravity="center"
     tools:context=".Fragment.PerfilFragment">
 
-
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCarta"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <include layout="@layout/perfil_carta"/>
-
-            <include layout="@layout/perfil_carta" />
-            <include layout="@layout/perfil_carta"/>
-            <include layout="@layout/perfil_carta"/>
-            <include layout="@layout/perfil_carta"/>
-
-
-
-        </LinearLayout>
-    </ScrollView>
-
+        android:layout_height="match_parent" />
 </LinearLayout>

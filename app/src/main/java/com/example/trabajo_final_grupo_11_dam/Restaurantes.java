@@ -1,5 +1,7 @@
 package com.example.trabajo_final_grupo_11_dam;
 
+import android.util.Log;
+
 public class Restaurantes {
 
     private String nombre;
@@ -10,6 +12,8 @@ public class Restaurantes {
     private String horarioApertura;
     private String horarioCierre;
     private boolean cerrado;
+    private int restaurantId;
+
     public Restaurantes() {
         // Default constructor
     }
@@ -47,6 +51,10 @@ public class Restaurantes {
         return cerrado;
     }
 
+    public int getRestaurantId() {
+        return restaurantId;
+    }
+
     // Setters
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -79,4 +87,11 @@ public class Restaurantes {
     public void setCerrado(boolean cerrado) {
         this.cerrado = cerrado;
     }
+
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
+    }
+
+
 }
+

@@ -20,9 +20,6 @@
             android:label="@string/title_activity_menu"
             android:theme="@style/Theme.Trabajo_Final_Grupo_11_DAM.NoActionBar" />
         <activity
-            android:name=".AnyadirCartaActivity"
-            android:exported="false" />
-        <activity
             android:name=".MenuRestaurantesActivity"
             android:exported="false" />
         <activity
@@ -86,6 +83,11 @@
                     android:scheme="https" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".CartaMenuActivity"
+            android:exported="false"
+            android:launchMode="singleTop"/>
+
     </application>
 
 </manifest>
