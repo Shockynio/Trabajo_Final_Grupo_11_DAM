@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/tv_pd_calle"
+                    android:id="@+id/tv_pd_calle_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -91,10 +91,10 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tv_pd_calle_info"
+                    android:id="@+id/tv_pd_calle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Vilafranca del Penedès, \nBarcelona,\nEspaña \n08720"
+                    android:text="Esta será la dirección de entrega de tus pedidos"
                     android:textAlignment="textStart"
                     android:textColor="#ED5E5E5E"
                     android:textSize="13sp"

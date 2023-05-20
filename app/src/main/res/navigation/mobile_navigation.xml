@@ -28,11 +28,6 @@
         android:label="fragment_perfil"
         tools:layout="@layout/fragment_perfil" />
     <fragment
-        android:id="@+id/restauranteFragment"
-        android:name="com.example.trabajo_final_grupo_11_dam.Fragment.RestauranteFragment"
-        android:label="fragment_restaurante"
-        tools:layout="@layout/fragment_restaurante" />
-    <fragment
         android:id="@+id/encargosDisponiblesFragment"
         android:name="com.example.trabajo_final_grupo_11_dam.Fragment.EncargosDisponiblesFragment"
         android:label="fragment_encargos_disponibles"

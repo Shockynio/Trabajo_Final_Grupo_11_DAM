@@ -10,6 +10,7 @@ import okhttp3.RequestBody;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -73,9 +74,6 @@ public class MainLoginActivity extends AppCompatActivity {
         tvContrasenaOlvidade =  findViewById(R.id.tv_contraseña_olvidada);
         tvCreateAccount = findViewById(R.id.tv_crear_cuenta);
 
-
-
-
         //admin and admin
 
         btnIniciarSesion.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +107,14 @@ public class MainLoginActivity extends AppCompatActivity {
                                     boolean success = response.getBoolean("success");
                                     if (success) {
                                         Log.d("Login", "Login successful");
-                                        // Login was successful. Start the next activity.
+                                        // Login was successful. Store user's email.
+                                        SharedPreferences sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        Log.d("Login", "Storing user's email: " + email);
+                                        editor.putString("email", email);
+                                        editor.apply();
+
+                                        // Start the next activity.
                                         Intent iniciarSesionCliente = new Intent(MainLoginActivity.this, MenuActivity.class);
                                         startActivity(iniciarSesionCliente);
                                     } else {

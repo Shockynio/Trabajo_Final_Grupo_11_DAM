@@ -1,5 +1,6 @@
 package com.example.trabajo_final_grupo_11_dam;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuInflater;
@@ -18,6 +19,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -50,7 +52,7 @@ public class MenuActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.perfilFragment, R.id.encargosDisponiblesFragment, R.id.encargosEscogidosragment, R.id.restauranteFragment, R.id.cartaFragment,
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.perfilFragment, R.id.encargosDisponiblesFragment, R.id.encargosEscogidosragment, R.id.cartaFragment,
                 R.id.anyadirCartaFragment)
                 .setOpenableLayout(drawer)
                 .build();
@@ -73,20 +75,46 @@ public class MenuActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.back_menu, menu);
+
+        // Get the current fragment ID
+        int currentFragmentId = NavHostFragment.findNavController(getSupportFragmentManager().getPrimaryNavigationFragment()).getCurrentDestination().getId();
+
+        // Check if the current fragment is PerfilFragment
+        if (currentFragmentId == R.id.perfilFragment) {
+            // Hide the "back_menu" item
+            MenuItem backMenuItem = menu.findItem(R.id.action_back);
+            backMenuItem.setVisible(false);
+        } else {
+            // Show the "back_menu" item for other fragments
+            MenuItem backMenuItem = menu.findItem(R.id.action_back);
+            backMenuItem.setVisible(true);
+        }
+
         return super.onCreateOptionsMenu(menu);
+
+         // TODO: POR ALGUNA RAZON ESTO NO FUNCIONA, HAY QUE ELIMINAR EL BOTÓN PERO NO LO HACE, OS TOCA INVESTIGAR POR QUÉ Y ESCONDER EL BOTON
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_back:
-                // go back to the previous activity
+                // Clear shared preferences
+                SharedPreferences sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
+
+                // Go back to the previous activity
                 finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
 
    /* private void fetchUserData() {
         String url = "https://trabajo-final-grupo-11.azurewebsites.net/selectuserdata";

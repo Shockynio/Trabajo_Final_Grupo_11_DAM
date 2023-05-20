@@ -10,7 +10,6 @@
     android:layout_gravity="center"
     tools:context=".Fragment.PerfilFragment">
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -19,10 +18,47 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+
+
             <include layout="@layout/perfil_nom"/>
             <include layout="@layout/perfil_email"/>
             <include layout="@layout/perfil_telf"/>
             <include layout="@layout/perfil_direccion"/>
+            <include layout="@layout/perfil_nacimiento"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+
+                <Switch
+                    android:id="@+id/switch_edit_mode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:padding="8dp"
+                    android:text="Edit Mode"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:thumbTint="@color/orangeINTENSE" />
+
+                <Button
+                    android:id="@+id/button_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_background"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="8dp"
+                    android:text="Save"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
     </ScrollView>
