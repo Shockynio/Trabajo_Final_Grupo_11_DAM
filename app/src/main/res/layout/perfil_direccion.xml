@@ -80,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
+                <EditText
                     android:id="@+id/tv_pd_calle_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -92,6 +92,7 @@
 
                 <TextView
                     android:id="@+id/tv_pd_calle"
+                    android:nextFocusDown="@+id/tv_pd_nacimiento1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Esta será la dirección de entrega de tus pedidos"

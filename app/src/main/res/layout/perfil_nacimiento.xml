@@ -42,7 +42,7 @@
 
         </LinearLayout>
 
-        <TextView
+        <EditText
             android:id="@+id/tv_pd_nacimiento1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

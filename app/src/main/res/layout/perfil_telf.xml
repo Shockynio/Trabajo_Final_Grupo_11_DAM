@@ -42,12 +42,13 @@
 
         </LinearLayout>
 
-        <TextView
+        <EditText
             android:id="@+id/tv_pt_mobil2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:layout_marginBottom="15dp"
+            android:nextFocusDown="@+id/tv_pd_calle_info"
             android:text="+34 600 00 00 00"
             android:textColor="@color/black"
             android:textSize="18sp"

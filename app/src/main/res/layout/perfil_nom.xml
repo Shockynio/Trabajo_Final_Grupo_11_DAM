@@ -42,7 +42,8 @@
 
         </LinearLayout>
 
-        <TextView
+        <EditText
+
             android:id="@+id/tv_pn_nom_completo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,6 +52,7 @@
             android:text="Aleix Busquets Carpena"
             android:textColor="@color/black"
             android:textSize="18sp"
+            android:nextFocusDown="@+id/tv_pe_email2"
             android:textStyle="bold" />
 
 

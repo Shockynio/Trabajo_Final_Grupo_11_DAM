@@ -15,11 +15,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,14 +49,15 @@ import java.util.Locale;
 public class PerfilFragment extends Fragment {
 
     private TextView tvPDCalle;
-    private TextView tvPDCalleInfo; //"Vilafranca del Penedès, \nBarcelona,\nEspaña \n08720"
-    private TextView tvPEEmail2;
-    private TextView tvPNNomCompleto;
-    private TextView tvPTMobil2;
-    private TextView tvNacimiento;
+    private EditText tvPNNomCompleto;
+    private EditText tvPEEmail2;
+    private EditText tvPDCalleInfo;
+    private EditText tvPTMobil2;
+    private EditText tvNacimiento;
     private Switch editModeSwitch;
     private Button saveButton;
     private boolean isEditModeEnabled = false;
+    private String oldEmail;
 
     public PerfilFragment() {
         // Required empty public constructor
@@ -73,11 +77,74 @@ public class PerfilFragment extends Fragment {
         editModeSwitch = root.findViewById(R.id.switch_edit_mode);
         saveButton = root.findViewById(R.id.button_save);
 
+        enableEditMode(false);
+
         // Set click listeners
         editModeSwitch.setOnCheckedChangeListener(this::onEditModeChanged);
         saveButton.setOnClickListener(this::onSaveButtonClicked);
 
+        saveButton.setVisibility(View.GONE);
+
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Mi perfil");
+
+
+
+        tvPNNomCompleto.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                    tvPEEmail2.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        tvPEEmail2.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                    tvPTMobil2.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        tvPTMobil2.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                    tvPDCalleInfo.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        tvPDCalleInfo.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                    tvNacimiento.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        tvNacimiento.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                    saveButton.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
 
         fetchUserProfile();
 
@@ -87,18 +154,48 @@ public class PerfilFragment extends Fragment {
     private void onEditModeChanged(CompoundButton buttonView, boolean isChecked) {
         isEditModeEnabled = isChecked;
         enableEditMode(isEditModeEnabled);
-    }
 
+        // Toggle the visibility of the save button
+        saveButton.setVisibility(isEditModeEnabled ? View.VISIBLE : View.GONE);
+    }
 
     private void enableEditMode(boolean isEnabled) {
-        // Enable or disable the editable state of the TextViews
+        // Enable or disable the editable state of the EditTexts
         tvPNNomCompleto.setEnabled(isEnabled);
-        tvPEEmail2.setEnabled(isEnabled);
-        tvPDCalleInfo.setEnabled(isEnabled);
-        tvPTMobil2.setEnabled(isEnabled);
-        tvNacimiento.setEnabled(isEnabled);
-    }
+        tvPNNomCompleto.setFocusable(isEnabled);
+        tvPNNomCompleto.setFocusableInTouchMode(isEnabled);
 
+        tvPEEmail2.setEnabled(isEnabled);
+        tvPEEmail2.setFocusable(isEnabled);
+        tvPEEmail2.setFocusableInTouchMode(isEnabled);
+
+        tvPDCalleInfo.setEnabled(isEnabled);
+        tvPDCalleInfo.setFocusable(isEnabled);
+        tvPDCalleInfo.setFocusableInTouchMode(isEnabled);
+
+        tvPTMobil2.setEnabled(isEnabled);
+        tvPTMobil2.setFocusable(isEnabled);
+        tvPTMobil2.setFocusableInTouchMode(isEnabled);
+
+        tvNacimiento.setEnabled(isEnabled);
+        tvNacimiento.setFocusable(isEnabled);
+        tvNacimiento.setFocusableInTouchMode(isEnabled);
+
+        if(!isEnabled) {
+            // Hide keyboard and clear focus when edit mode is disabled
+            View currentView = this.getView();
+            if(currentView != null) {
+                InputMethodManager imm = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(currentView.getWindowToken(), 0);
+
+                tvPNNomCompleto.clearFocus();
+                tvPEEmail2.clearFocus();
+                tvPDCalleInfo.clearFocus();
+                tvPTMobil2.clearFocus();
+                tvNacimiento.clearFocus();
+            }
+        }
+    }
 
 
     private void onSaveButtonClicked(View view) {
@@ -109,19 +206,6 @@ public class PerfilFragment extends Fragment {
             String direccionEntrega = tvPDCalleInfo.getText().toString();
             String telefono = tvPTMobil2.getText().toString();
             String nacimiento = tvNacimiento.getText().toString();
-
-
-            saveButton.setVisibility(isEditModeEnabled ? View.VISIBLE : View.GONE);
-
-            editModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    isEditModeEnabled = isChecked;
-                    enableEditMode(isEditModeEnabled);
-                    saveButton.setVisibility(isEditModeEnabled ? View.VISIBLE : View.GONE);
-                }
-            });
-
 
             // Data validation
             if (!isValidName(nombreCompleto)) {
@@ -142,9 +226,13 @@ public class PerfilFragment extends Fragment {
                 return;
             }
 
-            isEmailTaken(getContext(), email, new LoginCreacionActivity.VolleyCallback() {
-                @Override
-                public void onSuccess(boolean isTaken) {
+
+
+
+            if (!email.equals(oldEmail)) {
+                isEmailTaken(getContext(), email, new LoginCreacionActivity.VolleyCallback() {
+                    @Override
+                    public void onSuccess(boolean isTaken) {
                     if (isTaken) {
                         // Email is already taken
                         Toast.makeText(getContext(), "Email is already taken", Toast.LENGTH_SHORT).show();
@@ -195,15 +283,12 @@ public class PerfilFragment extends Fragment {
                     }
                 }
             });
+          }
         }
     }
 
 
-
-
-
-
-    private void fetchUserProfile() {
+        private void fetchUserProfile() {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user_info", Context.MODE_PRIVATE);
         String email = sharedPreferences.getString("email", "");
 
