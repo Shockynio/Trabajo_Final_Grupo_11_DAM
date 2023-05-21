@@ -26,7 +26,7 @@
                 android:layout_height="30dp"
                 android:layout_marginStart="5dp"
                 android:padding="2dp"
-                android:src="@drawable/birthday" />
+                android:src="@drawable/ic_nacimiento" />
 
             <TextView
                 android:id="@+id/tv_pd_nacimiento2"
