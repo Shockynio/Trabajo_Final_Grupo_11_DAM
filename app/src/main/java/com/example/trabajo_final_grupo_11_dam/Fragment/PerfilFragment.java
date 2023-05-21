@@ -50,7 +50,7 @@ public class PerfilFragment extends Fragment {
 
     private TextView tvPDCalle;
     private EditText tvPNNomCompleto;
-    private EditText tvPEEmail2;
+    private TextView tvPEEmail2;
     private EditText tvPDCalleInfo;
     private EditText tvPTMobil2;
     private EditText tvNacimiento;
@@ -94,14 +94,14 @@ public class PerfilFragment extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                    tvPEEmail2.requestFocus();
+                    tvPTMobil2.requestFocus();
                     return true;
                 }
                 return false;
             }
         });
 
-        tvPEEmail2.setOnKeyListener(new View.OnKeyListener() {
+       /* tvPEEmail2.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
@@ -110,7 +110,7 @@ public class PerfilFragment extends Fragment {
                 }
                 return false;
             }
-        });
+        });*/
 
         tvPTMobil2.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -211,19 +211,19 @@ public class PerfilFragment extends Fragment {
             // Data validation
             if (!isValidName(nombreCompleto)) {
                 // Invalid name
-                Toast.makeText(getContext(), "Invalid name", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Escribe un nombre y dos apellidos", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             if (!isValidEmail(email)) {
                 // Invalid email
-                Toast.makeText(getContext(), "Invalid email", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Escribe un email válido", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             if (!isValidSpanishMobileNumber(telefono)) {
                 // Invalid phone number
-                Toast.makeText(getContext(), "Invalid phone number", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Escribe un email válido", Toast.LENGTH_SHORT).show();
                 return;
             }
 
