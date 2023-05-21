@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:layout_marginBottom="15dp"
-            android:text="aleix1996@gmail.com"
+            android:text=" "
             android:textColor="@color/black"
             android:nextFocusDown="@+id/tv_pt_mobil2"
             android:textSize="18sp"

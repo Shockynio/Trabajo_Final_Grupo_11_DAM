@@ -85,7 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Calle Mare Rafols 63 3º 1ª"
+                    android:text=" "
                     android:textColor="@color/black"
                     android:textSize="17sp"
                     android:textStyle="bold" />
