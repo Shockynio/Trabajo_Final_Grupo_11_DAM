@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:id="@+id/cardViewRestaurant"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="10dp"
+    app:cardUseCompatPadding="true"
+    card_view:cardCornerRAdius="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/orangeINTENSE">
+
+        <!-- Media -->
+        <ImageView
+            android:id="@+id/iv_restaurant"
+            android:layout_width="match_parent"
+            android:layout_height="106dp"
+            android:contentDescription="@string/restaurant_image"
+            android:textColor="@color/black"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/comida"/>
+
+
+        <TextView
+            android:id="@+id/tv_eer2_nom_restaurante"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:padding="16dp"
+            android:layout_margin="8dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Restaurante" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

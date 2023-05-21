@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:id="@+id/card_view_res_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="10dp"
+    app:cardUseCompatPadding="true"
+    card_view:cardCornerRAdius="5dp">
+
+    <LinearLayout
+        android:layout_width="403dp"
+        android:layout_height="258dp"
+        android:orientation="vertical">
+
+        <!-- Media -->
+
+        <ImageView
+            android:id="@+id/restauranteImageView"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:contentDescription=""
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/comida" />
+
+        <LinearLayout
+            android:id="@+id/ly_edr_info"
+            android:layout_width="match_parent"
+            android:layout_height="111dp"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Title, secondary and supporting text -->
+
+            <TextView
+                android:id="@+id/tv_edr_direccion_cliente"
+                android:layout_width="345dp"
+                android:layout_height="42dp"
+                android:text="Dirección Cliente" />
+
+
+            <LinearLayout
+                android:id="@+id/ly_edr_cantidad"
+                android:layout_width="345dp"
+                android:layout_height="42dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_edr_cantidad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Cantidad" />
+
+                <TextView
+                    android:id="@+id/tv_edr_cantidad2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:text="10" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Buttons -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_edr_aceptar_encargo"
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="Aceptar Encargo" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
