@@ -2,6 +2,7 @@ package com.example.trabajo_final_grupo_11_dam.Fragment;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -71,6 +72,8 @@ public class anyadirCartaFragment extends Fragment {
 
         // Obtener referencia a los elementos del perfil
         btnañadircarta = view.findViewById(R.id.btn_añadirCarta);
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Añadir Carta");
 
         // Agregar función al botón de edición
         btnañadircarta.setOnClickListener(new View.OnClickListener() {

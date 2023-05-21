@@ -77,6 +77,7 @@ public class PerfilFragment extends Fragment {
         editModeSwitch = root.findViewById(R.id.switch_edit_mode);
         saveButton = root.findViewById(R.id.button_save);
 
+
         enableEditMode(false);
 
         // Set click listeners

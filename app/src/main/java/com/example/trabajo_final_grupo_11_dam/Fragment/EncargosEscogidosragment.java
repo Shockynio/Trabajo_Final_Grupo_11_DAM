@@ -2,6 +2,7 @@ package com.example.trabajo_final_grupo_11_dam.Fragment;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -97,6 +98,8 @@ public class EncargosEscogidosragment extends Fragment {
 
         btnFEECompleto = root.findViewById(R.id.btn_fee_completo);
         btnFEECancelar = root.findViewById(R.id.btn_fee_cancelar);
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Pedido a ENTREGAR");
 
         //TODO: Al apretar PEDIDO cambia estado a COMPLETO
         // (Repartidor a completado la entrega)

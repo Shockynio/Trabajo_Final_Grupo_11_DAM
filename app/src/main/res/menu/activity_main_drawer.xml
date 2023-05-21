@@ -28,7 +28,7 @@
         <item
             android:id="@+id/encargosEscogidosragment"
             android:icon="@drawable/ic_send"
-            android:title= "Pedidos Adjudicados" />
+            android:title= "Pedidos a ENTREDAGAR" />
         <item
             android:id="@+id/anyadirCartaFragment"
             android:icon="@drawable/ic_shop"
