@@ -223,22 +223,10 @@ public class PerfilFragment extends Fragment {
 
             if (!isValidSpanishMobileNumber(telefono)) {
                 // Invalid phone number
-                Toast.makeText(getContext(), "Escribe un email válido", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Escribe un teléfono válido", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-
-
-
-            if (!email.equals(oldEmail)) {
-                isEmailTaken(getContext(), email, new LoginCreacionActivity.VolleyCallback() {
-                    @Override
-                    public void onSuccess(boolean isTaken) {
-                    if (isTaken) {
-                        // Email is already taken
-                        Toast.makeText(getContext(), "Email is already taken", Toast.LENGTH_SHORT).show();
-                    } else {
-                        // Create a JSON object with the updated user profile data
                         JSONObject jsonBody = new JSONObject();
                         try {
                             jsonBody.put("Email", email);
@@ -263,7 +251,9 @@ public class PerfilFragment extends Fragment {
                                     public void onResponse(JSONObject response) {
                                         // Handle the response
                                         Log.d("UpdateProfile", "Response: " + response.toString());
-                                        // TODO: Handle the response from the server
+
+                                        // Show success message
+                                        Toast.makeText(getContext(), "¡Se ha actualizado el perfil correctamente!", Toast.LENGTH_SHORT).show();
                                     }
                                 },
                                 new Response.ErrorListener() {
@@ -272,6 +262,8 @@ public class PerfilFragment extends Fragment {
                                         // Handle error
                                         Log.e("UpdateProfile", "Error: " + error.getMessage(), error);
 
+                                        // Show error message
+                                        Toast.makeText(getContext(), "Ha habido un error actualizando los datos de perfil.", Toast.LENGTH_SHORT).show();
                                     }
                                 });
 
@@ -283,11 +275,6 @@ public class PerfilFragment extends Fragment {
                         enableEditMode(isEditModeEnabled);
                     }
                 }
-            });
-          }
-        }
-    }
-
 
         private void fetchUserProfile() {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user_info", Context.MODE_PRIVATE);
