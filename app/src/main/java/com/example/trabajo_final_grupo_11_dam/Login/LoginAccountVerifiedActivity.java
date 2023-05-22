@@ -26,9 +26,15 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-
+/**
+ * Actividad para la verificación de cuenta de inicio de sesión.
+ */
 public class LoginAccountVerifiedActivity extends AppCompatActivity {
 
+    /**
+     * Método llamado cuando se crea la actividad.
+     * @param savedInstanceState Los datos guardados de la actividad anteriormente destruida.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +52,10 @@ public class LoginAccountVerifiedActivity extends AppCompatActivity {
         Button verifyAccountButton = findViewById(R.id.verifyAccountButton);
 
         verifyAccountButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Método llamado cuando se hace clic en el botón de verificación de cuenta.
+             * @param v La vista que ha sido clicada.
+             */
             @Override
             public void onClick(View v) {
 
@@ -70,16 +80,30 @@ public class LoginAccountVerifiedActivity extends AppCompatActivity {
                             .build();
 
                     client.newCall(request).enqueue(new Callback() {
+                        /**
+                         * Método llamado cuando la llamada HTTP falla.
+                         * @param call La llamada HTTP.
+                         * @param e La excepción que causó el fallo.
+                         */
                         @Override
                         public void onFailure(Call call, IOException e) {
                             e.printStackTrace();
                         }
 
+                        /**
+                         * Método llamado cuando se recibe una respuesta HTTP.
+                         * @param call La llamada HTTP.
+                         * @param response La respuesta HTTP recibida.
+                         * @throws IOException Si ocurre un error al manejar la respuesta.
+                         */
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             if (response.isSuccessful()) {
                                 runOnUiThread(new Runnable() {
                                     @Override
+                                    /**
+                                     * Método ejecutado en el hilo de la interfaz de usuario para mostrar un mensaje de éxito.
+                                     */
                                     public void run() {
                                         Toast.makeText(LoginAccountVerifiedActivity.this, "La cuenta ha sido verificada correctamente!", Toast.LENGTH_SHORT).show();
 

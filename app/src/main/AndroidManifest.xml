@@ -19,9 +19,7 @@
             android:exported="false"
             android:label="@string/title_activity_menu"
             android:theme="@style/Theme.Trabajo_Final_Grupo_11_DAM.NoActionBar" />
-        <activity
-            android:name=".MenuRestaurantesActivity"
-            android:exported="false" />
+
         <activity
             android:name=".Login.SplashActivity"
             android:exported="true"

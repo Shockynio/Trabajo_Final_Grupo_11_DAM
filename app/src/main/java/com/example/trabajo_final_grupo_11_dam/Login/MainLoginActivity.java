@@ -50,7 +50,9 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Objects;
 
-
+/**
+ * Esta clase representa la actividad principal de inicio de sesión.
+ */
 public class MainLoginActivity extends AppCompatActivity {
 
     private TextView tvCreateAccount;
@@ -61,11 +63,16 @@ public class MainLoginActivity extends AppCompatActivity {
     private EditText etContrasena;
 
 
+    /**
+     * Método que se ejecuta al crear la actividad.
+     * Configura los elementos de la interfaz y los listeners.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Obtener el correo electrónico y la contraseña ingresados por el usuario
         etEmail = findViewById(R.id.et_email);
         etContrasena = findViewById(R.id.et_contraseña);
 
@@ -74,8 +81,7 @@ public class MainLoginActivity extends AppCompatActivity {
         tvContrasenaOlvidade =  findViewById(R.id.tv_contraseña_olvidada);
         tvCreateAccount = findViewById(R.id.tv_crear_cuenta);
 
-        //admin and admin
-
+        // Configuración del evento de clic para el botón de inicio de sesión
         btnIniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,10 +91,12 @@ public class MainLoginActivity extends AppCompatActivity {
                 Log.d("Login", "Email: " + email);
                 Log.d("Login", "Password: " + password);
 
+                // Crear una cola de solicitudes para enviar la solicitud de inicio de sesión al servidor
                 RequestQueue queue = Volley.newRequestQueue(MainLoginActivity.this);
 
                 String url = "https://trabajo-final-grupo-11.azurewebsites.net/login";
 
+                // Crear un objeto JSON con el correo electrónico y la contraseña
                 JSONObject jsonBody = new JSONObject();
                 try {
                     jsonBody.put("Email", email);
@@ -96,7 +104,7 @@ public class MainLoginActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
+                // Crear la solicitud JSON para enviar los datos de inicio de sesión al servidor
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                         (Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
 
@@ -107,19 +115,19 @@ public class MainLoginActivity extends AppCompatActivity {
                                     boolean success = response.getBoolean("success");
                                     if (success) {
                                         Log.d("Login", "Login successful");
-                                        // Login was successful. Store user's email.
+                                        // El inicio de sesión fue exitoso. Almacenar el correo electrónico del usuario.
                                         SharedPreferences sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
                                         SharedPreferences.Editor editor = sharedPreferences.edit();
                                         Log.d("Login", "Storing user's email: " + email);
                                         editor.putString("email", email);
                                         editor.apply();
 
-                                        // Start the next activity.
+                                        // Iniciar la siguiente actividad.
                                         Intent iniciarSesionCliente = new Intent(MainLoginActivity.this, MenuActivity.class);
                                         startActivity(iniciarSesionCliente);
                                     } else {
                                         Log.d("Login", "Login failed");
-                                        // Login failed. Show an error message.
+                                        // El inicio de sesión falló. Mostrar un mensaje de error.
                                         String message = response.getString("error");
                                         Toast.makeText(MainLoginActivity.this, message, Toast.LENGTH_SHORT).show();
                                     }
@@ -152,7 +160,7 @@ public class MainLoginActivity extends AppCompatActivity {
                             }
                         });
 
-                // Add the request to the RequestQueue.
+                // Agregar la solicitud a la cola de solicitudes.
                 queue.add(jsonObjectRequest);
             }
         });
@@ -163,7 +171,7 @@ public class MainLoginActivity extends AppCompatActivity {
 
 
 
-
+        // Configuración del evento de clic para el enlace de "Contraseña olvidada"
         tvContrasenaOlvidade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,7 +179,9 @@ public class MainLoginActivity extends AppCompatActivity {
             }
         });
 
-             // FIX DEL BUG DEL ENTER DEL CAMPO DE CORREO
+        // FIX DEL BUG DEL ENTER DEL CAMPO DE CORREO
+
+        // Solución para el error relacionado con la tecla Enter en el campo de correo electrónico
         etEmail.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -182,27 +192,28 @@ public class MainLoginActivity extends AppCompatActivity {
                             nextField.requestFocus();
                         }
                     }
-                    return true; // Consume the space key event
+                    return true; // Consume el evento de tecla Enter
                 }
-                return false; // Let other key events be handled normally
+                return false; // Permite que otros eventos de teclas sean manejados normalmente
             }
         });
 
 
+        // Solución para el error relacionado con la tecla Enter en el campo de contraseña
         etContrasena.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP) {
                     btnIniciarSesion.requestFocus();
-                    return true; // Consume the Enter key event
+                    return true; // Consume el evento de tecla Enter
                 }
-                return false; // Let other key events be handled normally
+                return false; // Permite que otros eventos de teclas sean manejados normalmente
             }
         });
 
 
 
-
+        // Configuración del evento de clic para el enlace de "Crear cuenta"
         tvCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -211,6 +222,7 @@ public class MainLoginActivity extends AppCompatActivity {
             }
         });
 
+        // Configuración del evento de clic para el enlace de "Solicitud"
         tvSolicitud.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -221,10 +233,14 @@ public class MainLoginActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Método para mostrar el cuadro de diálogo de recuperación de contraseña.
+     * @param v Vista que desencadenó el evento de clic.
+     */
     public void showDialog(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        // Pasamos el email
+        // Obtener el email
         String email = etEmail.getText().toString();
 
         // Check si el campo de email está vacio
@@ -270,7 +286,7 @@ public class MainLoginActivity extends AppCompatActivity {
                         }
                 );
 
-                // Add the request to the RequestQueue
+                // Agregar la solicitud a la cola de solicitudes/RequestQueue
                 queue.add(jsonObjectRequest);
             }
         });

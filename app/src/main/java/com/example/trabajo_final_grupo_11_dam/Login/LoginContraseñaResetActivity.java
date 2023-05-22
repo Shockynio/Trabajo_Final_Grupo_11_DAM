@@ -28,79 +28,98 @@ import okhttp3.Response;
 import com.example.trabajo_final_grupo_11_dam.R;
 import com.google.gson.Gson;
 
+/**
+ * Clase que maneja la actividad de restablecimiento de contraseña de inicio de sesión.
+ */
 public class LoginContraseñaResetActivity extends AppCompatActivity {
 
-    private EditText newPasswordEditText, confirmPasswordEditText;
-    private Button resetPasswordButton;
+    private EditText etNewPassword, etConfirmPassword;
+    private Button btnResetPassword;
     private String token;
 
-
+    /**
+     * Método que se llama al crear la actividad.
+     * @param savedInstanceState Objeto que contiene los datos guardados de la actividad anterior.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_contrasena);
 
-        newPasswordEditText = findViewById(R.id.new_password);
-        confirmPasswordEditText = findViewById(R.id.confirm_password);
-        resetPasswordButton = findViewById(R.id.reset_password_button);
+        etNewPassword = findViewById(R.id.new_password);
+        etConfirmPassword = findViewById(R.id.confirm_password);
+        btnResetPassword = findViewById(R.id.reset_password_button);
 
         Uri data = getIntent().getData();
 
-
         token = data.getQueryParameter("token");
 
-        newPasswordEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        etNewPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            /**
+             * Método llamado cuando el campo de texto(etNewPasssword) pierde el enfoque.
+             * @param v La vista que ha perdido el enfoque.
+             * @param hasFocus Indica si la vista tiene el enfoque o no.
+             */
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    String newPassword = newPasswordEditText.getText().toString().trim();
-                    String confirmPassword = confirmPasswordEditText.getText().toString().trim();
+                    String newPassword = etNewPassword.getText().toString().trim();
+                    String confirmPassword = etConfirmPassword.getText().toString().trim();
 
                     if (!newPassword.equals(confirmPassword)) {
-                        newPasswordEditText.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
-                        confirmPasswordEditText.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
+                        etNewPassword.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
+                        etConfirmPassword.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
                         Toast.makeText(LoginContraseñaResetActivity.this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
                     } else if (!isValidPassword(newPassword)) {
-                        newPasswordEditText.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
-                        confirmPasswordEditText.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
+                        etNewPassword.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
+                        etConfirmPassword.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
                         Toast.makeText(LoginContraseñaResetActivity.this, "Contraseña inválida", Toast.LENGTH_SHORT).show();
                     } else {
-                        newPasswordEditText.getBackground().setColorFilter(null);
-                        confirmPasswordEditText.getBackground().setColorFilter(null);
+                        etNewPassword.getBackground().setColorFilter(null);
+                        etConfirmPassword.getBackground().setColorFilter(null);
                     }
                 }
             }
         });
 
-        confirmPasswordEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        etConfirmPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            /**
+             * Método llamado cuando el campo de texto(etConfirmPassword) pierde el enfoque.
+             * @param v La vista que ha perdido el enfoque.
+             * @param hasFocus Indica si la vista tiene el enfoque o no.
+             */
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    String newPassword = newPasswordEditText.getText().toString().trim();
-                    String confirmPassword = confirmPasswordEditText.getText().toString().trim();
+                    String newPassword = etNewPassword.getText().toString().trim();
+                    String confirmPassword = etConfirmPassword.getText().toString().trim();
 
                     if (!newPassword.equals(confirmPassword)) {
-                        newPasswordEditText.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
-                        confirmPasswordEditText.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
+                        etNewPassword.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
+                        etConfirmPassword.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
                         Toast.makeText(LoginContraseñaResetActivity.this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
                     } else if (!isValidPassword(newPassword)) {
-                        newPasswordEditText.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
-                        confirmPasswordEditText.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
+                        etNewPassword.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
+                        etConfirmPassword.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
                         Toast.makeText(LoginContraseñaResetActivity.this, "Contraseña inválida", Toast.LENGTH_SHORT).show();
                     } else {
-                        newPasswordEditText.getBackground().setColorFilter(null);
-                        confirmPasswordEditText.getBackground().setColorFilter(null);
+                        etNewPassword.getBackground().setColorFilter(null);
+                        etConfirmPassword.getBackground().setColorFilter(null);
                     }
                 }
             }
         });
 
 
-        resetPasswordButton.setOnClickListener(new View.OnClickListener() {
+        btnResetPassword.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Método llamado cuando se hace clic en el botón de restablecimiento de contraseña.
+             * @param v La vista que ha sido clicada.
+             */
             @Override
             public void onClick(View v) {
-                String newPassword = newPasswordEditText.getText().toString();
-                String confirmPassword = confirmPasswordEditText.getText().toString();
+                String newPassword = etNewPassword.getText().toString();
+                String confirmPassword = etConfirmPassword.getText().toString();
 
                 if (newPassword.isEmpty() || confirmPassword.isEmpty()) {
                     Toast.makeText(LoginContraseñaResetActivity.this, "Ambos campos deben rellenarse.", Toast.LENGTH_SHORT).show();
@@ -130,15 +149,29 @@ public class LoginContraseñaResetActivity extends AppCompatActivity {
                             .build();
 
                     client.newCall(request).enqueue(new Callback() {
+                        /**
+                         * Método llamado cuando la llamada HTTP falla.
+                         * @param call La llamada HTTP.
+                         * @param e La excepción que causó el fallo.
+                         */
                         @Override
                         public void onFailure(Call call, IOException e) {
                             e.printStackTrace();
                         }
 
+                        /**
+                         * Método llamado cuando se recibe una respuesta HTTP.
+                         * @param call La llamada HTTP.
+                         * @param response La respuesta HTTP recibida.
+                         * @throws IOException Si ocurre un error al manejar la respuesta.
+                         */
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             if (response.isSuccessful()) {
                                 runOnUiThread(new Runnable() {
+                                    /**
+                                     * Método ejecutado en el hilo de la interfaz de usuario para mostrar un mensaje de éxito.
+                                     */
                                     @Override
                                     public void run() {
                                         Toast.makeText(LoginContraseñaResetActivity.this, "La contraseña se ha restablecido correctamente!", Toast.LENGTH_SHORT).show();
@@ -151,6 +184,9 @@ public class LoginContraseñaResetActivity extends AppCompatActivity {
                                 });
                             } else {
                                 runOnUiThread(new Runnable() {
+                                    /**
+                                     * Método ejecutado en el hilo de la interfaz de usuario para mostrar un mensaje de error.
+                                     */
                                     @Override
                                     public void run() {
                                         Toast.makeText(LoginContraseñaResetActivity.this, "Error al restablecer la contraseña", Toast.LENGTH_SHORT).show();
@@ -163,6 +199,12 @@ public class LoginContraseñaResetActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * Método que verifica si una contraseña es válida.
+     * @param password Contraseña a validar.
+     * @return true si la contraseña es válida, false de lo contrario.
+     */
 
         private boolean isValidPassword(String password) {
             String passwordRegex = "^(?=.*[0-9].*[0-9].*[0-9])(?=.*[a-zA-Z]).{8,}$";

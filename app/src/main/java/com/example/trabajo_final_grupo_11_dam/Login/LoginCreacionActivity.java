@@ -28,6 +28,9 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Esta clase representa la actividad de creación de cuenta de inicio de sesión.
+ */
 public class LoginCreacionActivity extends AppCompatActivity {
 
     private EditText etUsername;
@@ -39,7 +42,10 @@ public class LoginCreacionActivity extends AppCompatActivity {
     private EditText etPhone;
     private EditText etEmail;
 
-
+    /**
+     * Método que se ejecuta al crear la actividad.
+     * Configura la vista y los listeners de eventos, incluyendo la creación de cuenta y la selección de fecha.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,11 +141,20 @@ public class LoginCreacionActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Muestra un mensaje de error para un campo de texto específico.
+     *
+     * @param editText    El campo de texto para el cual se mostrará el mensaje de error.
+     * @param errorMessage El mensaje de error a mostrar.
+     */
     private void showFieldError(EditText editText, String errorMessage) {
         editText.setError(errorMessage);
     }
 
-
+    /**
+     * Crea una cuenta de usuario.
+     * Verifica la validez de los campos y realiza una solicitud para crear la cuenta en el servidor.
+     */
     private void createAccount() {
         if (areAllFieldsValid()) {
             final String username = etUsername.getText().toString().trim(); // Get the input from the username field
@@ -172,6 +187,12 @@ public class LoginCreacionActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Realiza una solicitud para crear una cuenta en el servidor.
+     *
+     * @param username El nombre de usuario para la nueva cuenta.
+     * @param email    El correo electrónico para la nueva cuenta.
+     */
     private void createAccountRequest(String username, String email) {
         // Instantiate the RequestQueue
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -211,7 +232,10 @@ public class LoginCreacionActivity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
     }
 
-
+        /**
+         * Muestra un diálogo de selección de fecha.
+         * Actualiza el campo de texto de la fecha cuando se selecciona una fecha.
+         */
         private void showDatePickerDialog() {
             // Current date en el default
             Calendar calendar = Calendar.getInstance();
@@ -240,8 +264,16 @@ public class LoginCreacionActivity extends AppCompatActivity {
 
 
 
-         //Comprobación de errores en el formulario a través de métodos
+     //Comprobación de errores en el formulario a través de métodos
 
+
+    /**
+     * Verifica si las contraseñas ingresadas coinciden.
+     *
+     * @param passwordEditText         El campo de texto de la contraseña.
+     * @param repeatPasswordEditText   El campo de texto para repetir la contraseña.
+     * @return true si las contraseñas coinciden, false en caso contrario.
+     */
         private boolean checkPasswordsMatch(EditText passwordEditText, EditText repeatPasswordEditText) {
             String password = passwordEditText.getText().toString().trim();
             String repeatPassword = repeatPasswordEditText.getText().toString().trim();
@@ -254,26 +286,52 @@ public class LoginCreacionActivity extends AppCompatActivity {
                 return true;
             }
         }
-
+    /**
+     * Verifica si un número de teléfono móvil español es válido.
+     *
+     * @param mobileNumber El número de teléfono móvil a verificar.
+     * @return true si el número de teléfono es válido, false en caso contrario.
+     */
         private boolean isValidSpanishMobileNumber(String mobileNumber) {
             String mobileRegex = "^[6|7|9]\\d{8}$";
             return mobileNumber.matches(mobileRegex);
         }
-
+    /**
+     * Verifica si un nombre es válido.
+     *
+     * @param name El nombre a verificar.
+     * @return true si el nombre es válido, false en caso contrario.
+     */
         private boolean isValidName(String name) {
             String nameRegex = "^[A-Za-zÁ-Úá-úñÑ ]{2,}(\\s[A-Za-zÁ-Úá-úñÑ ]{2,}){2}$";
             return name.matches(nameRegex);
         }
-
+    /**
+     * Verifica si una dirección de correo electrónico es válida.
+     *
+     * @param email La dirección de correo electrónico a verificar.
+     * @return true si el correo electrónico es válido, false en caso contrario.
+     */
         private boolean isValidEmail(String email) {
             String emailRegex = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
             return email.matches(emailRegex);
         }
+    /**
+     * Verifica si una contraseña es válida.
+     *
+     * @param password La contraseña a verificar.
+     * @return true si la contraseña es válida, false en caso contrario.
+     */
         private boolean isValidPassword(String password) {
             String passwordRegex = "^(?=.*[0-9].*[0-9].*[0-9])(?=.*[a-zA-Z]).{8,}$";
             return password.matches(passwordRegex);
         }
 
+    /**
+     *Establece el color de fondo de un campo de texto en función de su validez.
+     * @param editText El campo de texto al que se le establecerá el color de fondo.
+     * @param isValid Indica si el campo de texto es válido o no.
+     */
         private void setBackgroundColorBasedOnValidation(EditText editText, boolean isValid) {
             if (isValid) {
                 editText.setBackgroundColor(Color.WHITE);
@@ -281,7 +339,11 @@ public class LoginCreacionActivity extends AppCompatActivity {
                 editText.setBackgroundColor(Color.RED);
             }
         }
-
+    /**
+     * Verifica si todos los campos son válidos.
+     *
+     * @return true si todos los campos son válidos, false en caso contrario.
+     */
         private boolean areAllFieldsValid() {
             boolean usernameValid = !etUsername.getText().toString().trim().isEmpty();
             boolean passwordValid = etPassword.getText().toString().trim().length() >= 8; // Mínimo 8 carácteres de password
@@ -293,7 +355,9 @@ public class LoginCreacionActivity extends AppCompatActivity {
             return usernameValid && passwordValid && passwordsMatch && fullNameValid && phoneValid && emailValid;
         }
 
-
+    /**
+     * Verifica si las contraseñas ingresadas coinciden y muestra un mensaje de error si no coinciden.
+     */
     private void checkPasswordMatch() {
         String password = etPassword.getText().toString().trim();
         String repeatPassword = etRepeatPassword.getText().toString().trim();
@@ -305,8 +369,13 @@ public class LoginCreacionActivity extends AppCompatActivity {
             etRepeatPassword.setError(null);
         }
     }
-
+    /**
+     * Interfaz para manejar la respuesta de las llamadas Volley en la verificación de disponibilidad de nombre de usuario y correo electrónico.
+     */
     public interface VolleyCallback {
+        /**
+         * Interfaz para manejar la respuesta de las llamadas Volley en la verificación de disponibilidad de nombre de usuario y correo electrónico.
+         */
         void onSuccess(boolean isTaken);
     }
 

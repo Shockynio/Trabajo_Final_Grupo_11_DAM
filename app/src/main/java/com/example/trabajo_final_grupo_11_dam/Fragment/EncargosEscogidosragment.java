@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.example.trabajo_final_grupo_11_dam.R;
 
+import java.util.Objects;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link EncargosEscogidosragment#newInstance} factory method to
@@ -102,7 +104,7 @@ public class EncargosEscogidosragment extends Fragment {
         btnFEECompleto = root.findViewById(R.id.btn_fee_completo);
         btnFEECancelar = root.findViewById(R.id.btn_fee_cancelar);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Pedido a ENTREGAR");
+        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle("Pedido a ENTREGAR");
 
         //TODO: Al apretar PEDIDO cambia estado a COMPLETO
         // (Repartidor a completado la entrega)
@@ -114,7 +116,7 @@ public class EncargosEscogidosragment extends Fragment {
         });
 
         //TODO: Al apretar PEDIDO cambia estado a DISPONIBLE
-        // (Repartidor a cancelado continuar con la enctrega)
+        // (Repartidor a cancelado continuar con la entrega)
         btnFEECancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

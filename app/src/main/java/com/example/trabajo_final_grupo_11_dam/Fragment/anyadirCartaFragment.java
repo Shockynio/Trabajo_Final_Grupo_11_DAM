@@ -28,7 +28,7 @@ public class anyadirCartaFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private Button btnañadircarta;
+    private Button btnAñadirCarta;
 
     public anyadirCartaFragment() {
         // Required empty public constructor
@@ -71,12 +71,12 @@ public class anyadirCartaFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_anyadir_carta, container, false);
 
         // Obtener referencia a los elementos del perfil
-        btnañadircarta = view.findViewById(R.id.btn_añadirCarta);
+        btnAñadirCarta = view.findViewById(R.id.btn_añadirCarta);
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Añadir Carta");
 
         // Agregar función al botón de edición
-        btnañadircarta.setOnClickListener(new View.OnClickListener() {
+        btnAñadirCarta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Realizar acciones al pulsar el botón de edición del perfil
