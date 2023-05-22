@@ -41,11 +41,11 @@ public class SplashActivity extends AppCompatActivity {
                 .into(loadingGif);
 
         // Carga y muestra la animación del título en la vista tituloGif utilizando la biblioteca Glide
-        Glide.with(this)
+      /*  Glide.with(this)
                 .asGif()
-                .load(R.drawable.text)
+                .load(R.drawable.titulo2)
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                .into(tituloGif);
+                .into(tituloGif);*/
 
         // Ocluta el ActionBar
         Objects.requireNonNull(getSupportActionBar()).hide();
