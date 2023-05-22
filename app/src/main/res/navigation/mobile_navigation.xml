@@ -54,7 +54,7 @@
         tools:layout="@layout/fragment_encargos_escogidosragment" />
     <fragment
         android:id="@+id/carritoFragment"
-        android:name="com.example.trabajo_final_grupo_11_dam.CarritoFragment"
+        android:name="com.example.trabajo_final_grupo_11_dam.Fragment.CarritoFragment"
         android:label="fragment_carrito"
         tools:layout="@layout/fragment_carrito" />
 </navigation>

@@ -1,12 +1,17 @@
-package com.example.trabajo_final_grupo_11_dam;
+package com.example.trabajo_final_grupo_11_dam.Fragment;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
+
+import com.example.trabajo_final_grupo_11_dam.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +28,8 @@ public class CarritoFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Button btnConfirmarPedido;
+    private Button btnCancelarPedido;
 
     public CarritoFragment() {
         // Required empty public constructor
@@ -59,6 +66,34 @@ public class CarritoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_carrito, container, false);
+        View view = inflater.inflate(R.layout.fragment_carrito, container, false);
+
+        // Obtener referencia a los elementos del perfil
+        btnConfirmarPedido = view.findViewById(R.id.btn_confirmar_pedido);
+        btnCancelarPedido = view.findViewById(R.id.btn_cancelar_pedido);
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Carrito");
+
+        // Agregar función al botón de edición
+        btnConfirmarPedido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Realizar acciones al pulsar el botón de edición del perfil
+                // TODO; Añadir funcion para guardar en base de datos los productos
+                Toast.makeText(getActivity(), "¡Compra Confirmada!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        btnCancelarPedido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Realizar acciones al pulsar el botón de edición del perfil
+                // TODO; Añadir funcion para guardar en base de datos los productos
+                Toast.makeText(getActivity(), "¡Compra Cancelada!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return view;
+
+
     }
 }
