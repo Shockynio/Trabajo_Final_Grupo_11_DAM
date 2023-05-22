@@ -5,6 +5,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/carritoFragment"
+            android:icon="@drawable/ic_shop"
+            android:title= "Carrito" />
+        <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_restaurant_menu"
             android:title="@string/menu_home" />
@@ -16,6 +20,7 @@
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_slideshow" />
+
         <item
             android:id="@+id/perfilFragment"
             android:icon="@drawable/ic_person"
@@ -37,5 +42,6 @@
             android:id="@+id/pedidosFragment"
             android:icon="@drawable/ic_menu_camera"
             android:title= "Pedidos" />
+
     </group>
 </menu>
