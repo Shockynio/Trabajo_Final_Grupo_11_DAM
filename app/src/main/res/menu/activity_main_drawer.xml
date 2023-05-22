@@ -30,10 +30,7 @@
             android:id="@+id/anyadirCartaFragment"
             android:icon="@drawable/ic_shop"
             android:title= "Añadir Carta" />
-        <item
-            android:id="@+id/pedidosFragment"
-            android:icon="@drawable/ic_menu_camera"
-            android:title= "Pedidos" />
+
 
     </group>
 </menu>

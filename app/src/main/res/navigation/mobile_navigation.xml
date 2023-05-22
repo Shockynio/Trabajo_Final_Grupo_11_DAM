@@ -32,11 +32,6 @@
         android:label="fragment_anyadir_carta"
         tools:layout="@layout/fragment_anyadir_carta" />
     <fragment
-        android:id="@+id/pedidosFragment"
-        android:name="com.example.trabajo_final_grupo_11_dam.Fragment.PedidosFragment"
-        android:label="fragment_pedidos"
-        tools:layout="@layout/fragment_pedidos" />
-    <fragment
         android:id="@+id/encargosEscogidosragment"
         android:name="com.example.trabajo_final_grupo_11_dam.Fragment.EncargosEscogidosragment"
         android:label="fragment_encargos_escogidosragment"
