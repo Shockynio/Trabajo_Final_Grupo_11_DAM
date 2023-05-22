@@ -36,7 +36,9 @@ import org.json.JSONObject;
 import Util.Metodos;
 import java.util.Objects;
 
-
+/**
+ * Esta clase representa la actividad de inicio de sesión para una solicitud de registro.
+ */
 public class LoginSolicitudActivity extends AppCompatActivity implements  View.OnClickListener {
     EditText etNombre;
     EditText etEmail;
@@ -47,7 +49,10 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
     EditText etNombreRestaurante;
     Spinner  spTipoDeComida;
 
-
+    /**
+     * Método que se ejecuta al crear la actividad.
+     * Configura los elementos de la interfaz y los listeners.
+     */
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,6 +184,13 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
 
     // He refactorizado el sistema para que aparezcan los elementos si es repartidor/restaurante en vez de usar tantos ifs :)
 
+
+    /**
+     * Método que se ejecuta al hacer clic en un elemento de la interfaz.
+     * Realiza diferentes acciones según el elemento seleccionado.
+     *
+     * @param view El elemento de la interfaz en el que se hizo clic.
+     */
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ic_repartidor:
@@ -229,7 +241,11 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
 
 
 
-
+    /**
+     * Muestra u oculta los campos del formulario según si el usuario es un repartidor o un restaurante.
+     *
+     * @param esRepartidor Booleano que indica si el usuario es un repartidor.
+     */
     private void mostrarFormulario(boolean esRepartidor) {
         // Ocultar los iconos de repartidor y restaurante
         findViewById(R.id.ic_repartidor).setVisibility(View.GONE);
@@ -263,7 +279,16 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
 
 
 
-
+    /**
+     * Envía la solicitud de registro de un repartidor al servidor.
+     *
+     * @param name           Nombre del repartidor.
+     * @param email          Correo electrónico del repartidor.
+     * @param phoneNumber    Número de teléfono del repartidor.
+     * @param address        Dirección del repartidor.
+     * @param experience     Experiencia del repartidor.
+     * @param additionalInfo Información adicional del repartidor.
+     */
     private void EnviarSolicitudRepartidor(String name, String email, int phoneNumber, String address, String experience, String additionalInfo) {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "https://trabajo-final-grupo-11.azurewebsites.net/SubmitDriverForm";
@@ -299,6 +324,17 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
         queue.add(jsonObjectRequest);
     }
 
+    /**
+     * Envía la solicitud de registro de un restaurante al servidor.
+     *
+     * @param nombreRestaurante Nombre del restaurante.
+     * @param nombreEncargado   Nombre del encargado del restaurante.
+     * @param email             Correo electrónico del restaurante.
+     * @param phoneNumber       Número de teléfono del restaurante.
+     * @param address           Dirección del restaurante.
+     * @param estiloComida      Estilo de comida del restaurante.
+     * @param additionalInfo    Información adicional del restaurante.
+     */
     private void EnviarSolicitudRestaurante(String nombreRestaurante, String nombreEncargado, String email, int phoneNumber, String address, String estiloComida, String additionalInfo) {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "https://trabajo-final-grupo-11.azurewebsites.net/submitRestaurantForm";
@@ -334,6 +370,11 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
         queue.add(jsonObjectRequest);
     }
 
+    /**
+     * Valida los campos del formulario antes de enviar la solicitud.
+     *
+     * @return true si los campos son válidos, false si hay algún campo inválido.
+     */
     private boolean validarCampos() {
         if (etEmail.getText().toString().isEmpty()) {
             Toast.makeText(LoginSolicitudActivity.this, "El campo de correo electrónico no puede estar vacío.", Toast.LENGTH_SHORT).show();
@@ -373,8 +414,12 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
     }
 
 
-    // Method to set the error on the field
-// Method to set the error on the field
+    /**
+     * Establece un mensaje de error en un campo de texto.
+     *
+     * @param editText     Campo de texto en el que se mostrará el error.
+     * @param errorMessage Mensaje de error a mostrar.
+     */
     private void setFieldError(EditText editText, String errorMessage) {
         editText.setError(errorMessage);
         editText.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
@@ -382,6 +427,12 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
 
 
     // Method to clear the error on the field
+
+    /**
+     * Elimina el mensaje de error de un campo de texto.
+     *
+     * @param editText Campo de texto donde se eliminará el mensaje de error.
+     */
     private void clearFieldError(EditText editText) {
         editText.setError(null);
         editText.getBackground().setColorFilter(null);
