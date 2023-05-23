@@ -12,11 +12,17 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
+/**
+ * Adaptador para mostrar una lista de elementos de carta en un RecyclerView.
+ */
 public class CartaAdapter extends RecyclerView.Adapter<CartaAdapter.CartaViewHolder> {
 
     private List<Carta> menuList;
     private Context context;
 
+    /**
+     * Clase ViewHolder para representar los elementos de la lista en el RecyclerView.
+     */
     public static class CartaViewHolder extends RecyclerView.ViewHolder {
         public TextView nameTextView;
         public TextView priceTextView;
@@ -32,11 +38,24 @@ public class CartaAdapter extends RecyclerView.Adapter<CartaAdapter.CartaViewHol
         }
     }
 
+    /**
+     * Constructor de CartaAdapter.
+     *
+     * @param menuList La lista de elementos de carta a mostrar.
+     * @param context  El contexto de la aplicación.
+     */
     public CartaAdapter(List<Carta> menuList, Context context) {
         this.menuList = menuList;
         this.context = context;
     }
 
+    /**
+     * Crea una nueva instancia de CartaViewHolder al inflar el diseño de elemento de carta.
+     *
+     * @param parent   El ViewGroup padre en el que se añadirá la vista inflada.
+     * @param viewType El tipo de vista del elemento.
+     * @return Una nueva instancia de CartaViewHolder.
+     */
     @Override
     public CartaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -44,13 +63,19 @@ public class CartaAdapter extends RecyclerView.Adapter<CartaAdapter.CartaViewHol
         return new CartaViewHolder(view);
     }
 
+    /**
+     * Vincula los datos del elemento de carta en la posición dada con el ViewHolder.
+     *
+     * @param holder   El ViewHolder que contiene las vistas a actualizar.
+     * @param position La posición del elemento de carta en la lista.
+     */
     @Override
     public void onBindViewHolder(CartaViewHolder holder, int position) {
         Carta cartaItem = menuList.get(position);
         holder.nameTextView.setText(cartaItem.getNombreProducto());
         holder.priceTextView.setText(String.valueOf(cartaItem.getPrecioProducto()));
 
-        // Set the image based on item name
+        // Establecer la imagen basada en el nombre del elemento
         String itemName = cartaItem.getNombreProducto().toLowerCase();
         if (itemName.contains("pizza")) {
             holder.foodImageView.setImageResource(R.drawable.pizza_image);
@@ -75,7 +100,7 @@ public class CartaAdapter extends RecyclerView.Adapter<CartaAdapter.CartaViewHol
         } else if (itemName.contains("doner") || itemName.contains("kebab")) {
             holder.foodImageView.setImageResource(R.drawable.turkish_food_image);
         } else {
-            // Default image if the type doesn't match any specific image
+            // Imagen predeterminada si el tipo no coincide con ninguna imagen específica
             holder.foodImageView.setImageResource(R.drawable.default_food_image);
         }
 
@@ -92,7 +117,11 @@ public class CartaAdapter extends RecyclerView.Adapter<CartaAdapter.CartaViewHol
         });
     }
 
-
+    /**
+     * Devuelve el número total de elementos en la lista.
+     *
+     * @return El número total de elementos en la lista.
+     */
     @Override
     public int getItemCount() {
         return menuList.size();

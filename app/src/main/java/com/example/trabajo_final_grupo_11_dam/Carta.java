@@ -22,7 +22,7 @@ public class Carta {
     // Getters
 
     /**
-     * Getter: Devuelve el nombre del procducto en formato String.
+     * Devuelve el nombre del procducto en formato String.
      * @return nombre del producto
      */
     public String getNombreProducto() {
@@ -30,7 +30,7 @@ public class Carta {
     }
 
     /**
-     * Getter: Devuelve el precio del procuto en decimal.
+     * Devuelve el precio del procuto en decimal.
      * @return precio del producto
      */
     public double getPrecioProducto() {
@@ -38,7 +38,7 @@ public class Carta {
     }
 
     /**
-     * Getter: Devuelve el ID del restaurante en enteros.
+     * Devuelve el ID del restaurante en enteros.
      * @return ID del restaurante
      */
     public int getRestauranteID() {
@@ -48,7 +48,7 @@ public class Carta {
     // Setters
 
     /**
-     * Setter: Escojer el nombre del producto, en formato String.
+     * Establece el nombre del producto, en formato String.
      * @param nombreProducto
      */
     public void setNombreProducto(String nombreProducto) {
@@ -56,7 +56,7 @@ public class Carta {
     }
 
     /**
-     * Setter: Escojer el precio del producto, en decimales.
+     * Establece el precio del producto, en decimales.
      * @param precioProducto
      */
     public void setPrecioProducto(double precioProducto) {
@@ -64,7 +64,7 @@ public class Carta {
     }
 
     /**
-     * Setter: Escojer el ID del restaurante, en entero.
+     * Establece el ID del restaurante, en entero.
      * @param restauranteID
      */
     public void setRestauranteID(int restauranteID) {
