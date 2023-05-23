@@ -31,7 +31,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Fragmento que muestra el menú de un restaurante.
+ */
 public class CartaFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -39,6 +41,12 @@ public class CartaFragment extends Fragment {
     private List<Carta> menuList;
     private int restaurantId;
 
+    /**
+     * Crea una nueva instancia de CartaFragment con el ID del restaurante especificado.
+     *
+     * @param restaurantId El ID del restaurante.
+     * @return Una nueva instancia de CartaFragment.
+     */
     public static CartaFragment newInstance(int restaurantId) {
         CartaFragment fragment = new CartaFragment();
         Bundle args = new Bundle();
@@ -48,6 +56,16 @@ public class CartaFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * Método llamado al crear la vista del fragmento.
+     * Inicializa los elementos de la interfaz de usuario, configura el adaptador del RecyclerView
+     * y obtiene los datos del menú desde el servidor.
+     *
+     * @param inflater           El LayoutInflater utilizado para inflar la vista.
+     * @param container          El contenedor padre en el que se infla la vista.
+     * @param savedInstanceState Los datos guardados del fragmento.
+     * @return La vista inflada del fragmento.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_carta, container, false);
@@ -65,6 +83,12 @@ public class CartaFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Método llamado al crear el fragmento.
+     * Obtiene el ID del restaurante desde los argumentos del fragmento.
+     *
+     * @param savedInstanceState Los datos guardados del fragmento.
+     */
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +98,11 @@ public class CartaFragment extends Fragment {
         }
     }
 
+    /**
+     * Método privado para obtener los datos del menú desde el servidor.
+     * Realiza una solicitud HTTP para obtener los elementos del menú del restaurante específico.
+     * Actualiza la lista de elementos del menú y notifica al adaptador del cambio.
+     */
     private void fetchMenuData() {
 
         // Use the restaurantId from arguments

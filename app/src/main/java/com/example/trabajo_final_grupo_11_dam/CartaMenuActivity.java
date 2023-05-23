@@ -20,10 +20,18 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * La clase CartaMenuActivity es una actividad en Android que muestra la carta de menú de un restaurante.
+ * Extiende la clase AppCompatActivity de Android.
+ */
 public class CartaMenuActivity extends AppCompatActivity {
 
 
-
+    /**
+     * Método de ciclo de vida que se llama cuando se crea la actividad.
+     *
+     * @param savedInstanceState El estado guardado de la actividad.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +48,12 @@ public class CartaMenuActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.container, cartaFragment).commit();
     }
 
+    /**
+     * Crea una nueva instancia del fragmento CartaFragment con el ID del restaurante como argumento.
+     *
+     * @param restaurantId El ID del restaurante.
+     * @return El fragmento CartaFragment creado.
+     */
     public static CartaFragment newInstance(int restaurantId) {
         CartaFragment fragment = new CartaFragment();
 

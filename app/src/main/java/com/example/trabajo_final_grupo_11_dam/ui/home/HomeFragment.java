@@ -42,12 +42,24 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * La clase HomeFragment es un fragmento en Android que muestra una lista de restaurantes en una vista de lista.
+ * Extiende la clase Fragment de Android.
+ */
 public class HomeFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private RestaurantAdapter mRestaurantAdapter;
     private List<Restaurantes> restaurantesList = new ArrayList<>();
 
+    /**
+     * Método llamado para crear la vista del fragmento.
+     *
+     * @param inflater           El inflador utilizado para inflar la vista.
+     * @param container          El contenedor de la vista.
+     * @param savedInstanceState El estado guardado de la actividad.
+     * @return La vista inflada del fragmento.
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,6 +80,9 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Método para obtener los datos de los restaurantes desde el servidor.
+     */
     private void fetchRestaurantData() {
         // Clear the restaurant data before fetching new data
         clearRestaurantData();
@@ -138,7 +153,9 @@ public class HomeFragment extends Fragment {
     }
 
 
-
+    /**
+     * Método para limpiar los datos de los restaurantes.
+     */
     private void clearRestaurantData() {
         restaurantesList.clear();
         mRestaurantAdapter.notifyDataSetChanged();

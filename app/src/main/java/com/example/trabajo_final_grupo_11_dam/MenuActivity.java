@@ -30,6 +30,9 @@ import com.example.trabajo_final_grupo_11_dam.databinding.ActivityMenuBinding;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Clase que representa la actividad principal del menú.
+ */
 public class MenuActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -38,6 +41,10 @@ public class MenuActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private View headerView;
 
+    /**
+     * Método que se ejecuta al crear la actividad.
+     * @param savedInstanceState El estado guardado de la actividad.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +71,10 @@ public class MenuActivity extends AppCompatActivity {
         //fetchUserData();
     }
 
+    /**
+     * Método que se ejecuta cuando se selecciona el botón de navegación hacia arriba.
+     * @return True si la navegación ha sido manejada correctamente, False de lo contrario.
+     */
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_menu);
@@ -71,6 +82,11 @@ public class MenuActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+    /**
+     * Método que se ejecuta al crear el menú de opciones.
+     * @param menu El menú en el que se inflarán los elementos.
+     * @return True para mostrar el menú, False para ocultarlo.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -96,7 +112,11 @@ public class MenuActivity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * Método que se ejecuta cuando se selecciona un elemento del menú de opciones.
+     * @param item El elemento del menú seleccionado.
+     * @return True si el evento ha sido manejado correctamente, False de lo contrario.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -155,6 +175,11 @@ public class MenuActivity extends AppCompatActivity {
     }
 */
 
+    /**
+     * Método privado para actualizar la vista del encabezado con la información del usuario.
+     * @param fullName El nombre completo del usuario.
+     * @param email El correo electrónico del usuario.
+     */
     private void updateHeaderView(String fullName, String email) {
         headerView = navigationView.getHeaderView(0);
         TextView fullNameTextView = headerView.findViewById(R.id.tv_full_name);
