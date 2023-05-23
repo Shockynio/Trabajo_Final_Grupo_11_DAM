@@ -10,15 +10,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
 
-/**
- * Adaptador para mostrar una lista de elementos de carta en un RecyclerView.
- */
 public class CartaAdapter extends RecyclerView.Adapter<CartaAdapter.CartaViewHolder> {
 
     private List<Carta> menuList;
     private Context context;
+    private CarritoCompra carritoCompra;
 
     /**
      * Clase ViewHolder para representar los elementos de la lista en el RecyclerView.
@@ -43,10 +42,12 @@ public class CartaAdapter extends RecyclerView.Adapter<CartaAdapter.CartaViewHol
      *
      * @param menuList La lista de elementos de carta a mostrar.
      * @param context  El contexto de la aplicación.
+     * @param carritoCompra  La instancia de CarritoCompra.
      */
-    public CartaAdapter(List<Carta> menuList, Context context) {
+    public CartaAdapter(List<Carta> menuList, Context context, CarritoCompra carritoCompra) {
         this.menuList = menuList;
         this.context = context;
+        this.carritoCompra = carritoCompra;
     }
 
     /**
@@ -104,14 +105,10 @@ public class CartaAdapter extends RecyclerView.Adapter<CartaAdapter.CartaViewHol
             holder.foodImageView.setImageResource(R.drawable.default_food_image);
         }
 
-
-
-
         holder.btn_add_to_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Add item to cart
-                // TODO: Add function to add to cart
+                carritoCompra.addCarta(cartaItem);
                 Toast.makeText(context, "¡Producto Añadido!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -127,4 +124,3 @@ public class CartaAdapter extends RecyclerView.Adapter<CartaAdapter.CartaViewHol
         return menuList.size();
     }
 }
-

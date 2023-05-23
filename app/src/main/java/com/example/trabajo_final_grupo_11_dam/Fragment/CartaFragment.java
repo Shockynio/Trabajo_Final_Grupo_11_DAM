@@ -20,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.trabajo_final_grupo_11_dam.CarritoCompra;
 import com.example.trabajo_final_grupo_11_dam.Carta;
 import com.example.trabajo_final_grupo_11_dam.CartaAdapter;
 import com.example.trabajo_final_grupo_11_dam.R;
@@ -40,6 +41,12 @@ public class CartaFragment extends Fragment {
     private CartaAdapter adapter;
     private List<Carta> menuList;
     private int restaurantId;
+    private CarritoCompra carritoCompra;
+
+    public CartaFragment() {
+        // Obtener la instancia de CarritoCompra cuando se crea el Fragment
+        this.carritoCompra = CarritoCompra.getInstance();
+    }
 
     /**
      * Crea una nueva instancia de CartaFragment con el ID del restaurante especificado.
@@ -66,7 +73,7 @@ public class CartaFragment extends Fragment {
      * @param savedInstanceState Los datos guardados del fragmento.
      * @return La vista inflada del fragmento.
      */
-    @Override
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_carta, container, false);
 
@@ -75,7 +82,7 @@ public class CartaFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new CartaAdapter(menuList, getContext());
+        adapter = new CartaAdapter(menuList, getContext(), carritoCompra);  // Modify this line
         recyclerView.setAdapter(adapter);
 
         fetchMenuData();
@@ -83,12 +90,14 @@ public class CartaFragment extends Fragment {
         return view;
     }
 
+
     /**
      * Método llamado al crear el fragmento.
      * Obtiene el ID del restaurante desde los argumentos del fragmento.
      *
      * @param savedInstanceState Los datos guardados del fragmento.
      */
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

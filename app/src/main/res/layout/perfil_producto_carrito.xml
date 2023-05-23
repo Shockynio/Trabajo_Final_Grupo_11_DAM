@@ -30,7 +30,7 @@
                 android:padding="1dp">
 
                 <TextView
-                    android:id="@+id/tv_pd_total_carrito"
+                    android:id="@+id/nombreProductoTextView"
                     android:layout_width="139dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -39,20 +39,20 @@
                     android:textSize="16sp"
                     android:textStyle="bold|normal" />
 
-                <TextView
-                    android:id="@+id/text_cantidad"
-                    android:layout_width="117dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Cantidad" />
 
                 <TextView
-                    android:id="@+id/text_total"
+                    android:id="@+id/precioProductoTextView"
                     android:layout_width="87dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Total" />
 
+                <Button
+                    android:id="@+id/btnEliminarDelCarrito"
+                    android:layout_width="wrap_content"
+                    android:layout_height="58dp"
+                    android:layout_alignParentEnd="true"
+                    android:text="Eliminar" />
 
             </LinearLayout>
 

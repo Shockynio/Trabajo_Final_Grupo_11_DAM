@@ -20,49 +20,34 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp" />
 
-        <ScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_carrito"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="8dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/btn_confirmar_pedido"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_weight="1"
+                android:backgroundTint="@color/border_color1"
+                android:text="Confirmar Pedido" />
 
-                <include layout="@layout/perfil_producto_carrito" />
-
-                <include layout="@layout/perfil_producto_carrito" />
-
-                <include layout="@layout/perfil_producto_carrito" />
-
-                <include layout="@layout/perfil_producto_carrito" />
-
-                <include layout="@layout/perfil_producto_carrito" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
-
-                    <Button
-                        android:id="@+id/btn_confirmar_pedido"
-                        android:layout_width="207dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:backgroundTint="@color/border_color1"
-                        android:text="Confirmar Pedido" />
-
-                    <Button
-                        android:id="@+id/btn_cancelar_pedido"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:backgroundTint="@color/design_default_color_error"
-                        android:text="Cancelar Pedido" />
-                </LinearLayout>
-
-            </LinearLayout>
-        </ScrollView>
+            <Button
+                android:id="@+id/btn_cancelar_pedido"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/design_default_color_error"
+                android:text="Cancelar Pedido" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
