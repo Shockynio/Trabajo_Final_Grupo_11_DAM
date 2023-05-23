@@ -45,7 +45,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-
+/**
+ * Fragmento que muestra y permite editar el perfil del usuario.
+ */
 public class PerfilFragment extends Fragment {
 
     private TextView tvPDCalle;
@@ -59,6 +61,10 @@ public class PerfilFragment extends Fragment {
     private boolean isEditModeEnabled = false;
     private String oldEmail;
 
+    /**
+     * Constructor público de la clase PerfilFragment.
+     * Este constructor no requiere argumentos.
+     */
     public PerfilFragment() {
         // Required empty public constructor
     }
@@ -152,6 +158,12 @@ public class PerfilFragment extends Fragment {
         return root;
     }
 
+    /**
+     * Método que se ejecuta cuando cambia el estado del interruptor de cambio de modo de edición.
+     *
+     * @param buttonView Vista del interruptor de cambio de modo de edición.
+     * @param isChecked  Valor que indica si el modo de edición está habilitado o deshabilitado.
+     */
     private void onEditModeChanged(CompoundButton buttonView, boolean isChecked) {
         isEditModeEnabled = isChecked;
         enableEditMode(isEditModeEnabled);
@@ -160,8 +172,13 @@ public class PerfilFragment extends Fragment {
         saveButton.setVisibility(isEditModeEnabled ? View.VISIBLE : View.GONE);
     }
 
+    /**
+     * Método que habilita o deshabilita el modo de edición.
+     *
+     * @param isEnabled Valor que indica si se debe habilitar o deshabilitar el modo de edición.
+     */
     private void enableEditMode(boolean isEnabled) {
-        // Enable or disable the editable state of the EditTexts
+
         tvPNNomCompleto.setEnabled(isEnabled);
         tvPNNomCompleto.setFocusable(isEnabled);
         tvPNNomCompleto.setFocusableInTouchMode(isEnabled);
@@ -198,7 +215,11 @@ public class PerfilFragment extends Fragment {
         }
     }
 
-
+    /**
+     * Método que se ejecuta cuando se hace clic en el botón de guardar.
+     *
+     * @param view Vista del botón de guardar.
+     */
     private void onSaveButtonClicked(View view) {
         if (isEditModeEnabled) {
             // Perform data validation and update the database
@@ -275,7 +296,9 @@ public class PerfilFragment extends Fragment {
                         enableEditMode(isEditModeEnabled);
                     }
                 }
-
+    /**
+     * Método que obtiene el perfil del usuario.
+     */
         private void fetchUserProfile() {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user_info", Context.MODE_PRIVATE);
         String email = sharedPreferences.getString("email", "");
