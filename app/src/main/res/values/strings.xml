@@ -49,6 +49,15 @@
     <string name="textRestauranteProducto">Producto</string>
     <string name="textRestaurantePrecio">Precio </string>
     <string name="textRestauranteBebidas">Bebidas </string>
+
+    <string name="textIDPedido">ID del pedido</string>
+    <string name="textDireccion_Restaurante">Direccion del restaurante</string>
+    <string name="textDireccion_Cliente">Direccion del cliente</string>
+    <string name="textPrecio_Total">Precio total </string>
+    <string name="textCliente_Username">Nombre del cliente </string>
+
+
+
     <string-array name="tipos_de_comida">
         <item>Estilo de Comida</item>
         <item>Española</item>

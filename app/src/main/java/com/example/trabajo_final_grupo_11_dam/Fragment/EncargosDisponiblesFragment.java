@@ -2,71 +2,107 @@ package com.example.trabajo_final_grupo_11_dam.Fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.trabajo_final_grupo_11_dam.Pedido;
+import com.example.trabajo_final_grupo_11_dam.PedidoAdapter;
 import com.example.trabajo_final_grupo_11_dam.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EncargosDisponiblesFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class EncargosDisponiblesFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private List<Pedido> pedidos;
+    private RecyclerView recyclerPedidos;
+    private PedidoAdapter adapter;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public EncargosDisponiblesFragment() {
-        // Required empty public constructor
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_encargos_disponibles, container, false);
+        recyclerPedidos = v.findViewById(R.id.encargos_disponibles_recycler_view);
+        recyclerPedidos.setLayoutManager(new LinearLayoutManager(getContext()));
+        pedidos = new ArrayList<>();
+        adapter = new PedidoAdapter(pedidos);
+        recyclerPedidos.setAdapter(adapter);
+        loadData();
+        return v;
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EncargosDisponiblesFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static EncargosDisponiblesFragment newInstance(String param1, String param2) {
-        EncargosDisponiblesFragment fragment = new EncargosDisponiblesFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    private void loadData() {
+        String url = "https://trabajo-final-grupo-11.azurewebsites.net/RetrievePedidos";
+
+        Log.d("LoadData", "Enviando solicitud a: " + url);
+
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d("LoadData", "Respuesta recibida.");
+
+                        try {
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject pedidoJson = response.getJSONObject(i);
+                                Pedido pedido = new Pedido(
+                                        pedidoJson.getInt("id_pedido"),
+                                        pedidoJson.getString("Direccion_Restaurante"),
+                                        pedidoJson.getString("Direccion_Cliente"),
+                                        pedidoJson.getInt("Precio_Total"),
+                                        pedidoJson.getInt("RestauranteID"),
+                                        pedidoJson.getString("Cliente_Username")
+                                );
+                                pedidos.add(pedido);
+
+                                // Register the data for each Pedido object
+                                Log.d("LoadData", "Pedido #" + i + ": " + pedido.toString());
+                            }
+                            Log.d("LoadData", "Datos JSON analizados.");
+
+                            adapter.notifyDataSetChanged();
+                            Log.d("LoadData", "Datos cargados exitosamente.");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("LoadData", "Error al cargar los datos: " + error.getMessage());
+                        error.printStackTrace();
+                    }
+                }
+        );
+
+        Volley.newRequestQueue(getContext()).add(request);
+        Log.d("LoadData", "Solicitud agregada a la cola de solicitudes.");
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        View root = inflater.inflate(R.layout.fragment_encargos_disponibles, container, false);
-
-
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Pedidos Disponibles");
-
-        return root;
     }
 }
