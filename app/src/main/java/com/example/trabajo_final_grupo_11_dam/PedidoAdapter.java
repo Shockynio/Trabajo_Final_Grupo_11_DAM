@@ -12,14 +12,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+/**
+ * Adaptador utilizado para mostrar una lista de pedidos en un RecyclerView.
+ */
 public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoViewHolder> {
 
     private List<Pedido> pedidos;
 
+    /**
+     * Constructor de PedidoAdapter.
+     *
+     * @param pedidos La lista de pedidos a mostrar.
+     */
     public PedidoAdapter(List<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
 
+    /**
+     * Crea y devuelve un nuevo PedidoViewHolder que contiene la vista de un elemento del pedido.
+     *
+     * @param parent   El ViewGroup padre en el que se añadirá la vista del elemento.
+     * @param viewType El tipo de vista del elemento (no utilizado en este caso).
+     * @return Una nueva instancia de PedidoViewHolder que contiene la vista del elemento del pedido.
+     */
     @NonNull
     @Override
     public PedidoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -27,6 +42,12 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
         return new PedidoViewHolder(itemView);
     }
 
+    /**
+     * Vincula los datos del pedido en la posición especificada con la vista del PedidoViewHolder.
+     *
+     * @param holder   El PedidoViewHolder que contiene la vista del elemento del pedido.
+     * @param position La posición del elemento del pedido en la lista.
+     */
     @Override
     public void onBindViewHolder(@NonNull PedidoAdapter.PedidoViewHolder holder, int position) {
         Pedido pedido = pedidos.get(position);
@@ -71,11 +92,19 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
 
     }
 
+    /**
+     * Devuelve el número total de elementos en la lista de pedidos.
+     *
+     * @return El número total de elementos en la lista de pedidos.
+     */
     @Override
     public int getItemCount() {
         return pedidos.size();
     }
 
+    /**
+     * Clase interna que define el ViewHolder utilizado por el PedidoAdapter.
+     */
     public class PedidoViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvIdPedido;
@@ -94,6 +123,11 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
             restaurantImage = itemView.findViewById(R.id.IMAGEpedidos);
         }
 
+        /**
+         * Vincula los datos de un pedido al PedidoViewHolder.
+         *
+         * @param pedido El objeto Pedido que contiene los datos del pedido.
+         */
         public void bindPedido(Pedido pedido) {
             tvIdPedido.setText(String.valueOf(pedido.getid_pedido()));
             tvDireccionRestaurante.setText(pedido.getDireccionRestaurante());

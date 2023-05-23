@@ -29,12 +29,23 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Fragmento para mostrar los encargos disponibles.
+ */
 public class EncargosDisponiblesFragment extends Fragment {
 
     private List<Pedido> pedidos;
     private RecyclerView recyclerPedidos;
     private PedidoAdapter adapter;
 
+    /**
+     * Método llamado para crear la vista del fragmento.
+     *
+     * @param inflater           El LayoutInflater utilizado para inflar la vista.
+     * @param container          El ViewGroup al que se adjuntará la vista del fragmento.
+     * @param savedInstanceState Un objeto Bundle que contiene el estado anteriormente guardado del fragmento.
+     * @return La vista creada del fragmento.
+     */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -48,6 +59,9 @@ public class EncargosDisponiblesFragment extends Fragment {
         return v;
     }
 
+    /**
+     * Método privado para cargar los datos de los encargos desde una URL.
+     */
     private void loadData() {
         String url = "https://trabajo-final-grupo-11.azurewebsites.net/RetrievePedidos";
 
@@ -100,6 +114,12 @@ public class EncargosDisponiblesFragment extends Fragment {
         Log.d("LoadData", "Solicitud agregada a la cola de solicitudes.");
     }
 
+    /**
+     * Método llamado cuando la vista del fragmento ha sido creada.
+     *
+     * @param view               La vista raíz del fragmento.
+     * @param savedInstanceState Un objeto Bundle que contiene el estado anteriormente guardado del fragmento.
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
