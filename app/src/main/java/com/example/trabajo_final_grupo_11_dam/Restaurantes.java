@@ -170,7 +170,5 @@ public class Restaurantes {
     public void setRestaurantId(int restaurantId) {
         this.restaurantId = restaurantId;
     }
-
-
 }
 

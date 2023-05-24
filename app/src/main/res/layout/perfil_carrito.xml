@@ -48,10 +48,17 @@
 
                 <TextView
                     android:id="@+id/text_cantidad"
-                    android:layout_width="205dp"
+                    android:layout_width="68dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/text_euros"
+                    android:layout_width="93dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Euros" />
 
 
             </LinearLayout>

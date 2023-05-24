@@ -1,14 +1,24 @@
 package com.example.trabajo_final_grupo_11_dam;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class CarritoCompra {
+
     private static CarritoCompra instance;
-    private List<Carta> cartaList;
+    private MutableLiveData<List<Carta>> cartaListLiveData;
 
     private CarritoCompra() {
-        cartaList = new ArrayList<>();
+        cartaListLiveData = new MutableLiveData<>(new ArrayList<>());
     }
 
     public static synchronized CarritoCompra getInstance() {
@@ -18,23 +28,17 @@ public class CarritoCompra {
         return instance;
     }
 
-    public List<Carta> getCartaList() {
-        return cartaList;
-    }
-
     public void addCarta(Carta carta) {
-        this.cartaList.add(carta);
-    }
-
-    public void removeCarta(Carta carta) {
-        this.cartaList.remove(carta);
+        List<Carta> currentList = cartaListLiveData.getValue();
+        currentList.add(carta);
+        cartaListLiveData.setValue(currentList);
     }
 
     public void clear() {
-        this.cartaList.clear();
+        cartaListLiveData.setValue(new ArrayList<>());
     }
 
-    public void setCartaList(List<Carta> cartaList) {
-        this.cartaList = cartaList;
+    public LiveData<List<Carta>> getCartaListLiveData() {
+        return cartaListLiveData;
     }
 }

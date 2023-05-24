@@ -3,12 +3,16 @@ package com.example.trabajo_final_grupo_11_dam.Fragment;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -24,6 +28,7 @@ import com.example.trabajo_final_grupo_11_dam.CarritoCompra;
 import com.example.trabajo_final_grupo_11_dam.Carta;
 import com.example.trabajo_final_grupo_11_dam.CartaAdapter;
 import com.example.trabajo_final_grupo_11_dam.R;
+import com.example.trabajo_final_grupo_11_dam.ui.home.HomeFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -77,18 +82,39 @@ public class CartaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_carta, container, false);
 
+        setHasOptionsMenu(true);  // Add this line
+
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        if (activity != null) {
+            activity.getSupportActionBar().setTitle("Carta del Restaurante");
+            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         menuList = new ArrayList<>();
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewCarta);
+        recyclerView = view.findViewById(R.id.recyclerViewCarta);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new CartaAdapter(menuList, getContext(), carritoCompra);  // Modify this line
+        adapter = new CartaAdapter(menuList, getContext(), carritoCompra);
         recyclerView.setAdapter(adapter);
 
         fetchMenuData();
 
         return view;
     }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            // Go back to the previous activity
+            getActivity().finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
 
     /**

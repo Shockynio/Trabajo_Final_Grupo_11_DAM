@@ -50,29 +50,61 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Objects;
 
-/**
- * Esta clase representa la actividad principal de inicio de sesión.
- */
 public class MainLoginActivity extends AppCompatActivity {
 
     private TextView tvCreateAccount;
     private TextView tvSolicitud;
-    private Button   btnIniciarSesion;
+    private Button btnIniciarSesion;
     private TextView tvContrasenaOlvidade;
     private EditText etEmail;
     private EditText etContrasena;
 
+    // User class to represent a logged in user
+    public static class User {
+        private String email;
+        private String password;
 
-    /**
-     * Método que se ejecuta al crear la actividad.
-     * Configura los elementos de la interfaz y los listeners.
-     */
+        public User(String email, String password) {
+            this.email = email;
+            this.password = password;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+    }
+
+    // Singleton Session Manager to store current logged in user
+    public static class SessionManager {
+        private static SessionManager instance;
+        private User currentUser;
+
+        public static synchronized SessionManager getInstance() {
+            if (instance == null) {
+                instance = new SessionManager();
+            }
+            return instance;
+        }
+
+        public void loginUser(User user) {
+            this.currentUser = user;
+        }
+
+        public User getCurrentUser() {
+            return currentUser;
+        }
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Obtener el correo electrónico y la contraseña ingresados por el usuario
         etEmail = findViewById(R.id.et_email);
         etContrasena = findViewById(R.id.et_contraseña);
 
@@ -81,7 +113,6 @@ public class MainLoginActivity extends AppCompatActivity {
         tvContrasenaOlvidade =  findViewById(R.id.tv_contraseña_olvidada);
         tvCreateAccount = findViewById(R.id.tv_crear_cuenta);
 
-        // Configuración del evento de clic para el botón de inicio de sesión
         btnIniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,12 +122,10 @@ public class MainLoginActivity extends AppCompatActivity {
                 Log.d("Login", "Email: " + email);
                 Log.d("Login", "Password: " + password);
 
-                // Crear una cola de solicitudes para enviar la solicitud de inicio de sesión al servidor
                 RequestQueue queue = Volley.newRequestQueue(MainLoginActivity.this);
 
                 String url = "https://trabajo-final-grupo-11.azurewebsites.net/login";
 
-                // Crear un objeto JSON con el correo electrónico y la contraseña
                 JSONObject jsonBody = new JSONObject();
                 try {
                     jsonBody.put("Email", email);
@@ -104,7 +133,7 @@ public class MainLoginActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                // Crear la solicitud JSON para enviar los datos de inicio de sesión al servidor
+
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                         (Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
 
@@ -115,19 +144,13 @@ public class MainLoginActivity extends AppCompatActivity {
                                     boolean success = response.getBoolean("success");
                                     if (success) {
                                         Log.d("Login", "Login successful");
-                                        // El inicio de sesión fue exitoso. Almacenar el correo electrónico del usuario.
-                                        SharedPreferences sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
-                                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                                        Log.d("Login", "Storing user's email: " + email);
-                                        editor.putString("email", email);
-                                        editor.apply();
+                                        // Log in the user by creating a User object and storing it in SessionManager
+                                        SessionManager.getInstance().loginUser(new User(email, password));
 
-                                        // Iniciar la siguiente actividad.
                                         Intent iniciarSesionCliente = new Intent(MainLoginActivity.this, MenuActivity.class);
                                         startActivity(iniciarSesionCliente);
                                     } else {
                                         Log.d("Login", "Login failed");
-                                        // El inicio de sesión falló. Mostrar un mensaje de error.
                                         String message = response.getString("error");
                                         Toast.makeText(MainLoginActivity.this, message, Toast.LENGTH_SHORT).show();
                                     }
@@ -160,12 +183,9 @@ public class MainLoginActivity extends AppCompatActivity {
                             }
                         });
 
-                // Agregar la solicitud a la cola de solicitudes.
                 queue.add(jsonObjectRequest);
             }
         });
-
-
 
 
 
