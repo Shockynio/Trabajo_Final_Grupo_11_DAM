@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Trabajo_Final_Grupo_11_DAM</string>
+    <string name="app_name">Bocado Rural</string>
     <string name="textSolicitudTrabajo">Solicitud para trabajar con nosotros.</string>
     <string name="textNombreyApellidos">Nombre y apellidos.</string>
     <string name="textNombreyApellidosManager">Nombre y apellidos. (Encargado)</string>
