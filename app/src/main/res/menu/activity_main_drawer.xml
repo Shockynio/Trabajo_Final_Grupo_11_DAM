@@ -26,11 +26,6 @@
             android:id="@+id/encargosEscogidosragment"
             android:icon="@drawable/ic_send"
             android:title= "Pedidos a Entregar" />
-        <item
-            android:id="@+id/anyadirCartaFragment"
-            android:icon="@drawable/ic_shop"
-            android:title= "Añadir Carta" />
-
 
     </group>
 </menu>

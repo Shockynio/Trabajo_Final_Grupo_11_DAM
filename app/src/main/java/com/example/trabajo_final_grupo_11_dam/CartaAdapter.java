@@ -1,6 +1,7 @@
 package com.example.trabajo_final_grupo_11_dam;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -109,18 +110,24 @@ public class CartaAdapter extends RecyclerView.Adapter<CartaAdapter.CartaViewHol
             @Override
             public void onClick(View v) {
                 carritoCompra.addCarta(cartaItem);
+                Log.d("CartaAdapter", "Item added to carrito: " + cartaItem.getNombreProducto());
+                Log.d("CartaAdapter", "Current cart contents: " + carritoCompra.getCartaListLiveData().getValue().toString());
                 Toast.makeText(context, "¡Producto Añadido!", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
+
 
     /**
      * Devuelve el número total de elementos en la lista.
      *
      * @return El número total de elementos en la lista.
      */
-    @Override
-    public int getItemCount() {
-        return menuList.size();
-    }
+        @Override
+        public int getItemCount() {
+            return menuList.size();
+        }
 }
+
+
