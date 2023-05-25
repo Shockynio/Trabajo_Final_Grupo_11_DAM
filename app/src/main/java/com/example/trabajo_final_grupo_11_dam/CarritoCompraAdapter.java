@@ -17,18 +17,33 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Adaptador para mostrar los elementos del carrito de compras en un RecyclerView.
+ */
 public class CarritoCompraAdapter extends RecyclerView.Adapter<CarritoCompraAdapter.CarritoViewHolder> {
 
     private List<Carta> itemsCarrito;
     private Context context;
     private OnCartChangeListener listener;
 
+    /**
+     * Constructor del adaptador.
+     * @param itemsCarrito Lista de cartas del carrito de compras.
+     * @param context Contexto de la aplicación.
+     * @param listener Listener para los cambios en el carrito de compras.
+     */
     public CarritoCompraAdapter(List<Carta> itemsCarrito, Context context, OnCartChangeListener listener) {
         this.itemsCarrito = itemsCarrito;
         this.context = context;
         this.listener = listener;
     }
 
+    /**
+     * Crea y devuelve una instancia de CarritoViewHolder.
+     * @param parent El ViewGroup padre en el que se mostrará el nuevo View.
+     * @param viewType El tipo de la vista.
+     * @return Una nueva instancia de CarritoViewHolder.
+     */
     @NonNull
     @Override
     public CarritoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -37,6 +52,11 @@ public class CarritoCompraAdapter extends RecyclerView.Adapter<CarritoCompraAdap
         return new CarritoViewHolder(itemView);
     }
 
+    /**
+     * Vincula los datos de una carta específica a los elementos de la vista en la posición dada.
+     * @param holder El ViewHolder en el que se establecerán los datos.
+     * @param position La posición del elemento en la lista de datos.
+     */
     @Override
     public void onBindViewHolder(@NonNull CarritoViewHolder holder, int position) {
         Carta cartaItem = itemsCarrito.get(position);
@@ -60,11 +80,19 @@ public class CarritoCompraAdapter extends RecyclerView.Adapter<CarritoCompraAdap
         });
     }
 
+    /**
+     * Devuelve el número de elementos en la lista de datos.
+     * @return El número de elementos en la lista.
+     */
     @Override
     public int getItemCount() {
         return itemsCarrito.size();
     }
 
+    /**
+     * Actualiza la lista de cartas del carrito y notifica los cambios.
+     * @param itemsCarrito Nueva lista de cartas del carrito.
+     */
     public void setItemsCarrito(List<Carta> itemsCarrito) {
         this.itemsCarrito = itemsCarrito;
         notifyDataSetChanged();
@@ -73,6 +101,9 @@ public class CarritoCompraAdapter extends RecyclerView.Adapter<CarritoCompraAdap
         }
     }
 
+    /**
+     * ViewHolder para los elementos de la lista del carrito de compras.
+     */
     public class CarritoViewHolder extends RecyclerView.ViewHolder {
         private TextView nombreProducto, precioProducto;
         private Button btnEliminarDelCarrito;

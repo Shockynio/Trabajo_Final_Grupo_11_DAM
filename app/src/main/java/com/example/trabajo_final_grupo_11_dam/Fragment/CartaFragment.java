@@ -48,8 +48,11 @@ public class CartaFragment extends Fragment {
     private int restaurantId;
     private CarritoCompra carritoCompra;
 
+    /**
+     * Crea una nueva instancia de CartaFragment.
+     * Obtiene la instancia de CarritoCompra al crearse el fragmento.
+     */
     public CartaFragment() {
-        // Obtener la instancia de CarritoCompra cuando se crea el Fragment
         this.carritoCompra = CarritoCompra.getInstance();
     }
 
@@ -104,7 +107,12 @@ public class CartaFragment extends Fragment {
     }
 
 
-
+    /**
+     * Maneja los eventos de selección de elementos del menú de opciones.
+     * Si el elemento seleccionado es el botón de inicio, se finaliza la actividad actual y se regresa a la actividad anterior.
+     * @param item El elemento del menú seleccionado.
+     * @return true si el evento se ha manejado correctamente, false en caso contrario.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
