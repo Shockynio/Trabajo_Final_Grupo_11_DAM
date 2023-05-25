@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -41,10 +42,8 @@ public class MenuActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private View headerView;
 
-    /**
-     * Método que se ejecuta al crear la actividad.
-     * @param savedInstanceState El estado guardado de la actividad.
-     */
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +52,7 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMenu.toolbar);
+
 
         DrawerLayout drawer = binding.drawerLayout;
         navigationView = binding.navView;
@@ -69,12 +69,17 @@ public class MenuActivity extends AppCompatActivity {
 
         // Fetch user data and update the header view
         //fetchUserData();
+
+
+        SharedPreferences sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
+        String email = sharedPreferences.getString("email", "");
+
+
+        fetchUserPermission(email);
     }
 
-    /**
-     * Método que se ejecuta cuando se selecciona el botón de navegación hacia arriba.
-     * @return True si la navegación ha sido manejada correctamente, False de lo contrario.
-     */
+
+
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_menu);
@@ -82,52 +87,33 @@ public class MenuActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    /**
-     * Método que se ejecuta al crear el menú de opciones.
-     * @param menu El menú en el que se inflarán los elementos.
-     * @return True para mostrar el menú, False para ocultarlo.
-     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.back_menu, menu);
 
-        // Get the current fragment ID
         int currentFragmentId = NavHostFragment.findNavController(getSupportFragmentManager().getPrimaryNavigationFragment()).getCurrentDestination().getId();
 
-        // Check if the current fragment is PerfilFragment
         if (currentFragmentId == R.id.perfilFragment) {
-            // Hide the "back_menu" item
             MenuItem backMenuItem = menu.findItem(R.id.action_back);
             backMenuItem.setVisible(false);
         } else {
-            // Show the "back_menu" item for other fragments
             MenuItem backMenuItem = menu.findItem(R.id.action_back);
             backMenuItem.setVisible(true);
         }
 
         return super.onCreateOptionsMenu(menu);
-
-         // TODO: POR ALGUNA RAZON ESTO NO FUNCIONA, HAY QUE ELIMINAR EL BOTÓN PERO NO LO HACE, OS TOCA INVESTIGAR POR QUÉ Y ESCONDER EL BOTON
     }
 
-
-    /**
-     * Método que se ejecuta cuando se selecciona un elemento del menú de opciones.
-     * @param item El elemento del menú seleccionado.
-     * @return True si el evento ha sido manejado correctamente, False de lo contrario.
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_back:
-                // Clear shared preferences
                 SharedPreferences sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();
                 editor.apply();
 
-                // Go back to the previous activity
                 finish();
                 return true;
             default:
@@ -135,28 +121,31 @@ public class MenuActivity extends AppCompatActivity {
         }
     }
 
+    private void updateHeaderView(String fullName, String email) {
+        headerView = navigationView.getHeaderView(0);
+        TextView fullNameTextView = headerView.findViewById(R.id.tv_full_name);
+        TextView emailTextView = headerView.findViewById(R.id.tv_email);
 
-   /* private void fetchUserData() {
-        String url = "https://trabajo-final-grupo-11.azurewebsites.net/selectuserdata";
+        fullNameTextView.setText(fullName);
+        emailTextView.setText(email);
+    }
+
+    private void fetchUserPermission(String email) {
+        // URL to get user permissions
+        String url = "https://trabajo-final-grupo-11.azurewebsites.net/getUserPermission/" + email;
 
         // Create a StringRequest with the GET method
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Parse the response and extract the user's information
+                        // Parse the response and extract the permission level
                         try {
-                            Log.d("MenuActivity", "Response: " + response);
-
                             JSONObject jsonResponse = new JSONObject(response);
-                            String fullName = jsonResponse.getString("fullName");
-                            String email = jsonResponse.getString("email");
+                            int permissionLevel = jsonResponse.getInt("permissionLevel");
 
-                            Log.d("MenuActivity", "Full Name: " + fullName);
-                            Log.d("MenuActivity", "Email: " + email);
-
-                            // Update the header view with the retrieved user's information
-                            updateHeaderView(fullName, email);
+                            // Update menu visibility based on permission level
+                            updateMenuVisibility(permissionLevel);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -166,26 +155,25 @@ public class MenuActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Handle error response
-                        Log.e("MenuActivity", "Error fetching user data: " + error.getMessage());
+                        Log.e("MenuActivity", "Error fetching user permission: " + error.getMessage());
                     }
                 });
 
         // Add the request to the request queue
         Volley.newRequestQueue(this).add(stringRequest);
     }
-*/
 
-    /**
-     * Método privado para actualizar la vista del encabezado con la información del usuario.
-     * @param fullName El nombre completo del usuario.
-     * @param email El correo electrónico del usuario.
-     */
-    private void updateHeaderView(String fullName, String email) {
-        headerView = navigationView.getHeaderView(0);
-        TextView fullNameTextView = headerView.findViewById(R.id.tv_full_name);
-        TextView emailTextView = headerView.findViewById(R.id.tv_email);
+    private void updateMenuVisibility(int permissionLevel) {
+        Menu navMenu = navigationView.getMenu();
 
-        fullNameTextView.setText(fullName);
-        emailTextView.setText(email);
+        if (permissionLevel == 0) {
+            navMenu.findItem(R.id.encargosDisponiblesFragment).setVisible(false);
+            navMenu.findItem(R.id.encargosEscogidosragment).setVisible(false);
+        } else {
+            navMenu.findItem(R.id.encargosDisponiblesFragment).setVisible(true);
+            navMenu.findItem(R.id.encargosEscogidosragment).setVisible(true);
+        }
     }
+
 }
+
