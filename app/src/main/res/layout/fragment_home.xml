@@ -8,7 +8,7 @@
     android:background="@color/white"
     android:orientation="vertical"
     android:layout_gravity="center"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".Fragment.HomeFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/restaurant_recycler_view"

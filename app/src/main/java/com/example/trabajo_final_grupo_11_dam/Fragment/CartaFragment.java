@@ -5,8 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,8 +13,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,7 +24,6 @@ import com.example.trabajo_final_grupo_11_dam.CarritoCompra;
 import com.example.trabajo_final_grupo_11_dam.Carta;
 import com.example.trabajo_final_grupo_11_dam.CartaAdapter;
 import com.example.trabajo_final_grupo_11_dam.R;
-import com.example.trabajo_final_grupo_11_dam.ui.home.HomeFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -1,4 +1,4 @@
-package com.example.trabajo_final_grupo_11_dam.ui.home;
+package com.example.trabajo_final_grupo_11_dam.Fragment;
 
 import android.os.Bundle;
 import android.util.Log;
