@@ -21,12 +21,14 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.trabajo_final_grupo_11_dam.CarritoCompra;
 import com.example.trabajo_final_grupo_11_dam.CarritoCompraAdapter;
 import com.example.trabajo_final_grupo_11_dam.Carta;
 import com.example.trabajo_final_grupo_11_dam.CartaPreferenceHelper;
+import com.example.trabajo_final_grupo_11_dam.Login.MainLoginActivity;
 import com.example.trabajo_final_grupo_11_dam.OnCartChangeListener;
 import com.example.trabajo_final_grupo_11_dam.Pedido;
 import com.example.trabajo_final_grupo_11_dam.R;
@@ -45,11 +47,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -106,6 +110,7 @@ public class CarritoFragment extends Fragment implements OnCartChangeListener {
                     public void onCallback(Restaurantes restaurant) {
                         // Now that you have fetched the restaurant, you can use it to create the order
                         createOrder(finalTotalPrice, restaurant, finalRestaurantId);
+                        Toast.makeText(getContext(), "¡Pedido confirmado! Recuerda que el pago debe hacerse en efectivo", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -153,13 +158,14 @@ public class CarritoFragment extends Fragment implements OnCartChangeListener {
         String url = "https://trabajo-final-grupo-11.azurewebsites.net/restaurant/" + id;
 
         // Create the GET request
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONObject response) {
+                    public void onResponse(JSONArray response) {
                         try {
+                            JSONObject jsonObject = response.getJSONObject(0);
                             Restaurantes restaurant = new Restaurantes();
-                            restaurant.setDireccionLocal(response.getString("Direccion_Local"));
+                            restaurant.setDireccionLocal(jsonObject.getString("Dirección_Local"));
                             restaurantCallback.onCallback(restaurant);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -175,8 +181,9 @@ public class CarritoFragment extends Fragment implements OnCartChangeListener {
         );
 
         // Add the request to the queue
-        queue.add(jsonObjectRequest);
+        queue.add(jsonArrayRequest);
     }
+
 
     private void createOrder(double totalPrice, Restaurantes restaurant, int restaurantId) {
         // Create a new request queue
@@ -189,10 +196,10 @@ public class CarritoFragment extends Fragment implements OnCartChangeListener {
         JSONObject jsonBody = new JSONObject();
         try {
             jsonBody.put("Direccion_Restaurante", restaurant.getDireccionLocal());
-            jsonBody.put("Direccion_Cliente", "Put the customer address here"); // replace with actual method call
+            jsonBody.put("Direccion_Cliente", "Calle Alamos nº8 3ºC"); // TODO: Crear la lógica de dirección cliente
             jsonBody.put("Precio_Total", totalPrice);
             jsonBody.put("RestauranteID", restaurantId);
-            jsonBody.put("Cliente_Username", "Put the customer username here"); // replace with actual method call
+            jsonBody.put("Cliente_Username", "Enrique González Gutiérrez"); // TODO: Crear la lógica nombre cliente
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -223,18 +230,6 @@ public class CarritoFragment extends Fragment implements OnCartChangeListener {
     public interface RestaurantCallback {
         void onCallback(Restaurantes restaurant);
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 
