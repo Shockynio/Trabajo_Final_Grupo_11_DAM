@@ -1,131 +1,131 @@
 package com.example.trabajo_final_grupo_11_dam.Fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.trabajo_final_grupo_11_dam.Pedido;
+import com.example.trabajo_final_grupo_11_dam.PedidoAdapter;
 import com.example.trabajo_final_grupo_11_dam.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Objects;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EncargosEscogidosragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class EncargosEscogidosragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private RecyclerView mRecyclerView;
+    private ArrayList<Pedido> mPedidos;
+    private PedidoAdapter mAdapter;
+    private String repartidorEmail;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public EncargosEscogidosragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EncargosEscogidosragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static EncargosEscogidosragment newInstance(String param1, String param2) {
-        EncargosEscogidosragment fragment = new EncargosEscogidosragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_encargos_escogidosragment, container, false);
 
-    private TextView tvEER2NomRestaurante;
-    private ImageView ivRestaurant;
+        mRecyclerView = view.findViewById(R.id.encargos_disponibles_recycler_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-    private TextView tvEEPPedidoInfo;
-    private TextView tvEEPPedidoInfo2;
-    private TextView tvEEPPedidoInfo3;
-    private TextView tvEEPPedidoInfo4;
-    private TextView tvEEPPedidoInfo5;
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Mis Pedidos A Entregar");
 
-    private TextView tvEEDCalle;
-    private TextView tvEEDCalleInfo; //"Vilafranca del Penedès, \nBarcelona,\nEspaña \n08720"
-    private TextView tvEEDCalle2;
-    private TextView tvEEDCalleInfo2;
-
-    private Button btnFEECompleto;
-    private Button btnFEECancelar;
-
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_encargos_escogidosragment, container, false);
-
-        //TODO: SELECT TO NOMBRE RESTAURANTE donde se hace el pedido, y su imagen
-        tvEER2NomRestaurante = root.findViewById(R.id.tv_eer2_nom_restaurante);
-        ivRestaurant = root.findViewById(R.id.iv_restaurant);
-        //TODO: SELECT TO PEDIDOS(DIVIDIDOS ENTRE 1.ENTRANTES 2.SEGUNDOS 3.POSTRES 4.BEBEDIAS 5.TAPAS)
-        tvEEPPedidoInfo  = root.findViewById(R.id.tv_eep_pedido_info);
-        tvEEPPedidoInfo2 = root.findViewById(R.id.tv_eep_pedido_info2);
-        tvEEPPedidoInfo3 = root.findViewById(R.id.tv_eep_pedido_info3);
-        tvEEPPedidoInfo4 = root.findViewById(R.id.tv_eep_pedido_info4);
-        tvEEPPedidoInfo5 = root.findViewById(R.id.tv_eep_pedido_info5);
-        //TODO: SELECT TO DIRECCION 1.RESTAURANTE 2.CLIENTE
-        tvEEDCalle = root.findViewById(R.id.tv_eed_calle);
-        tvEEDCalleInfo = root.findViewById(R.id.tv_eed_calle_info);
-        tvEEDCalle2 = root.findViewById(R.id.tv_eed_calle2);
-        tvEEDCalleInfo2 = root.findViewById(R.id.tv_eed_calle_info2);
-
-        btnFEECompleto = root.findViewById(R.id.btn_fee_completo);
-        btnFEECancelar = root.findViewById(R.id.btn_fee_cancelar);
-
-        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle("Pedido a ENTREGAR");
-
-        //TODO: Al apretar PEDIDO cambia estado a COMPLETO
-        // (Repartidor a completado la entrega)
-        btnFEECompleto.setOnClickListener(new View.OnClickListener() {
+        // Initialise the ArrayList and the adapter
+        mPedidos = new ArrayList<>();
+        mAdapter = new PedidoAdapter(mPedidos, new PedidoAdapter.PedidoClickListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onPedidoClick(Pedido pedido, int position) {
+                // Handle the click event
             }
         });
 
-        //TODO: Al apretar PEDIDO cambia estado a DISPONIBLE
-        // (Repartidor a cancelado continuar con la entrega)
-        btnFEECancelar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        // Set the adapter to the RecyclerView
+        mRecyclerView.setAdapter(mAdapter);
 
+        // Retrieve the repartidor's email from SharedPreferences
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        repartidorEmail = sharedPreferences.getString("email", "");
+
+        loadPedidos();
+
+        return view;
+    }
+
+    private void loadPedidos() {
+        // Create a new request queue
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+
+        // The URL of the server-side endpoint to fetch pedidos by repartidor's email
+        String url = "https://trabajo-final-grupo-11.azurewebsites.net/pedidos/" + repartidorEmail;
+
+        // Create the GET request
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            boolean success = response.getBoolean("success");
+                            if (success) {
+                                JSONArray pedidosArray = response.getJSONArray("pedidos");
+                                mPedidos.clear();
+
+                                for (int i = 0; i < pedidosArray.length(); i++) {
+                                    JSONObject pedidoObject = pedidosArray.getJSONObject(i);
+                                    int idPedido = pedidoObject.getInt("id_pedido");
+                                    String direccionRestaurante = pedidoObject.getString("Direccion_Restaurante");
+                                    String direccionCliente = pedidoObject.getString("Direccion_Cliente");
+                                    int precioTotal = pedidoObject.getInt("Precio_Total");
+                                    int restauranteId = pedidoObject.getInt("RestauranteID");
+                                    String clienteUsername = pedidoObject.getString("Cliente_Username");
+                                    boolean isTaken = pedidoObject.getBoolean("IsTaken");
+
+                                    Pedido pedido = new Pedido(idPedido, direccionRestaurante, direccionCliente, precioTotal, restauranteId, clienteUsername, isTaken);
+                                    mPedidos.add(pedido);
+                                }
+
+                                mAdapter.notifyDataSetChanged();
+                            } else {
+                                String error = response.getString("error");
+                                Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("EncargosEscogidos", "Error: " + error.getMessage());
+                Toast.makeText(getContext(), "Error occurred while retrieving pedidos", Toast.LENGTH_SHORT).show();
             }
         });
 
-
-
-        return root;
+        // Add the request to the queue
+        queue.add(jsonObjectRequest);
     }
 }
+
