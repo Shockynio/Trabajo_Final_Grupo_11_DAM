@@ -29,7 +29,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.trabajo_final_grupo_11_dam.R;
 import com.example.trabajo_final_grupo_11_dam.RestaurantAdapter;
 import com.example.trabajo_final_grupo_11_dam.Restaurantes;
-import com.example.trabajo_final_grupo_11_dam.databinding.FragmentHomeBinding;
 
 import org.json.JSONArray;
 import org.json.JSONException;

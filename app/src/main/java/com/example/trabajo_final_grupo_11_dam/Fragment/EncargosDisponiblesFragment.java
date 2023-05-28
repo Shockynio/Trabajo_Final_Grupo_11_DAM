@@ -1,5 +1,7 @@
 package com.example.trabajo_final_grupo_11_dam.Fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,11 +15,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.trabajo_final_grupo_11_dam.Pedido;
 import com.example.trabajo_final_grupo_11_dam.PedidoAdapter;
@@ -27,25 +32,15 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-/**
- * Fragmento para mostrar los encargos disponibles.
- */
 public class EncargosDisponiblesFragment extends Fragment {
 
     private List<Pedido> pedidos;
     private RecyclerView recyclerPedidos;
     private PedidoAdapter adapter;
 
-    /**
-     * Método llamado para crear la vista del fragmento.
-     *
-     * @param inflater           El LayoutInflater utilizado para inflar la vista.
-     * @param container          El ViewGroup al que se adjuntará la vista del fragmento.
-     * @param savedInstanceState Un objeto Bundle que contiene el estado anteriormente guardado del fragmento.
-     * @return La vista creada del fragmento.
-     */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -53,15 +48,86 @@ public class EncargosDisponiblesFragment extends Fragment {
         recyclerPedidos = v.findViewById(R.id.encargos_disponibles_recycler_view);
         recyclerPedidos.setLayoutManager(new LinearLayoutManager(getContext()));
         pedidos = new ArrayList<>();
-        adapter = new PedidoAdapter(pedidos);
+        adapter = new PedidoAdapter(pedidos, new PedidoAdapter.PedidoClickListener() {
+            @Override
+            public void onPedidoClick(Pedido pedido, int position) {
+
+                // Create a new AlertDialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+                // Set the title and message of the AlertDialog
+                builder.setTitle("Confirmación");
+                builder.setMessage("¿Quieres tomar este pedido?");
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User clicked the "Yes" button, so you can take the order.
+                        pedido.setTaken(true);
+
+                        // Start the request to update the order
+
+                        String url = "https://trabajo-final-grupo-11.azurewebsites.net/pedido/" + pedido.getid_pedido();
+
+                        // Set the parameters for the PUT request
+                        HashMap<String, Object> params = new HashMap<>();
+                        params.put("IsTaken", 1);
+                        params.put("RepartidorAsignadoEmail", "driver@example.com");
+                        params.put("IsFinished", 0);
+
+                        JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, url, new JSONObject(params),
+                                new Response.Listener<JSONObject>() {
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        Log.d("Pedido Update", "Success: " + response.toString());
+
+                                        adapter.notifyItemChanged(position); // Notify adapter about data changed
+                                        Toast.makeText(getContext(), "Has tomado el pedido con éxito.", Toast.LENGTH_LONG).show();
+                                    }
+                                }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.e("Pedido Update", "Error: " + error.toString());
+                                // TODO: handle error
+                            }
+                        }
+                        );
+
+                        Volley.newRequestQueue(getContext()).add(request);
+                    }
+                });
+
+                // Add a negative button to the AlertDialog
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                        // Nothing happens
+                    }
+                });
+
+                // Create the AlertDialog and display it
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+                // Add log for AlertDialog creation
+                Log.d("AlertDialog", "Created");
+            }
+        });
         recyclerPedidos.setAdapter(adapter);
+
+        // Add log for starting data loading
+        Log.d("Data Loading", "Started");
+
         loadData();
+
+        // Add log for finishing data loading
+        Log.d("Data Loading", "Finished");
+
         return v;
     }
 
-    /**
-     * Método privado para cargar los datos de los encargos desde una URL.
-     */
+
+
+
     private void loadData() {
         String url = "https://trabajo-final-grupo-11.azurewebsites.net/RetrievePedidos";
 
@@ -85,12 +151,13 @@ public class EncargosDisponiblesFragment extends Fragment {
                                         pedidoJson.getString("Direccion_Cliente"),
                                         pedidoJson.getInt("Precio_Total"),
                                         pedidoJson.getInt("RestauranteID"),
-                                        pedidoJson.getString("Cliente_Username")
+                                        pedidoJson.getString("Cliente_Username"),
+                                        pedidoJson.has("isTaken") ? pedidoJson.getBoolean("isTaken") : false
                                 );
                                 pedidos.add(pedido);
 
                                 // Register the data for each Pedido object
-                                Log.d("LoadData", "Pedido #" + i + ": " + pedido.toString());
+                                Log.d("LoadData", "Pedido #" + i + ": " + pedido.toString() + ", isTaken: " + (pedidoJson.has("isTaken") ? pedidoJson.getBoolean("isTaken") : false));
                             }
                             Log.d("LoadData", "Datos JSON analizados.");
 
@@ -114,12 +181,6 @@ public class EncargosDisponiblesFragment extends Fragment {
         Log.d("LoadData", "Solicitud agregada a la cola de solicitudes.");
     }
 
-    /**
-     * Método llamado cuando la vista del fragmento ha sido creada.
-     *
-     * @param view               La vista raíz del fragmento.
-     * @param savedInstanceState Un objeto Bundle que contiene el estado anteriormente guardado del fragmento.
-     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

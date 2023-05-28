@@ -10,24 +10,26 @@ public class Pedido {
     private int Precio_Total;
     private int RestauranteID;
     private String Cliente_Username;
+    private boolean isTaken;
 
     /**
      * Constructor de la clase Pedido.
-     *
-     * @param id_pedido          El ID del pedido.
+     *  @param id_pedido          El ID del pedido.
      * @param direccionRestaurante La dirección del restaurante.
      * @param direccionCliente    La dirección del cliente.
      * @param precioTotal         El precio total del pedido.
      * @param restauranteId       El ID del restaurante asociado al pedido.
      * @param cliente_Username    El nombre de usuario del cliente que realizó el pedido.
+     * @param isTaken
      */
-    public Pedido(int id_pedido, String direccionRestaurante, String direccionCliente, int precioTotal, int restauranteId, String cliente_Username) {
+    public Pedido(int id_pedido, String direccionRestaurante, String direccionCliente, int precioTotal, int restauranteId, String cliente_Username, boolean isTaken) {
         this.id_pedido = id_pedido;
         this.Direccion_Restaurante = direccionRestaurante;
         this.Direccion_Cliente = direccionCliente;
         this.Precio_Total = precioTotal;
         this.RestauranteID = restauranteId;
         this.Cliente_Username = cliente_Username;
+        this.isTaken = isTaken;
     }
 
     /**
@@ -83,5 +85,12 @@ public class Pedido {
     public String getCliente_Username() {
         return Cliente_Username;
     }
-}
 
+    public boolean getIsTaken() {
+        return isTaken;
+    }
+
+    public void setTaken(boolean taken) {
+        this.isTaken = taken;
+    }
+}
