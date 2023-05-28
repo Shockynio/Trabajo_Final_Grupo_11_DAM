@@ -5,8 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,8 +13,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,7 +24,6 @@ import com.example.trabajo_final_grupo_11_dam.CarritoCompra;
 import com.example.trabajo_final_grupo_11_dam.Carta;
 import com.example.trabajo_final_grupo_11_dam.CartaAdapter;
 import com.example.trabajo_final_grupo_11_dam.R;
-import com.example.trabajo_final_grupo_11_dam.ui.home.HomeFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,8 +43,11 @@ public class CartaFragment extends Fragment {
     private int restaurantId;
     private CarritoCompra carritoCompra;
 
+    /**
+     * Crea una nueva instancia de CartaFragment.
+     * Obtiene la instancia de CarritoCompra al crearse el fragmento.
+     */
     public CartaFragment() {
-        // Obtener la instancia de CarritoCompra cuando se crea el Fragment
         this.carritoCompra = CarritoCompra.getInstance();
     }
 
@@ -104,7 +102,12 @@ public class CartaFragment extends Fragment {
     }
 
 
-
+    /**
+     * Maneja los eventos de selección de elementos del menú de opciones.
+     * Si el elemento seleccionado es el botón de inicio, se finaliza la actividad actual y se regresa a la actividad anterior.
+     * @param item El elemento del menú seleccionado.
+     * @return true si el evento se ha manejado correctamente, false en caso contrario.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

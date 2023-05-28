@@ -58,7 +58,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
-
+/**
+ * Fragmento que muestra nuestras ordenes en el carrito.
+ */
 public class CarritoFragment extends Fragment implements OnCartChangeListener {
 
     private RecyclerView rvCarrito;
@@ -67,6 +69,14 @@ public class CarritoFragment extends Fragment implements OnCartChangeListener {
     private Button btnConfirmarPedido, btnCancelerPedido;
     private TextView totalDelCarritoTextView;
 
+    /**
+     * Método llamado al crear la vista del fragmento.
+     *
+     * @param inflater           El objeto LayoutInflater que se utiliza para inflar la vista.
+     * @param container          El contenedor padre en el que se debe insertar la vista.
+     * @param savedInstanceState Los datos guardados de la instancia anterior del fragmento.
+     * @return La vista inflada del fragmento.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_carrito, container, false);
@@ -137,6 +147,11 @@ public class CarritoFragment extends Fragment implements OnCartChangeListener {
         return view;
     }
 
+    /**
+     * Método llamado cuando cambia el carrito de compras.
+     *
+     * @param updatedCartList La nueva lista de productos en el carrito.
+     */
     @Override
     public void onCartChange(List<Carta> updatedCartList) {
         int total = 0;
@@ -147,7 +162,12 @@ public class CarritoFragment extends Fragment implements OnCartChangeListener {
     }
 
 
-
+    /**
+     * Obtiene los datos del restaurante por su ID.
+     *
+     * @param id                 El ID del restaurante.
+     * @param restaurantCallback El callback para manejar la respuesta con los datos del restaurante.
+     */
     private void fetchRestaurantById(int id, final RestaurantCallback restaurantCallback) {
         // This is your existing fetchRestaurantById function which should call the callback with the fetched restaurant
 
@@ -184,7 +204,13 @@ public class CarritoFragment extends Fragment implements OnCartChangeListener {
         queue.add(jsonArrayRequest);
     }
 
-
+    /**
+     * Crea un nuevo pedido.
+     *
+     * @param totalPrice     El precio total del pedido.
+     * @param restaurant     El objeto Restaurantes con los datos del restaurante.
+     * @param restaurantId   El ID del restaurante.
+     */
     private void createOrder(double totalPrice, Restaurantes restaurant, int restaurantId) {
         // Create a new request queue
         RequestQueue queue = Volley.newRequestQueue(getContext());
@@ -226,8 +252,15 @@ public class CarritoFragment extends Fragment implements OnCartChangeListener {
         queue.add(jsonObjectRequest);
     }
 
-
+    /**
+     * Callback para manejar la respuesta con los datos del restaurante.
+     */
     public interface RestaurantCallback {
+        /**
+         * Método llamado cuando se obtienen los datos del restaurante.
+         *
+         * @param restaurant El objeto Restaurantes con los datos del restaurante.
+         */
         void onCallback(Restaurantes restaurant);
     }
 }
