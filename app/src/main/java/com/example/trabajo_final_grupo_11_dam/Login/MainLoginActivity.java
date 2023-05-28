@@ -115,11 +115,21 @@ public class MainLoginActivity extends AppCompatActivity {
                                     boolean success = response.getBoolean("success");
                                     if (success) {
                                         Log.d("Login", "Login successful");
+
                                         // El inicio de sesión fue exitoso. Almacenar el correo electrónico del usuario.
                                         SharedPreferences sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
                                         SharedPreferences.Editor editor = sharedPreferences.edit();
                                         Log.d("Login", "Storing user's email: " + email);
                                         editor.putString("email", email);
+
+                                        // New code
+                                        String direccion_entrega = response.getString("direccion_entrega");
+                                        String nombre_completo = response.getString("nombre_completo");
+                                        Log.d("Login", "Storing user's delivery address: " + direccion_entrega);
+                                        Log.d("Login", "Storing user's full name: " + nombre_completo);
+                                        editor.putString("direccion_entrega", direccion_entrega);
+                                        editor.putString("nombre_completo", nombre_completo);
+
                                         editor.apply();
 
                                         // Iniciar la siguiente actividad.

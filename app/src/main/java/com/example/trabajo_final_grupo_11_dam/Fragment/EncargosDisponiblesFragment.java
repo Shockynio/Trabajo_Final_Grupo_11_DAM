@@ -1,7 +1,9 @@
 package com.example.trabajo_final_grupo_11_dam.Fragment;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -47,11 +49,11 @@ public class EncargosDisponiblesFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_encargos_disponibles, container, false);
         recyclerPedidos = v.findViewById(R.id.encargos_disponibles_recycler_view);
         recyclerPedidos.setLayoutManager(new LinearLayoutManager(getContext()));
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Pedidos Disponibles");
         pedidos = new ArrayList<>();
         adapter = new PedidoAdapter(pedidos, new PedidoAdapter.PedidoClickListener() {
             @Override
             public void onPedidoClick(Pedido pedido, int position) {
-
                 // Create a new AlertDialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
@@ -68,10 +70,14 @@ public class EncargosDisponiblesFragment extends Fragment {
 
                         String url = "https://trabajo-final-grupo-11.azurewebsites.net/pedido/" + pedido.getid_pedido();
 
+                        // Get userEmail from SharedPreferences
+                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user_info", Context.MODE_PRIVATE);
+                        String userEmail = sharedPreferences.getString("email", "Error"); // Use a default value
+
                         // Set the parameters for the PUT request
                         HashMap<String, Object> params = new HashMap<>();
                         params.put("IsTaken", 1);
-                        params.put("RepartidorAsignadoEmail", "driver@example.com");
+                        params.put("RepartidorAsignadoEmail", userEmail);
                         params.put("IsFinished", 0);
 
                         JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, url, new JSONObject(params),

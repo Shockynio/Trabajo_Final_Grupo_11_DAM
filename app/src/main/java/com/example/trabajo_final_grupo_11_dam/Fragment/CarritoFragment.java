@@ -221,11 +221,20 @@ public class CarritoFragment extends Fragment implements OnCartChangeListener {
         // Create a new JSONObject to hold the data
         JSONObject jsonBody = new JSONObject();
         try {
+            SharedPreferences sharedPreferences = getContext().getSharedPreferences("user_info", Context.MODE_PRIVATE);
+
+            String direccionCliente = sharedPreferences.getString("direccion_entrega", ""); // Use default value if not found
+            String nombreCliente = sharedPreferences.getString("nombre_completo", ""); // Use default value if not found
+
+            Log.d("Preferences", "Direccion Cliente: " + direccionCliente);
+            Log.d("Preferences", "Nombre Cliente: " + nombreCliente);
+
             jsonBody.put("Direccion_Restaurante", restaurant.getDireccionLocal());
-            jsonBody.put("Direccion_Cliente", "Calle Alamos nº8 3ºC"); // TODO: Crear la lógica de dirección cliente
+            jsonBody.put("Direccion_Cliente", direccionCliente);
             jsonBody.put("Precio_Total", totalPrice);
             jsonBody.put("RestauranteID", restaurantId);
-            jsonBody.put("Cliente_Username", "Enrique González Gutiérrez"); // TODO: Crear la lógica nombre cliente
+            jsonBody.put("Cliente_Username", nombreCliente);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
