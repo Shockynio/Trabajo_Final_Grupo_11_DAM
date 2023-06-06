@@ -210,10 +210,10 @@ public class LoginSolicitudActivity extends AppCompatActivity implements  View.O
                 String email = etEmail.getText().toString();
                 isEmailTaken(LoginSolicitudActivity.this, email, new LoginCreacionActivity.VolleyCallback() {
                     @Override
-                    public void onSuccess(boolean isTaken) {
-                        if (isTaken) {
-                            Toast.makeText(LoginSolicitudActivity.this, "El correo electrónico ya está en uso.", Toast.LENGTH_SHORT).show();
-                        } else {
+                            public void onSuccess(boolean isTaken) {
+                                if (isTaken) {
+                                    Toast.makeText(LoginSolicitudActivity.this, "El correo electrónico ya está en uso.", Toast.LENGTH_SHORT).show();
+                                } else {
                             if (etExperienciaRepartidor.getVisibility() == View.VISIBLE) {
                                 String nombre = etNombre.getText().toString();
                                 int telefono = Integer.parseInt(etTelefono.getText().toString());

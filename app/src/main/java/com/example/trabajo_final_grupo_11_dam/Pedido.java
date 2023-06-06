@@ -11,6 +11,7 @@ public class Pedido {
     private int RestauranteID;
     private String Cliente_Username;
     private boolean isTaken;
+    private String RepartidorAsignadoEmail;
 
     /**
      * Constructor de la clase Pedido.
@@ -93,4 +94,9 @@ public class Pedido {
     public void setTaken(boolean taken) {
         this.isTaken = taken;
     }
+
+    public String getRepartidorAsignadoEmail() {
+        return RepartidorAsignadoEmail;
+    }
+
 }

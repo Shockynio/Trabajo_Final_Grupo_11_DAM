@@ -43,6 +43,7 @@ public class EncargosEscogidosragment extends Fragment {
     private ArrayList<Pedido> mPedidos;
     private PedidoAdapter mAdapter;
     private String repartidorEmail;
+    private boolean isFromEncargosEscogidosFragment;
 
     @Nullable
     @Override
@@ -73,6 +74,10 @@ public class EncargosEscogidosragment extends Fragment {
         loadPedidos();
 
         return view;
+    }
+
+    public void setFromEncargosEscogidosFragment(boolean isFromEncargosEscogidosFragment) {
+        this.isFromEncargosEscogidosFragment = isFromEncargosEscogidosFragment;
     }
 
     private void loadPedidos() {
@@ -128,4 +133,3 @@ public class EncargosEscogidosragment extends Fragment {
         queue.add(jsonObjectRequest);
     }
 }
-

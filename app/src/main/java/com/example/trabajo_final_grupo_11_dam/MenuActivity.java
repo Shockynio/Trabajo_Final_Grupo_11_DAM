@@ -129,9 +129,9 @@ public class MenuActivity extends AppCompatActivity {
         emailTextView.setText(email);
     }
 
-    private void fetchUserPermission(String email) {
+    private void fetchUserPermission(String Email){
         // URL to get user permissions
-        String url = "https://trabajo-final-grupo-11.azurewebsites.net/getUserPermission/" + email;
+        String url = "https://trabajo-final-grupo-11.azurewebsites.net/getUserPermission/" + Email;
 
         // Create a StringRequest with the GET method
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

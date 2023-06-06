@@ -107,17 +107,6 @@ public class PerfilFragment extends Fragment {
             }
         });
 
-       /* tvPEEmail2.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                    tvPTMobil2.requestFocus();
-                    return true;
-                }
-                return false;
-            }
-        });*/
-
         tvPTMobil2.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -293,7 +282,7 @@ public class PerfilFragment extends Fragment {
 
                         // Disable edit mode after saving the changes
                         isEditModeEnabled = false;
-                        enableEditMode(isEditModeEnabled);
+                        enableEditMode(false);
                     }
                 }
     /**

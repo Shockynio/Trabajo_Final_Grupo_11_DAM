@@ -117,13 +117,22 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
                 restaurantImage.setImageResource(R.drawable.icono_restaurante);
             }
 
-            if (pedido.getIsTaken()) {
-                cardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.lightGrey));
-                restaurantImage.setColorFilter(ContextCompat.getColor(itemView.getContext(), R.color.lightGrey), PorterDuff.Mode.MULTIPLY);
-            } else {
+            boolean isFromEncargosEscogidosFragment = false;
+
+            if (isFromEncargosEscogidosFragment) {
                 cardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), android.R.color.white));
                 restaurantImage.clearColorFilter();
+            } else {
+                if (pedido.getIsTaken()) {
+                    cardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.lightGrey));
+                    restaurantImage.setColorFilter(ContextCompat.getColor(itemView.getContext(), R.color.lightGrey), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    cardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), android.R.color.white));
+                    restaurantImage.clearColorFilter();
+                }
             }
+
         }
     }
+
 }
