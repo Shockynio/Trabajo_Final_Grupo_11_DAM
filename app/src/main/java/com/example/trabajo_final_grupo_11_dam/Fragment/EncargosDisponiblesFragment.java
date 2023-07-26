@@ -95,8 +95,7 @@ public class EncargosDisponiblesFragment extends Fragment {
                                 Log.e("Pedido Update", "Error: " + error.toString());
                                 // TODO: handle error
                             }
-                        }
-                        );
+                        });
 
                         Volley.newRequestQueue(getContext()).add(request);
                     }
@@ -117,7 +116,8 @@ public class EncargosDisponiblesFragment extends Fragment {
                 // Add log for AlertDialog creation
                 Log.d("AlertDialog", "Created");
             }
-        });
+        }, false);
+
         recyclerPedidos.setAdapter(adapter);
 
         // Add log for starting data loading
@@ -130,6 +130,7 @@ public class EncargosDisponiblesFragment extends Fragment {
 
         return v;
     }
+
 
 
 

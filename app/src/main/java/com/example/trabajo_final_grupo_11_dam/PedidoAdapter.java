@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.GradientDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,10 +32,14 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
 
     private List<Pedido> pedidos;
     private PedidoClickListener listener;
+    private boolean isFromEncargosEscogidosFragment;
+    private Pedido selectedPedido = null;
 
-    public PedidoAdapter(List<Pedido> pedidos, PedidoClickListener listener) {
+
+    public PedidoAdapter(List<Pedido> pedidos, PedidoClickListener listener, boolean isFromEncargosEscogidosFragment) {
         this.pedidos = pedidos;
         this.listener = listener;
+        this.isFromEncargosEscogidosFragment = isFromEncargosEscogidosFragment;
     }
 
     public interface PedidoClickListener {
@@ -59,13 +64,29 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (pedido.getIsTaken()) {
-                    Toast.makeText(view.getContext(), "Este pedido ya ha sido tomado.", Toast.LENGTH_SHORT).show();
-                } else if (listener != null) {
-                    listener.onPedidoClick(pedido, position);
+                if (isFromEncargosEscogidosFragment) {
+                    if (holder.cardView.isSelected()) {
+                        holder.cardView.setSelected(false);
+                        holder.cardView.setCardBackgroundColor(ContextCompat.getColor(view.getContext(), android.R.color.white)); // Change color back to default
+                        selectedPedido = null; // No selected pedido
+                    } else {
+                        holder.cardView.setSelected(true);
+                        holder.cardView.setCardBackgroundColor(ContextCompat.getColor(view.getContext(), R.color.orangeCLEAR)); // Change color to light orange
+                        selectedPedido = pedido; // Update the selected pedido
+                    }
+                } else {
+                    if (pedido.getIsTaken()) {
+                        Toast.makeText(view.getContext(), "Este pedido ya ha sido tomado.", Toast.LENGTH_SHORT).show();
+                    } else if (listener != null) {
+                        listener.onPedidoClick(pedido, position);
+                    }
                 }
             }
         });
+    }
+
+    public Pedido getSelectedPedido() {
+        return selectedPedido;
     }
 
     @Override
@@ -117,7 +138,7 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
                 restaurantImage.setImageResource(R.drawable.icono_restaurante);
             }
 
-            boolean isFromEncargosEscogidosFragment = false;
+            // isFromEncargosEscogidosFragment = false;
 
             if (isFromEncargosEscogidosFragment) {
                 cardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), android.R.color.white));
@@ -134,5 +155,4 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
 
         }
     }
-
 }
