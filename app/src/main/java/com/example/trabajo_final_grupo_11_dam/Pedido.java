@@ -12,6 +12,7 @@ public class Pedido {
     private String Cliente_Username;
     private boolean isTaken;
     private String RepartidorAsignadoEmail;
+    private boolean isFinished;
 
     /**
      * Constructor de la clase Pedido.
@@ -95,8 +96,20 @@ public class Pedido {
         this.isTaken = taken;
     }
 
+    public boolean getIsFinished() {
+        return isFinished;
+    }
+
+    public void setIsFinished(boolean isFinished) {
+        this.isFinished = isFinished;
+    }
+
     public String getRepartidorAsignadoEmail() {
         return RepartidorAsignadoEmail;
+    }
+
+    public void setRepartidorAsignadoEmail(String repartidorAsignadoEmail) {
+        this.RepartidorAsignadoEmail = repartidorAsignadoEmail;
     }
 
 }

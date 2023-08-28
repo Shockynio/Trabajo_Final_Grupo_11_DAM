@@ -26,6 +26,10 @@
             android:id="@+id/encargosEscogidosragment"
             android:icon="@drawable/ic_send"
             android:title= "Pedidos a Entregar" />
+        <item
+            android:id="@+id/pedidosFinalizadosFragment"
+            android:icon="@drawable/ic_okey"
+            android:title= "Pedidos Finalizados" />
 
     </group>
 </menu>

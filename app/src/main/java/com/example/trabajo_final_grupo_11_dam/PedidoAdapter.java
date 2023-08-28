@@ -1,7 +1,11 @@
 package com.example.trabajo_final_grupo_11_dam;
 
+import static java.security.AccessController.getContext;
+
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.GradientDrawable;
@@ -34,6 +38,10 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
     private PedidoClickListener listener;
     private boolean isFromEncargosEscogidosFragment;
     private Pedido selectedPedido = null;
+    public List<Pedido> getPedidos() {
+        return this.pedidos;
+    }
+
 
 
     public PedidoAdapter(List<Pedido> pedidos, PedidoClickListener listener, boolean isFromEncargosEscogidosFragment) {
@@ -76,14 +84,32 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
                     }
                 } else {
                     if (pedido.getIsTaken()) {
-                        Toast.makeText(view.getContext(), "Este pedido ya ha sido tomado.", Toast.LENGTH_SHORT).show();
+                        Log.d("PedidoAdapter", "Pedido está tomado.");
+
+                        SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("user_info", Context.MODE_PRIVATE);
+                        String userEmail = sharedPreferences.getString("email", "Error"); // Usa un valor predeterminado
+
+                        String repartidorAsignadoEmail = pedido.getRepartidorAsignadoEmail();
+
+                        if (repartidorAsignadoEmail != null && repartidorAsignadoEmail.equals(userEmail)) {
+                            Toast.makeText(view.getContext(), "Has tomado este pedido.", Toast.LENGTH_SHORT).show();
+                        } else if (repartidorAsignadoEmail != null) {
+                            Toast.makeText(view.getContext(), "Este pedido ya ha sido tomado por otro repartidor.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.d("PedidoAdapter", "repartidorAsignadoEmail es null.");
+                        }
                     } else if (listener != null) {
+                        Log.d("PedidoAdapter", "listener no es null.");
                         listener.onPedidoClick(pedido, position);
+                    } else {
+                        Log.d("PedidoAdapter", "listener es null o pedido no está tomado.");
                     }
+
                 }
             }
         });
     }
+
 
     public Pedido getSelectedPedido() {
         return selectedPedido;

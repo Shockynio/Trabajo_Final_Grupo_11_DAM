@@ -138,8 +138,6 @@ public class EncargosDisponiblesFragment extends Fragment {
     private void loadData() {
         String url = "https://trabajo-final-grupo-11.azurewebsites.net/RetrievePedidos";
 
-        Log.d("LoadData", "Enviando solicitud a: " + url);
-
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
                 url,
@@ -147,11 +145,17 @@ public class EncargosDisponiblesFragment extends Fragment {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.d("LoadData", "Respuesta recibida.");
-
                         try {
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject pedidoJson = response.getJSONObject(i);
+                                boolean isTaken = pedidoJson.has("IsTaken") ? pedidoJson.getBoolean("IsTaken") : false;
+                                boolean isFinished = pedidoJson.has("IsFinished") ? pedidoJson.getBoolean("IsFinished") : false;
+
+                                // Si el pedido ha sido tomado y finalizado, no lo agregamos a la lista
+                                if (isTaken && isFinished) {
+                                    continue;
+                                }
+
                                 Pedido pedido = new Pedido(
                                         pedidoJson.getInt("id_pedido"),
                                         pedidoJson.getString("Direccion_Restaurante"),
@@ -159,17 +163,18 @@ public class EncargosDisponiblesFragment extends Fragment {
                                         pedidoJson.getInt("Precio_Total"),
                                         pedidoJson.getInt("RestauranteID"),
                                         pedidoJson.getString("Cliente_Username"),
-                                        pedidoJson.has("isTaken") ? pedidoJson.getBoolean("isTaken") : false
+                                        isTaken
                                 );
-                                pedidos.add(pedido);
+                                pedido.setIsFinished(isFinished); // Establecemos la propiedad IsFinished
 
-                                // Register the data for each Pedido object
-                                Log.d("LoadData", "Pedido #" + i + ": " + pedido.toString() + ", isTaken: " + (pedidoJson.has("isTaken") ? pedidoJson.getBoolean("isTaken") : false));
+                                if (pedidoJson.has("RepartidorAsignadoEmail")) {
+                                    pedido.setRepartidorAsignadoEmail(pedidoJson.getString("RepartidorAsignadoEmail"));
+                                }
+
+                                pedidos.add(pedido);
                             }
-                            Log.d("LoadData", "Datos JSON analizados.");
 
                             adapter.notifyDataSetChanged();
-                            Log.d("LoadData", "Datos cargados exitosamente.");
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -178,8 +183,7 @@ public class EncargosDisponiblesFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("LoadData", "Error al cargar los datos: " + error.getMessage());
-                        error.printStackTrace();
+                        // Manejo de errores
                     }
                 }
         );
