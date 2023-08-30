@@ -83,4 +83,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="restaurant_image" />
     <string name="placeholder_restaurant_name" />
+    <string name="textCreacionPedido">              Creacion del Pedido </string>
+    <string name="textTomaPedido">              Hora de Toma del Pedido</string>
+    <string name="textPedidoEntregado">              Hora Entrega del Pedido</string>
+    />
 </resources>

@@ -33,9 +33,14 @@ import com.example.trabajo_final_grupo_11_dam.R;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class EncargosDisponiblesFragment extends Fragment {
 
@@ -116,7 +121,7 @@ public class EncargosDisponiblesFragment extends Fragment {
                 // Add log for AlertDialog creation
                 Log.d("AlertDialog", "Created");
             }
-        }, false);
+        }, false, false);
 
         recyclerPedidos.setAdapter(adapter);
 
@@ -137,6 +142,12 @@ public class EncargosDisponiblesFragment extends Fragment {
 
     private void loadData() {
         String url = "https://trabajo-final-grupo-11.azurewebsites.net/RetrievePedidos";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
+
+        // Crear listas separadas para pedidos tomados y no tomados
+        List<Pedido> pedidosTomados = new ArrayList<>();
+        List<Pedido> nuevosPedidos = new ArrayList<>();
 
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
@@ -148,8 +159,36 @@ public class EncargosDisponiblesFragment extends Fragment {
                         try {
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject pedidoJson = response.getJSONObject(i);
-                                boolean isTaken = pedidoJson.has("IsTaken") ? pedidoJson.getBoolean("IsTaken") : false;
-                                boolean isFinished = pedidoJson.has("IsFinished") ? pedidoJson.getBoolean("IsFinished") : false;
+                                boolean isTaken = pedidoJson.getBoolean("IsTaken");
+                                boolean isFinished = pedidoJson.getBoolean("IsFinished");
+
+                                Date CreacionPedido = null;
+                                Date TomaPedido = null;
+                                Date FinalizacionPedido = null;
+
+                                if (pedidoJson.has("CreacionPedido")) {
+                                    CreacionPedido = sdf.parse(pedidoJson.getString("CreacionPedido"));
+                                }
+                                if (pedidoJson.has("TomaPedido") && !pedidoJson.isNull("TomaPedido")) {
+                                    try {
+                                        TomaPedido = sdf.parse(pedidoJson.getString("TomaPedido"));
+                                    } catch (ParseException e) {
+                                        Log.e("ParseException", "Error al parsear TomaPedido: " + e.getMessage());
+                                    }
+                                } else {
+                                    TomaPedido = null;
+                                }
+
+                                if (pedidoJson.has("FinalizacionPedido") && !pedidoJson.isNull("FinalizacionPedido")) {
+                                    try {
+                                        FinalizacionPedido = sdf.parse(pedidoJson.getString("FinalizacionPedido"));
+                                    } catch (ParseException e) {
+                                        Log.e("ParseException", "Error al parsear FinalizacionPedido: " + e.getMessage());
+                                    }
+                                } else {
+                                    FinalizacionPedido = null;
+                                }
+
 
                                 // Si el pedido ha sido tomado y finalizado, no lo agregamos a la lista
                                 if (isTaken && isFinished) {
@@ -163,16 +202,30 @@ public class EncargosDisponiblesFragment extends Fragment {
                                         pedidoJson.getInt("Precio_Total"),
                                         pedidoJson.getInt("RestauranteID"),
                                         pedidoJson.getString("Cliente_Username"),
-                                        isTaken
+                                        isTaken,
+                                        CreacionPedido,
+                                        TomaPedido,
+                                        FinalizacionPedido
                                 );
-                                pedido.setIsFinished(isFinished); // Establecemos la propiedad IsFinished
+
+                                pedido.setIsFinished(isFinished);
 
                                 if (pedidoJson.has("RepartidorAsignadoEmail")) {
                                     pedido.setRepartidorAsignadoEmail(pedidoJson.getString("RepartidorAsignadoEmail"));
                                 }
 
-                                pedidos.add(pedido);
+                                // Agregar el pedido a la lista correspondiente
+                                if (isTaken) {
+                                    pedidosTomados.add(pedido);
+                                } else {
+                                    nuevosPedidos.add(pedido);
+                                }
                             }
+
+                            // Unir las listas, con nuevosPedidos en la parte superior
+                            pedidos.clear();
+                            pedidos.addAll(nuevosPedidos);
+                            pedidos.addAll(pedidosTomados);
 
                             adapter.notifyDataSetChanged();
                         } catch (Exception e) {
@@ -191,6 +244,9 @@ public class EncargosDisponiblesFragment extends Fragment {
         Volley.newRequestQueue(getContext()).add(request);
         Log.d("LoadData", "Solicitud agregada a la cola de solicitudes.");
     }
+
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

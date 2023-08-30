@@ -24,7 +24,11 @@ import com.example.trabajo_final_grupo_11_dam.PedidoAdapter;
 import com.example.trabajo_final_grupo_11_dam.R;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PedidosFinalizadosFragment extends Fragment {
@@ -50,7 +54,7 @@ public class PedidosFinalizadosFragment extends Fragment {
             public void onPedidoClick(Pedido pedido, int position) {
                 // Aquí puedes manejar clics para los pedidos finalizados si lo necesitas
             }
-        }, false);  // El último parámetro es 'false' porque no es de EncargosEscogidosFragment
+        }, false, true);
 
         recyclerView.setAdapter(adapter);
 
@@ -74,11 +78,31 @@ public class PedidosFinalizadosFragment extends Fragment {
                             SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user_info", Context.MODE_PRIVATE);
                             String userEmail = sharedPreferences.getString("email", "Error");
 
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"); // Actualiza el formato
+
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject pedidoJson = response.getJSONObject(i);
 
-                                // Si el pedido ha sido finalizado y el correo electrónico del repartidor coincide, lo agregamos a la lista
                                 if (pedidoJson.getBoolean("IsFinished") && pedidoJson.getString("RepartidorAsignadoEmail").equals(userEmail)) {
+
+                                    Date CreacionPedido = null;
+                                    Date TomaPedido = null;
+                                    Date FinalizacionPedido = null;
+
+                                    try {
+                                        if (pedidoJson.has("CreacionPedido") && !pedidoJson.isNull("CreacionPedido")) {
+                                            CreacionPedido = sdf.parse(pedidoJson.getString("CreacionPedido"));
+                                        }
+                                        if (pedidoJson.has("TomaPedido") && !pedidoJson.isNull("TomaPedido")) {
+                                            TomaPedido = sdf.parse(pedidoJson.getString("TomaPedido"));
+                                        }
+                                        if (pedidoJson.has("FinalizacionPedido") && !pedidoJson.isNull("FinalizacionPedido")) {
+                                            FinalizacionPedido = sdf.parse(pedidoJson.getString("FinalizacionPedido"));
+                                        }
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
+                                    }
+
                                     Pedido pedido = new Pedido(
                                             pedidoJson.getInt("id_pedido"),
                                             pedidoJson.getString("Direccion_Restaurante"),
@@ -86,7 +110,10 @@ public class PedidosFinalizadosFragment extends Fragment {
                                             pedidoJson.getInt("Precio_Total"),
                                             pedidoJson.getInt("RestauranteID"),
                                             pedidoJson.getString("Cliente_Username"),
-                                            pedidoJson.getBoolean("IsTaken")
+                                            pedidoJson.getBoolean("IsTaken"),
+                                            CreacionPedido,
+                                            TomaPedido,
+                                            FinalizacionPedido
                                     );
 
                                     pedidosFinalizados.add(pedido);
@@ -98,6 +125,7 @@ public class PedidosFinalizadosFragment extends Fragment {
                             e.printStackTrace();
                         }
                     }
+
                 },
                 new Response.ErrorListener() {
                     @Override
@@ -109,6 +137,7 @@ public class PedidosFinalizadosFragment extends Fragment {
 
         Volley.newRequestQueue(getContext()).add(request);
     }
+
 }
 
 

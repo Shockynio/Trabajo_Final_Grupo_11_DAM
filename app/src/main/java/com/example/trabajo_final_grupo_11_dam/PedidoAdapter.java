@@ -29,25 +29,33 @@ import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoViewHolder> {
+
+    private static final String TAG = "PedidoViewHolder";
 
     private List<Pedido> pedidos;
     private PedidoClickListener listener;
     private boolean isFromEncargosEscogidosFragment;
+    private boolean isFromPedidosFinalizadosFragment;
     private Pedido selectedPedido = null;
+
+
+
+
     public List<Pedido> getPedidos() {
         return this.pedidos;
     }
 
-
-
-    public PedidoAdapter(List<Pedido> pedidos, PedidoClickListener listener, boolean isFromEncargosEscogidosFragment) {
+    public PedidoAdapter(List<Pedido> pedidos, PedidoClickListener listener, boolean isFromEncargosEscogidosFragment, boolean isFromPedidosFinalizadosFragment) {
         this.pedidos = pedidos;
         this.listener = listener;
         this.isFromEncargosEscogidosFragment = isFromEncargosEscogidosFragment;
+        this.isFromPedidosFinalizadosFragment = isFromPedidosFinalizadosFragment;
     }
 
     public interface PedidoClickListener {
@@ -127,6 +135,9 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
         private TextView tvDireccionCliente;
         private TextView tvPrecioTotal;
         private TextView tvClienteUsername;
+        private TextView tvCreacionPedido;
+        private TextView tvTomaPedido;
+        private TextView tvPedidoEntregado;
         private ImageView restaurantImage;
         private CardView cardView;
 
@@ -139,14 +150,62 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
             tvClienteUsername = itemView.findViewById(R.id.txtCliente_Username);
             restaurantImage = itemView.findViewById(R.id.IMAGEpedidos);
             cardView = itemView.findViewById(R.id.cardView);
+            tvCreacionPedido = itemView.findViewById(R.id.txtCreacionPedido);
+            tvTomaPedido = itemView.findViewById(R.id.txtTomaPedido);
+            tvPedidoEntregado = itemView.findViewById(R.id.txtPedidoEntregado);
         }
 
         public void bindPedido(Pedido pedido) {
+
+            Log.d(TAG, "bindPedido() called");
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
+
             tvIdPedido.setText(String.valueOf(pedido.getid_pedido()));
             tvDireccionRestaurante.setText(pedido.getDireccionRestaurante());
             tvDireccionCliente.setText(pedido.getDireccionCliente());
             tvPrecioTotal.setText(String.valueOf(pedido.getPrecioTotal()));
             tvClienteUsername.setText(pedido.getCliente_Username());
+
+            if (isFromEncargosEscogidosFragment) {
+                tvCreacionPedido.setText(sdf.format(pedido.getCreacionPedido()));
+                tvCreacionPedido.setVisibility(View.VISIBLE);
+                tvTomaPedido.setText(sdf.format(pedido.getTomaPedido()));
+                tvTomaPedido.setVisibility(View.VISIBLE);
+                itemView.findViewById(R.id.textViewTomaPedido).setVisibility(View.VISIBLE);
+                tvPedidoEntregado.setVisibility(View.GONE);
+                itemView.findViewById(R.id.textViewPedidoEntregado).setVisibility(View.GONE);
+
+                Log.d(TAG, "isFromEncargosEscogidosFragment is true");
+            }
+            else if (isFromPedidosFinalizadosFragment) {
+                tvCreacionPedido.setText(sdf.format(pedido.getCreacionPedido()));
+                tvTomaPedido.setText(sdf.format(pedido.getTomaPedido()));
+                tvPedidoEntregado.setText(sdf.format(pedido.getFinalizacionPedido()));
+
+                // Make all fields and their titles visible
+                tvCreacionPedido.setVisibility(View.VISIBLE);
+                tvTomaPedido.setVisibility(View.VISIBLE);
+                itemView.findViewById(R.id.textViewTomaPedido).setVisibility(View.VISIBLE);
+                tvPedidoEntregado.setVisibility(View.VISIBLE);
+                itemView.findViewById(R.id.textViewPedidoEntregado).setVisibility(View.VISIBLE);
+
+                Log.d(TAG, "isFromPedidosFinalizadosFragment is true");
+            }
+            else {
+                tvCreacionPedido.setText(sdf.format(pedido.getCreacionPedido()));
+                tvCreacionPedido.setVisibility(View.VISIBLE);
+
+                // Hide other fields and their titles
+                tvTomaPedido.setVisibility(View.GONE);
+                itemView.findViewById(R.id.textViewTomaPedido).setVisibility(View.GONE);
+                tvPedidoEntregado.setVisibility(View.GONE);
+                itemView.findViewById(R.id.textViewPedidoEntregado).setVisibility(View.GONE);
+
+                Log.d(TAG, "Neither isFromEncargosEscogidosFragment nor isFromPedidosFinalizadosFragment is true");
+            }
+
+
 
             int restaurantId = pedido.getRestauranteId();
             if (restaurantId == 1) {
@@ -160,13 +219,13 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
             } else if (restaurantId == 5) {
                 restaurantImage.setImageResource(R.drawable.italian_image);
             } else {
-                // Default image if the ID doesn't match any specific image
                 restaurantImage.setImageResource(R.drawable.icono_restaurante);
             }
 
-            // isFromEncargosEscogidosFragment = false;
-
             if (isFromEncargosEscogidosFragment) {
+                cardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), android.R.color.white));
+                restaurantImage.clearColorFilter();
+            } else if (isFromPedidosFinalizadosFragment) {
                 cardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), android.R.color.white));
                 restaurantImage.clearColorFilter();
             } else {
@@ -178,7 +237,9 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
                     restaurantImage.clearColorFilter();
                 }
             }
-
         }
     }
 }
+
+
+

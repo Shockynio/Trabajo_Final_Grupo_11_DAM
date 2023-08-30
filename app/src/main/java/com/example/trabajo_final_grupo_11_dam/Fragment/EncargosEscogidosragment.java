@@ -36,7 +36,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 public class EncargosEscogidosragment extends Fragment {
@@ -201,7 +204,7 @@ public class EncargosEscogidosragment extends Fragment {
             public void onPedidoClick(Pedido pedido, int position) {
                 // Handle the click event
             }
-        }, true);
+        }, true, false);
 
 
         // Set the adapter to the RecyclerView
@@ -233,6 +236,7 @@ public class EncargosEscogidosragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
                             boolean success = response.getBoolean("success");
                             if (success) {
                                 JSONArray pedidosArray = response.getJSONArray("pedidos");
@@ -252,7 +256,22 @@ public class EncargosEscogidosragment extends Fragment {
                                         String clienteUsername = pedidoObject.getString("Cliente_Username");
                                         boolean isTaken = pedidoObject.getBoolean("IsTaken");
 
-                                        Pedido pedido = new Pedido(idPedido, direccionRestaurante, direccionCliente, precioTotal, restauranteId, clienteUsername, isTaken);
+                                        Date CreacionPedido = null;
+                                        Date TomaPedido = null;
+                                        Date FinalizacionPedido = null;
+
+                                        if (pedidoObject.has("CreacionPedido")) {
+                                            CreacionPedido = sdf.parse(pedidoObject.getString("CreacionPedido"));
+                                        }
+                                        if (pedidoObject.has("TomaPedido") && !pedidoObject.isNull("TomaPedido")) {
+                                            TomaPedido = sdf.parse(pedidoObject.getString("TomaPedido"));
+                                        }
+                                        if (pedidoObject.has("FinalizacionPedido") && !pedidoObject.isNull("FinalizacionPedido")) {
+                                            FinalizacionPedido = sdf.parse(pedidoObject.getString("FinalizacionPedido"));
+                                        }
+
+                                        Pedido pedido = new Pedido(idPedido, direccionRestaurante, direccionCliente, precioTotal, restauranteId, clienteUsername, isTaken, CreacionPedido, TomaPedido, FinalizacionPedido);
+
                                         mPedidos.add(pedido);
                                     }
                                     mAdapter.notifyDataSetChanged();
@@ -261,10 +280,12 @@ public class EncargosEscogidosragment extends Fragment {
                                 String error = response.getString("error");
                                 Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
                             }
-                        } catch (JSONException e) {
+                        } catch (JSONException | ParseException e) {
                             e.printStackTrace();
                         }
                     }
+
+
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
