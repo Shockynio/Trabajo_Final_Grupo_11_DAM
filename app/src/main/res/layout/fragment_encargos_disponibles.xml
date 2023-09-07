@@ -10,6 +10,7 @@
     android:layout_gravity="center"
     tools:context=".Fragment.PerfilFragment">
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/encargos_disponibles_recycler_view"
         android:layout_width="match_parent"

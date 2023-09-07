@@ -8,15 +8,20 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -45,8 +50,10 @@ import java.util.TimeZone;
 public class EncargosDisponiblesFragment extends Fragment {
 
     private List<Pedido> pedidos;
+    private List<Pedido> filteredPedidos;
     private RecyclerView recyclerPedidos;
     private PedidoAdapter adapter;
+    private boolean showTakenOrders = true;
 
     @Nullable
     @Override
@@ -56,7 +63,8 @@ public class EncargosDisponiblesFragment extends Fragment {
         recyclerPedidos.setLayoutManager(new LinearLayoutManager(getContext()));
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Pedidos Disponibles");
         pedidos = new ArrayList<>();
-        adapter = new PedidoAdapter(pedidos, new PedidoAdapter.PedidoClickListener() {
+        filteredPedidos = new ArrayList<>();
+        adapter = new PedidoAdapter(filteredPedidos, new PedidoAdapter.PedidoClickListener() {
             @Override
             public void onPedidoClick(Pedido pedido, int position) {
                 // Create a new AlertDialog
@@ -227,6 +235,10 @@ public class EncargosDisponiblesFragment extends Fragment {
                             pedidos.addAll(nuevosPedidos);
                             pedidos.addAll(pedidosTomados);
 
+                            // Also update filteredPedidos
+                            filteredPedidos.clear();
+                            filteredPedidos.addAll(pedidos);
+
                             adapter.notifyDataSetChanged();
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -252,5 +264,67 @@ public class EncargosDisponiblesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Pedidos Disponibles");
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Add the button to the AppBar
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setTitle("Pedidos Disponibles");
+
+        // Create a new Button with custom style
+        Button hideTakenButton = new Button(new ContextThemeWrapper(getActivity(), R.style.MyButtonStyle), null, 0);
+        hideTakenButton.setText("Ocultar");
+        hideTakenButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14); // Ajusta el tamaño a 14sp
+
+        // Set custom text color
+        hideTakenButton.setTextColor(ContextCompat.getColor(getActivity(), R.color.black));
+
+        // Set custom background
+        hideTakenButton.setBackgroundColor(ContextCompat.getColor(getActivity(), android.R.color.holo_orange_light));
+
+        // Add OnClickListener
+        hideTakenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleVisibility();
+            }
+        });
+
+        actionBar.setCustomView(hideTakenButton);
+        actionBar.setDisplayShowCustomEnabled(true);
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // Remove the button from the AppBar
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(false);
+    }
+
+    // New method to handle visibility toggle
+    private void toggleVisibility() {
+        showTakenOrders = !showTakenOrders;
+        filterPedidos();
+    }
+
+    // New method to filter pedidos based on the flag
+    private void filterPedidos() {
+        if (showTakenOrders) {
+            filteredPedidos.clear();
+            filteredPedidos.addAll(pedidos);
+        } else {
+            filteredPedidos.clear();
+            for (Pedido pedido : pedidos) {
+                if (!pedido.getIsTaken()) {
+                    filteredPedidos.add(pedido);
+                }
+            }
+        }
+        adapter.notifyDataSetChanged();
     }
 }

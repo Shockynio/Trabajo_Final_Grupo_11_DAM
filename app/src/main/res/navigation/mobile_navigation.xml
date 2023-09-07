@@ -42,5 +42,11 @@
         android:name="com.example.trabajo_final_grupo_11_dam.Fragment.PedidosFinalizadosFragment"
         android:label="Pedidos Finalizados"
         tools:layout="@layout/fragment_pedidos_finalizados" />
+    <fragment
+        android:id="@+id/BalanceFragment"
+        android:name="com.example.trabajo_final_grupo_11_dam.Fragment.BalanceFragment"
+        android:label="Balance"
+        tools:layout="@layout/fragment_balance" />
+
 
 </navigation>

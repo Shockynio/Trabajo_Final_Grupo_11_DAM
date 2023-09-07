@@ -56,13 +56,21 @@ public class MenuActivity extends AppCompatActivity {
 
         DrawerLayout drawer = binding.drawerLayout;
         navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.carritoFragment, R.id.perfilFragment, R.id.encargosDisponiblesFragment,
-                R.id.encargosEscogidosragment, R.id.cartaFragment, R.id.pedidosFinalizadosFragment)
+                R.id.nav_home,
+                R.id.carritoFragment,
+                R.id.perfilFragment,
+                R.id.encargosDisponiblesFragment,
+                R.id.encargosEscogidosragment,
+                R.id.cartaFragment,
+                R.id.pedidosFinalizadosFragment,
+                R.id.BalanceFragment
+        )
                 .setOpenableLayout(drawer)
                 .build();
+
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_menu);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
@@ -171,10 +179,14 @@ public class MenuActivity extends AppCompatActivity {
             navMenu.findItem(R.id.encargosDisponiblesFragment).setVisible(false);
             navMenu.findItem(R.id.encargosEscogidosragment).setVisible(false);
             navMenu.findItem(R.id.pedidosFinalizadosFragment).setVisible(false);
+            navMenu.findItem(R.id.BalanceFragment).setVisible(false);
         } else {
             navMenu.findItem(R.id.encargosDisponiblesFragment).setVisible(true);
             navMenu.findItem(R.id.encargosEscogidosragment).setVisible(true);
             navMenu.findItem(R.id.pedidosFinalizadosFragment).setVisible(true);
+            navMenu.findItem(R.id.BalanceFragment).setVisible(true);
+
+
         }
     }
 }

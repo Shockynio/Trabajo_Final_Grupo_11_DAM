@@ -24,12 +24,16 @@
             android:title= "Pedidos Disponibles" />
         <item
             android:id="@+id/encargosEscogidosragment"
-            android:icon="@drawable/ic_send"
+            android:icon="@drawable/icono_repartidor"
             android:title= "Pedidos a Entregar" />
         <item
             android:id="@+id/pedidosFinalizadosFragment"
             android:icon="@drawable/ic_okey"
             android:title= "Pedidos Finalizados" />
+        <item
+            android:id="@+id/BalanceFragment"
+            android:icon="@drawable/dolar"
+            android:title= "Balance" />
 
     </group>
 </menu>
